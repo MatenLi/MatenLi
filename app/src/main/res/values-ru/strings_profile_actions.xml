@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="profile_menu_desc">Дополнительно</string>
+    <string name="action_tcp_ping">TCP-пинг</string>
+    <string name="action_url_test">Проверка по URL</string>
+    <string name="action_duplicate">Дублировать</string>
+    <string name="action_copy_json">Копировать JSON</string>
+    <string name="profile_url_needs_connect">Сначала подключитесь к этому профилю</string>
+    <string name="profile_url_ms">URL %1$d мс</string>
+    <string name="profile_url_timeout">URL: ошибка</string>
+    <string name="profile_duplicated">Профиль продублирован</string>
+    <string name="profile_json_copied">JSON профиля скопирован</string>
+    <string name="profile_copy_suffix">копия</string>
+</resources>

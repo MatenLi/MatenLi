@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="group_local">Локальные</string>
+    <string name="group_local_no_update">Локальные профили не из подписки, обновлять нечего.</string>
+    <string name="update_failed">Не удалось обновить: %1$s</string>
+    <string name="reconnecting">Переключение на выбранный профиль...</string>
+    <string name="exit_loading">Определяем выходной IP...</string>
+    <string name="action_update_group">Обновить подписку</string>
+    <string name="action_url_test_top">Проверка по URL</string>
+    <string name="action_share">Поделиться</string>
+    <string name="lock_secure">Защищённое соединение</string>
+    <string name="lock_insecure">Проверка сертификата отключена</string>
+    <string name="storage_section">Хранилище</string>
+    <string name="storage_path">Папка данных</string>
+    <string name="storage_missing">Разрешите доступ ко всем файлам, чтобы данные сохранялись при обновлении. До этого они хранятся в памяти приложения.</string>
+    <string name="country_lookup_section">Страна выхода</string>
+    <string name="country_lookup_title">Определять страну выхода</string>
+    <string name="country_lookup_summary">Отправляется только выходной IP на api.ip2location.io</string>
+    <string name="ip2location_key">Ключ ip2location.io (необязательно)</string>
+</resources>

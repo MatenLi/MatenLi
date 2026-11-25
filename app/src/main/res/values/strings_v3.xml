@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="group_local">Local</string>
+    <string name="group_local_no_update">Local profiles are not from a subscription, so there is nothing to update.</string>
+    <string name="update_failed">Update failed: %1$s</string>
+    <string name="reconnecting">Switching to the selected profile...</string>
+    <string name="exit_loading">Looking up exit IP...</string>
+    <string name="action_update_group">Update subscription</string>
+    <string name="action_url_test_top">URL test</string>
+    <string name="action_share">Share</string>
+    <string name="lock_secure">Secure profile</string>
+    <string name="lock_insecure">Insecure certificate check allowed</string>
+    <string name="storage_section">Storage</string>
+    <string name="storage_path">Data folder</string>
+    <string name="storage_missing">Allow all-files access to keep data across updates. Until then it stays in app storage.</string>
+    <string name="country_lookup_section">Exit country</string>
+    <string name="country_lookup_title">Look up exit country</string>
+    <string name="country_lookup_summary">Sends only the exit IP to api.ip2location.io</string>
+    <string name="ip2location_key">ip2location.io API key (optional)</string>
+</resources>

@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Profiles and links · MatenLi docs</title>
+<meta name="description" content="Add, edit, test, duplicate, share and delete servers.">
+<link rel="icon" href="/assets/icon-512.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/wiki.css">
+<link rel="alternate" hreflang="en" href="/en/wiki/profiles/">
+<link rel="alternate" hreflang="ru" href="/ru/wiki/profiles/">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/"><img src="/assets/icon-512.png" alt="" width="32" height="32"> MatenLi</a>
+  <nav>
+    <a href="/en/wiki/">Documentation</a>
+    <a href="/download/">Download</a>
+    <a href="https://github.com/MatenLi/MatenLi">GitHub</a>
+    <a class="lang-switch" href="/ru/wiki/profiles/" hreflang="ru" lang="ru">Русский</a>
+  </nav>
+</header>
+<div class="layout">
+  <aside class="side">
+    <p class="side-title">Documentation</p>
+    <nav class="toc-side"><a href="/en/wiki/getting-started/">Getting started</a><a class="active" href="/en/wiki/profiles/">Profiles and links</a><a href="/en/wiki/groups/">Groups and subscriptions</a><a href="/en/wiki/connecting/">Connecting and tests</a><a href="/en/wiki/routing/">Routing, DNS and inbound</a><a href="/en/wiki/settings/">Settings reference</a><a href="/en/wiki/modules/">Modules</a><a href="/en/wiki/plugins/">Plugins</a><a href="/en/wiki/make-a-plugin/">Make your own plugin</a><a href="/en/wiki/examples/">Examples</a><a href="/en/wiki/troubleshooting/">Troubleshooting</a><a href="/en/wiki/ai-prompt/">AI prompt</a></nav>
+  </aside>
+  <main class="content">
+    <p class="crumbs"><a href="/en/wiki/">Documentation</a> / Profiles and links</p>
+    <h1>Profiles and links</h1>
+    <p class="summary">Add, edit, test, duplicate, share and delete servers.</p>
+    <details class="on-this-page" open><summary>On this page</summary><ul><li><a href="#what-a-profile-is">What a profile is</a></li><li><a href="#adding-a-profile">Adding a profile</a><ul><li><a href="#supported-link-types">Supported link types</a></li></ul></li><li><a href="#editing-a-profile">Editing a profile</a></li><li><a href="#actions-on-a-profile">Actions on a profile</a></li><li><a href="#example">Example</a></li><li><a href="#tips">Tips</a></li></ul></details>
+    <h2 id="what-a-profile-is">What a profile is<a class="headerlink" href="#what-a-profile-is" title="Permanent link">#</a></h2>
+<p>A profile is one server together with everything needed to reach it: the address, the port,
+the protocol, the security settings and a name. Each profile is stored on your phone only.</p>
+<h2 id="adding-a-profile">Adding a profile<a class="headerlink" href="#adding-a-profile" title="Permanent link">#</a></h2>
+<p>There are five ways to add one. Tap <strong>+</strong> at the bottom right and choose:</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Use it when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Paste from clipboard</td>
+<td>You copied a link. This is the usual way.</td>
+</tr>
+<tr>
+<td>Scan QR code</td>
+<td>Your provider shows a QR code.</td>
+</tr>
+<tr>
+<td>Import from file</td>
+<td>You saved a text file with one link per line.</td>
+</tr>
+<tr>
+<td>Add manually</td>
+<td>You know the server details and want to type them.</td>
+</tr>
+<tr>
+<td>Add subscription</td>
+<td>You have a subscription address. See <a href="/en/wiki/groups/">Groups</a>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="supported-link-types">Supported link types<a class="headerlink" href="#supported-link-types" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Link start</th>
+<th>Protocol</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>vless://</code></td>
+<td>VLESS</td>
+<td>Works with Reality and TLS.</td>
+</tr>
+<tr>
+<td><code>vmess://</code></td>
+<td>VMess</td>
+<td></td>
+</tr>
+<tr>
+<td><code>trojan://</code></td>
+<td>Trojan</td>
+<td></td>
+</tr>
+<tr>
+<td><code>ss://</code></td>
+<td>Shadowsocks</td>
+<td></td>
+</tr>
+<tr>
+<td><code>hysteria2://</code> or <code>hy2://</code></td>
+<td>Hysteria 2</td>
+<td>UDP based.</td>
+</tr>
+<tr>
+<td><code>tuic://</code></td>
+<td>TUIC</td>
+<td>Runs on the sing-box core.</td>
+</tr>
+<tr>
+<td><code>socks://</code>, <code>http://</code></td>
+<td>SOCKS, HTTP proxy</td>
+<td></td>
+</tr>
+<tr>
+<td><code>{ ... }</code></td>
+<td>Raw sing-box JSON</td>
+<td>Paste a complete outbound object.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Status:</strong> XHTTP (SplitHTTP) links need the Xray core. That core is being added in the next
+release. Until then MatenLi shows the message "XHTTP needs the Xray core" instead of connecting.</p>
+</blockquote>
+<h2 id="editing-a-profile">Editing a profile<a class="headerlink" href="#editing-a-profile" title="Permanent link">#</a></h2>
+<p>Tap and hold a profile, or tap the <strong>...</strong> button on it, then choose <strong>Edit</strong>. The editor shows every
+field for that protocol. Fields that are not needed for the protocol are hidden.</p>
+<ul>
+<li>Change the <strong>name</strong> to something you will recognise.</li>
+<li>Leave <strong>advanced</strong> fields alone unless your provider told you to change them.</li>
+<li>Tap <strong>Save</strong>. Errors appear under the field that caused them.</li>
+</ul>
+<h2 id="actions-on-a-profile">Actions on a profile<a class="headerlink" href="#actions-on-a-profile" title="Permanent link">#</a></h2>
+<p>Tap the <strong>...</strong> button on a profile to open its menu:</p>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Test</td>
+<td>Measures latency to the test address. The result appears on the card.</td>
+</tr>
+<tr>
+<td>TCP ping</td>
+<td>Checks that the server port answers. Faster and does not need the VPN.</td>
+</tr>
+<tr>
+<td>Edit</td>
+<td>Opens the editor.</td>
+</tr>
+<tr>
+<td>Duplicate</td>
+<td>Makes a copy, useful for trying a different port or route.</td>
+</tr>
+<tr>
+<td>Share link</td>
+<td>Shows the link and a QR code.</td>
+</tr>
+<tr>
+<td>Copy link</td>
+<td>Copies the link to the clipboard.</td>
+</tr>
+<tr>
+<td>Move to group</td>
+<td>Moves the profile to another group.</td>
+</tr>
+<tr>
+<td>Delete</td>
+<td>Removes the profile. A subscription profile comes back the next time the subscription updates.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="example">Example<a class="headerlink" href="#example" title="Permanent link">#</a></h2>
+<p>You have a link:</p>
+<pre><code class="language-text">vless://0f5c1a2e-1111-4444-9999-abcdef012345@example.org:443?security=tls&amp;type=ws&amp;path=%2Fchat&amp;sni=example.org#My%20home%20server
+</code></pre>
+<p>Pasting this creates a profile named <strong>My home server</strong>. Its server is <code>example.org</code>, port <code>443</code>,
+over TLS with WebSocket. Tap <strong>Test</strong> to measure it.</p>
+<h2 id="tips">Tips<a class="headerlink" href="#tips" title="Permanent link">#</a></h2>
+<ul>
+<li>Keep one profile per server. Duplicate it when you want a variant.</li>
+<li>Name profiles by place and provider, for example <code>Helsinki, provider A</code>. Names are free text.</li>
+<li>Do not share links you did not create. A link contains the password to the server.</li>
+</ul>
+    <nav class="pager"><a class="prev" href="/en/wiki/getting-started/">&larr; Getting started</a><a class="next" href="/en/wiki/groups/">Groups and subscriptions &rarr;</a></nav>
+  </main>
+</div>
+<footer class="foot">MatenLi is open source. Contact: <a href="https://t.me/r_FFR_r">@r_FFR_r</a></footer>
+</body>
+</html>

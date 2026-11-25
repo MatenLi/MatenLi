@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="profile_menu_desc">More actions</string>
+    <string name="action_tcp_ping">TCP ping</string>
+    <string name="action_url_test">URL test</string>
+    <string name="action_duplicate">Duplicate</string>
+    <string name="action_copy_json">Copy as JSON</string>
+    <string name="profile_url_needs_connect">Connect to this profile first</string>
+    <string name="profile_url_ms">URL %1$d ms</string>
+    <string name="profile_url_timeout">URL failed</string>
+    <string name="profile_duplicated">Profile duplicated</string>
+    <string name="profile_json_copied">Profile JSON copied</string>
+    <string name="profile_copy_suffix">copy</string>
+</resources>

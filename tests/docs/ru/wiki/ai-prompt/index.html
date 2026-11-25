@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Промпт для ИИ · документация MatenLi</title>
+<meta name="description" content="Готовый промпт, с помощью которого ассистент ИИ напишет плагин MatenLi.">
+<link rel="icon" href="/assets/icon-512.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/wiki.css">
+<link rel="alternate" hreflang="en" href="/en/wiki/ai-prompt/">
+<link rel="alternate" hreflang="ru" href="/ru/wiki/ai-prompt/">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/"><img src="/assets/icon-512.png" alt="" width="32" height="32"> MatenLi</a>
+  <nav>
+    <a href="/ru/wiki/">Документация</a>
+    <a href="/download/">Скачать</a>
+    <a href="https://github.com/MatenLi/MatenLi">GitHub</a>
+    <a class="lang-switch" href="/en/wiki/ai-prompt/" hreflang="en" lang="en">English</a>
+  </nav>
+</header>
+<div class="layout">
+  <aside class="side">
+    <p class="side-title">Документация</p>
+    <nav class="toc-side"><a href="/ru/wiki/getting-started/">С чего начать</a><a href="/ru/wiki/profiles/">Профили и ссылки</a><a href="/ru/wiki/groups/">Группы и подписки</a><a href="/ru/wiki/connecting/">Подключение и проверки</a><a href="/ru/wiki/routing/">Маршрутизация, DNS и входящие</a><a href="/ru/wiki/settings/">Справочник настроек</a><a href="/ru/wiki/modules/">Модули</a><a href="/ru/wiki/plugins/">Плагины</a><a href="/ru/wiki/make-a-plugin/">Написать свой плагин</a><a href="/ru/wiki/examples/">Примеры</a><a href="/ru/wiki/troubleshooting/">Решение проблем</a><a class="active" href="/ru/wiki/ai-prompt/">Промпт для ИИ</a></nav>
+  </aside>
+  <main class="content">
+    <p class="crumbs"><a href="/ru/wiki/">Документация</a> / Промпт для ИИ</p>
+    <h1>Промпт для ИИ</h1>
+    <p class="summary">Готовый промпт, с помощью которого ассистент ИИ напишет плагин MatenLi.</p>
+    <details class="on-this-page" open><summary>На этой странице</summary><ul><li><a href="#как-пользоваться">Как пользоваться</a></li><li><a href="#что-делает-промпт">Что делает промпт</a></li><li><a href="#советы">Советы</a></li></ul></details>
+    <p>Вставьте полный промпт в ассистент ИИ и опишите, какой плагин нужен. Промпт опубликован на английском
+как обычный файл для ИИ: <a href="/ru/wiki/PROMPT.md">/wiki/PROMPT.md</a>. Ассистенты понимают английский, поэтому
+промпт не переводится.</p>
+<h2 id="как-пользоваться">Как пользоваться<a class="headerlink" href="#как-пользоваться" title="Permanent link">#</a></h2>
+<ol>
+<li>Откройте <a href="/ru/wiki/PROMPT.md">файл PROMPT.md</a> и скопируйте всё содержимое.</li>
+<li>Начните новый чат с ассистентом ИИ и сначала вставьте промпт.</li>
+<li>Под промптом опишите, что нужно. Например:</li>
+</ol>
+<blockquote>
+<p>Сделай плагин MatenLi для туннеля StormDNS. Пользователь выбирает локальный порт и список резолверов.</p>
+</blockquote>
+<ol start="4">
+<li>Прочитайте ответ. Сохраните полученный <code>module.json</code>, проверьте его проверщиком JSON и заархивируйте.</li>
+<li>Импортируйте ZIP в MatenLi в разделе <strong>Модули</strong>.</li>
+</ol>
+<h2 id="что-делает-промпт">Что делает промпт<a class="headerlink" href="#что-делает-промпт" title="Permanent link">#</a></h2>
+<p>Промпт сообщает ИИ:</p>
+<ul>
+<li>точный формат модулей (версия 1), включая каждое поле и его тип</li>
+<li>какие ядра есть и какие поля они ожидают</li>
+<li>задать один вопрос, если протокол не ясен</li>
+<li>вернуть только корректный <code>module.json</code> и короткое пояснение</li>
+</ul>
+<h2 id="советы">Советы<a class="headerlink" href="#советы" title="Permanent link">#</a></h2>
+<ul>
+<li>Дайте ИИ ссылку или документацию протокола, который хотите добавить.</li>
+<li>Попросите объяснить каждое поле простыми словами, чтобы выучить формат.</li>
+<li>Всегда проверяйте результат. ИИ может ошибаться, а плагин работает на вашем телефоне.</li>
+</ul>
+    <nav class="pager"><a class="prev" href="/ru/wiki/troubleshooting/">&larr; Решение проблем</a></nav>
+  </main>
+</div>
+<footer class="foot">MatenLi с открытым кодом. Связь: <a href="https://t.me/r_FFR_r">@r_FFR_r</a></footer>
+</body>
+</html>

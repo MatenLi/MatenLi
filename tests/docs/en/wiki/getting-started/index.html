@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Getting started · MatenLi docs</title>
+<meta name="description" content="A step-by-step guide for people who have never used a VPN client before.">
+<link rel="icon" href="/assets/icon-512.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/wiki.css">
+<link rel="alternate" hreflang="en" href="/en/wiki/getting-started/">
+<link rel="alternate" hreflang="ru" href="/ru/wiki/getting-started/">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/"><img src="/assets/icon-512.png" alt="" width="32" height="32"> MatenLi</a>
+  <nav>
+    <a href="/en/wiki/">Documentation</a>
+    <a href="/download/">Download</a>
+    <a href="https://github.com/MatenLi/MatenLi">GitHub</a>
+    <a class="lang-switch" href="/ru/wiki/getting-started/" hreflang="ru" lang="ru">Русский</a>
+  </nav>
+</header>
+<div class="layout">
+  <aside class="side">
+    <p class="side-title">Documentation</p>
+    <nav class="toc-side"><a class="active" href="/en/wiki/getting-started/">Getting started</a><a href="/en/wiki/profiles/">Profiles and links</a><a href="/en/wiki/groups/">Groups and subscriptions</a><a href="/en/wiki/connecting/">Connecting and tests</a><a href="/en/wiki/routing/">Routing, DNS and inbound</a><a href="/en/wiki/settings/">Settings reference</a><a href="/en/wiki/modules/">Modules</a><a href="/en/wiki/plugins/">Plugins</a><a href="/en/wiki/make-a-plugin/">Make your own plugin</a><a href="/en/wiki/examples/">Examples</a><a href="/en/wiki/troubleshooting/">Troubleshooting</a><a href="/en/wiki/ai-prompt/">AI prompt</a></nav>
+  </aside>
+  <main class="content">
+    <p class="crumbs"><a href="/en/wiki/">Documentation</a> / Getting started</p>
+    <h1>Getting started</h1>
+    <p class="summary">A step-by-step guide for people who have never used a VPN client before.</p>
+    <details class="on-this-page" open><summary>On this page</summary><ul><li><a href="#what-matenli-does">What MatenLi does</a></li><li><a href="#install-the-app">Install the app</a></li><li><a href="#add-your-first-server">Add your first server</a></li><li><a href="#connect">Connect</a></li><li><a href="#check-that-it-works">Check that it works</a></li><li><a href="#words-you-will-see">Words you will see</a></li><li><a href="#next-steps">Next steps</a></li></ul></details>
+    <h2 id="what-matenli-does">What MatenLi does<a class="headerlink" href="#what-matenli-does" title="Permanent link">#</a></h2>
+<p>MatenLi is an Android app that sends your phone's internet traffic through a <strong>server</strong> you choose.
+The server is run by someone else (a VPN provider, a friend, or yourself). MatenLi only holds the
+settings that tell it how to reach that server.</p>
+<p>You need three things:</p>
+<ol>
+<li>An <strong>Android phone</strong> running Android 12 or newer.</li>
+<li>A <strong>link</strong> from your provider. It starts with a word such as <code>vless://</code>, <code>vmess://</code>, <code>trojan://</code>,
+   <code>ss://</code> or <code>hysteria2://</code>. Some providers give you a web address called a <strong>subscription</strong> instead.</li>
+<li>The <strong>MatenLi APK</strong> from the <a href="/download/">download page</a>.</li>
+</ol>
+<h2 id="install-the-app">Install the app<a class="headerlink" href="#install-the-app" title="Permanent link">#</a></h2>
+<ol>
+<li>Open the <a href="/download/">download page</a> on your phone and download the newest <code>matenli-debug</code> APK.</li>
+<li>Open the file. Android asks you to allow installs from this source. Allow it for the browser you used.</li>
+<li>Tap <strong>Install</strong>. The app is not in the Play Store, so Android may show a warning. It is the
+   same APK that the public build pipeline produced.</li>
+</ol>
+<blockquote>
+<p><strong>Tip:</strong> if you see "App not installed", you probably have an older MatenLi installed.
+Uninstall it first, then install again.</p>
+</blockquote>
+<h2 id="add-your-first-server">Add your first server<a class="headerlink" href="#add-your-first-server" title="Permanent link">#</a></h2>
+<ol>
+<li>Copy the link your provider gave you.</li>
+<li>Open MatenLi and tap the <strong>+</strong> button at the bottom right.</li>
+<li>Choose <strong>Paste from clipboard</strong>. The server appears in the list.</li>
+<li>Tap the server once to select it. A small check mark shows which server is selected.</li>
+</ol>
+<p>If you got a <strong>subscription</strong> address instead, choose <strong>Add subscription</strong> in the menu, paste the
+address, and save. Every server in it is added to a group.</p>
+<h2 id="connect">Connect<a class="headerlink" href="#connect" title="Permanent link">#</a></h2>
+<ol>
+<li>Tap the big <strong>Connect</strong> button.</li>
+<li>Android asks you to allow a VPN. Tap <strong>OK</strong>. The key icon in the status bar means the VPN is on.</li>
+<li>Check the bottom bar. It shows the status, your speed, and the latency to a test address.</li>
+</ol>
+<p>To disconnect, tap the same button again.</p>
+<h2 id="check-that-it-works">Check that it works<a class="headerlink" href="#check-that-it-works" title="Permanent link">#</a></h2>
+<p>Open a browser and search for "what is my ip". The address should now be the address of your server,
+not your home or mobile address.</p>
+<p>If the page does not load, read <a href="/en/wiki/troubleshooting/">Troubleshooting</a>.</p>
+<h2 id="words-you-will-see">Words you will see<a class="headerlink" href="#words-you-will-see" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Word</th>
+<th>What it means</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Profile</td>
+<td>One server with its settings.</td>
+</tr>
+<tr>
+<td>Group</td>
+<td>A folder of profiles, usually one per subscription.</td>
+</tr>
+<tr>
+<td>Subscription</td>
+<td>A web address that lists many profiles. It can update itself.</td>
+</tr>
+<tr>
+<td>Latency</td>
+<td>How long one round trip to a test address takes, in milliseconds. Lower is better.</td>
+</tr>
+<tr>
+<td>Route</td>
+<td>A rule that says which traffic goes through the server and which goes direct.</td>
+</tr>
+<tr>
+<td>Module</td>
+<td>An add-on that teaches MatenLi a new protocol or setting. See <a href="/en/wiki/modules/">Modules</a>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="next-steps">Next steps<a class="headerlink" href="#next-steps" title="Permanent link">#</a></h2>
+<ul>
+<li><a href="/en/wiki/profiles/">Profiles and links</a>: add, edit, test and share servers.</li>
+<li><a href="/en/wiki/groups/">Groups and subscriptions</a>: keep many servers organised and up to date.</li>
+<li><a href="/en/wiki/connecting/">Connecting and tests</a>: what the latency numbers mean.</li>
+</ul>
+    <nav class="pager"><a class="next" href="/en/wiki/profiles/">Profiles and links &rarr;</a></nav>
+  </main>
+</div>
+<footer class="foot">MatenLi is open source. Contact: <a href="https://t.me/r_FFR_r">@r_FFR_r</a></footer>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_paste">Paste</string>
+    <string name="action_add">Add</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="action_clear">Clear</string>
+
+    <string name="profile_add_title">Add profiles</string>
+    <string name="profile_add_hint">Paste share links or outbound JSON, one per line. A whole JSON config also works.</string>
+    <string name="profile_added">Added %1$d profile(s)</string>
+    <string name="profile_line_error">Line %1$d: %2$s</string>
+    <string name="profile_empty_title">No profiles yet</string>
+    <string name="profile_empty_hint">Tap the plus button and paste a share link, outbound JSON or a subscription URL.</string>
+    <string name="profile_tap_hint">Tap a profile to select it. The selected profile is used when you connect.</string>
+    <string name="profile_delete_title">Delete profile?</string>
+    <string name="profile_delete_message">The profile is removed from this device.</string>
+    <string name="profile_unsupported">Not supported yet</string>
+    <string name="profile_clipboard_empty">Clipboard is empty</string>
+
+    <string name="connect_no_profile">Add and select a profile first</string>
+    <string name="vpn_permission_denied">VPN permission was denied</string>
+    <string name="xhttp_title">xHTTP is not supported yet</string>
+    <string name="xhttp_message">%1$s uses %2$s. MatenLi cannot run it yet. Choose another profile.</string>
+
+    <string name="stats_up_format">&#8593; %1$s</string>
+    <string name="stats_down_format">&#8595; %1$s</string>
+
+    <string name="sub_empty_title">No subscriptions</string>
+    <string name="sub_empty_hint">Add a subscription URL. Its servers are replaced each time you refresh it.</string>
+    <string name="sub_add">Add subscription</string>
+    <string name="sub_add_title">Add subscription</string>
+    <string name="sub_name">Name</string>
+    <string name="sub_url">Subscription URL</string>
+    <string name="sub_servers">%1$d servers</string>
+    <string name="sub_never">Never updated</string>
+    <string name="sub_updated">Updated %1$s</string>
+    <string name="sub_refreshing">Updating</string>
+    <string name="sub_failed">Update failed: %1$s</string>
+    <string name="sub_remove">Remove subscription</string>
+
+    <string name="route_empty_hint">Add a rule to send matching traffic to proxy, direct or block.</string>
+    <string name="route_add">Add rule</string>
+    <string name="route_add_title">Add route rule</string>
+    <string name="route_match">Match</string>
+    <string name="route_values">Values, separated by commas</string>
+    <string name="route_action">Action</string>
+    <string name="route_kind_suffix">Domain suffix</string>
+    <string name="route_kind_keyword">Domain keyword</string>
+    <string name="route_kind_ip">IP range</string>
+    <string name="route_kind_port">Port</string>
+    <string name="route_outbound_proxy">Proxy</string>
+    <string name="route_outbound_direct">Direct</string>
+    <string name="route_outbound_block">Block</string>
+    <string name="route_bypass_hint">Private networks are handled by Bypass LAN in Route Settings.</string>
+    <string name="route_no_proxy">Proxy rules need a selected profile</string>
+
+    <string name="logs_hint">Connect to see the core log here.</string>
+
+    <string name="dash_uptime">Connected for</string>
+    <string name="dash_upload">Upload</string>
+    <string name="dash_download">Download</string>
+    <string name="dash_total_upload">Total upload</string>
+    <string name="dash_total_download">Total download</string>
+    <string name="dash_connections">Connections</string>
+    <string name="dash_run_tests">Run tests</string>
+    <string name="dash_testing">Testing</string>
+    <string name="dash_failed">failed</string>
+    <string name="dash_not_connected">Not connected</string>
+    <string name="dash_no_profile">No profile selected</string>
+    <string name="dash_selected">Profile: %1$s</string>
+    <string name="dash_ms">%1$d ms</string>
+    <string name="theme_custom">Custom colour</string>
+    <string name="custom_accent">Custom colour (hex, e.g. #6750A4)</string>
+</resources>

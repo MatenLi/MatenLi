@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Группы и подписки · документация MatenLi</title>
+<meta name="description" content="Группировка серверов и автоматическое обновление подписок.">
+<link rel="icon" href="/assets/icon-512.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/wiki.css">
+<link rel="alternate" hreflang="en" href="/en/wiki/groups/">
+<link rel="alternate" hreflang="ru" href="/ru/wiki/groups/">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/"><img src="/assets/icon-512.png" alt="" width="32" height="32"> MatenLi</a>
+  <nav>
+    <a href="/ru/wiki/">Документация</a>
+    <a href="/download/">Скачать</a>
+    <a href="https://github.com/MatenLi/MatenLi">GitHub</a>
+    <a class="lang-switch" href="/en/wiki/groups/" hreflang="en" lang="en">English</a>
+  </nav>
+</header>
+<div class="layout">
+  <aside class="side">
+    <p class="side-title">Документация</p>
+    <nav class="toc-side"><a href="/ru/wiki/getting-started/">С чего начать</a><a href="/ru/wiki/profiles/">Профили и ссылки</a><a class="active" href="/ru/wiki/groups/">Группы и подписки</a><a href="/ru/wiki/connecting/">Подключение и проверки</a><a href="/ru/wiki/routing/">Маршрутизация, DNS и входящие</a><a href="/ru/wiki/settings/">Справочник настроек</a><a href="/ru/wiki/modules/">Модули</a><a href="/ru/wiki/plugins/">Плагины</a><a href="/ru/wiki/make-a-plugin/">Написать свой плагин</a><a href="/ru/wiki/examples/">Примеры</a><a href="/ru/wiki/troubleshooting/">Решение проблем</a><a href="/ru/wiki/ai-prompt/">Промпт для ИИ</a><a href="/ru/wiki/updating/">Обновление и резервная копия</a></nav>
+  </aside>
+  <main class="content">
+    <p class="crumbs"><a href="/ru/wiki/">Документация</a> / Группы и подписки</p>
+    <h1>Группы и подписки</h1>
+    <p class="summary">Группировка серверов и автоматическое обновление подписок.</p>
+    <details class="on-this-page" open><summary>На этой странице</summary><ul><li><a href="#группы">Группы</a></li><li><a href="#подписки">Подписки</a><ul><li><a href="#добавление-подписки">Добавление подписки</a></li><li><a href="#что-делает-обновление">Что делает обновление</a></li><li><a href="#пример-фильтр">Пример: фильтр</a></li></ul></li><li><a href="#дедупликация">Дедупликация</a></li><li><a href="#проверка-всей-группы">Проверка всей группы</a></li><li><a href="#если-подписка-не-работает">Если подписка не работает</a></li></ul></details>
+    <h2 id="группы">Группы<a class="headerlink" href="#группы" title="Permanent link">#</a></h2>
+<p>Группа — это папка с профилями. Вкладки вверху главного экрана — ваши группы, как в NekoBox.
+Листайте между ними или нажимайте на вкладку.</p>
+<ul>
+<li><strong>Local</strong> — группа по умолчанию для профилей, которые вы добавили сами.</li>
+<li>Каждая <strong>подписка</strong> получает свою группу с её названием.</li>
+<li>Создавайте свои группы из меню <strong>+</strong>, например <code>Работа</code> или <code>Поездки</code>.</li>
+</ul>
+<h2 id="подписки">Подписки<a class="headerlink" href="#подписки" title="Permanent link">#</a></h2>
+<p>Подписка — это веб-адрес. Когда MatenLi его открывает, ответ — список ссылок, в виде обычного текста или в Base64.
+Каждая ссылка становится профилем в этой группе.</p>
+<h3 id="добавление-подписки">Добавление подписки<a class="headerlink" href="#добавление-подписки" title="Permanent link">#</a></h3>
+<ol>
+<li>Нажмите <strong>+</strong> и выберите <strong>Добавить подписку</strong>.</li>
+<li>Вставьте адрес и задайте имя группе.</li>
+<li>По желанию: включите <strong>Автообновление</strong> и задайте <strong>интервал</strong> в минутах. Минимум — 15.</li>
+<li>По желанию: задайте <strong>фильтр</strong>. Останутся только профили, имя которых подходит под фильтр (регулярное выражение).</li>
+<li>По желанию: задайте <strong>User-Agent</strong>. Некоторые провайдеры отвечают только известным клиентам.</li>
+<li>Нажмите <strong>Сохранить</strong>. MatenLi загрузит список и покажет, что изменилось.</li>
+</ol>
+<h3 id="что-делает-обновление">Что делает обновление<a class="headerlink" href="#что-делает-обновление" title="Permanent link">#</a></h3>
+<p>Когда подписка обновляется, MatenLi сравнивает новый список со старым и показывает диалог:</p>
+<table>
+<thead>
+<tr>
+<th>Результат</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Добавлено</td>
+<td>Появилась новая ссылка. Она добавляется в группу.</td>
+</tr>
+<tr>
+<td>Обновлено</td>
+<td>У того же профиля изменились настройки. Он заменяется.</td>
+</tr>
+<tr>
+<td>Удалено</td>
+<td>Ссылка исчезла. Она удаляется из группы.</td>
+</tr>
+</tbody>
+</table>
+<p>Профили, которые вы добавили в группу вручную, обновление <strong>не трогает</strong>.</p>
+<h3 id="пример-фильтр">Пример: фильтр<a class="headerlink" href="#пример-фильтр" title="Permanent link">#</a></h3>
+<p>Провайдер даёт 40 серверов, а вам нужны только европейские, имена которых начинаются с <code>EU</code>:</p>
+<pre><code class="language-text">^EU
+</code></pre>
+<p>Сохраните группу. Останутся только профили, имена которых начинаются с <code>EU</code>.</p>
+<h2 id="дедупликация">Дедупликация<a class="headerlink" href="#дедупликация" title="Permanent link">#</a></h2>
+<p>Если две ссылки указывают на один и тот же сервер и порт, <strong>дедупликация</strong> оставит только одну из них.
+Включите её, когда провайдер повторяет серверы.</p>
+<h2 id="проверка-всей-группы">Проверка всей группы<a class="headerlink" href="#проверка-всей-группы" title="Permanent link">#</a></h2>
+<p>Откройте меню группы и выберите <strong>Проверить все</strong>. Каждый профиль группы проверяется по очереди.
+Результаты появляются на карточках, а список можно сортировать по задержке.</p>
+<h2 id="если-подписка-не-работает">Если подписка не работает<a class="headerlink" href="#если-подписка-не-работает" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Проблема</th>
+<th>Что попробовать</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>«Не удалось загрузить»</td>
+<td>Откройте адрес в браузере. Если он не открывается, провайдер недоступен или адрес изменился.</td>
+</tr>
+<tr>
+<td>Всё удалено</td>
+<td>Фильтр может быть слишком строгим. Очистите его и обновите снова.</td>
+</tr>
+<tr>
+<td>Некоторых серверов нет</td>
+<td>Задайте другой <strong>User-Agent</strong> или спросите у провайдера, для какого клиента список.</td>
+</tr>
+</tbody>
+</table>
+    <nav class="pager"><a class="prev" href="/ru/wiki/profiles/">&larr; Профили и ссылки</a><a class="next" href="/ru/wiki/connecting/">Подключение и проверки &rarr;</a></nav>
+  </main>
+</div>
+<footer class="foot">MatenLi с открытым кодом. Связь: <a href="https://t.me/r_FFR_r">@r_FFR_r</a></footer>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Groups and subscriptions · MatenLi docs</title>
+<meta name="description" content="Organise servers into groups and keep subscriptions up to date automatically.">
+<link rel="icon" href="/assets/icon-512.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/wiki.css">
+<link rel="alternate" hreflang="en" href="/en/wiki/groups/">
+<link rel="alternate" hreflang="ru" href="/ru/wiki/groups/">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/"><img src="/assets/icon-512.png" alt="" width="32" height="32"> MatenLi</a>
+  <nav>
+    <a href="/en/wiki/">Documentation</a>
+    <a href="/download/">Download</a>
+    <a href="https://github.com/MatenLi/MatenLi">GitHub</a>
+    <a class="lang-switch" href="/ru/wiki/groups/" hreflang="ru" lang="ru">Русский</a>
+  </nav>
+</header>
+<div class="layout">
+  <aside class="side">
+    <p class="side-title">Documentation</p>
+    <nav class="toc-side"><a href="/en/wiki/getting-started/">Getting started</a><a href="/en/wiki/profiles/">Profiles and links</a><a class="active" href="/en/wiki/groups/">Groups and subscriptions</a><a href="/en/wiki/connecting/">Connecting and tests</a><a href="/en/wiki/routing/">Routing, DNS and inbound</a><a href="/en/wiki/settings/">Settings reference</a><a href="/en/wiki/modules/">Modules</a><a href="/en/wiki/plugins/">Plugins</a><a href="/en/wiki/make-a-plugin/">Make your own plugin</a><a href="/en/wiki/examples/">Examples</a><a href="/en/wiki/troubleshooting/">Troubleshooting</a><a href="/en/wiki/ai-prompt/">AI prompt</a></nav>
+  </aside>
+  <main class="content">
+    <p class="crumbs"><a href="/en/wiki/">Documentation</a> / Groups and subscriptions</p>
+    <h1>Groups and subscriptions</h1>
+    <p class="summary">Organise servers into groups and keep subscriptions up to date automatically.</p>
+    <details class="on-this-page" open><summary>On this page</summary><ul><li><a href="#groups">Groups</a></li><li><a href="#subscriptions">Subscriptions</a><ul><li><a href="#add-a-subscription">Add a subscription</a></li><li><a href="#what-an-update-does">What an update does</a></li><li><a href="#example-a-filter">Example: a filter</a></li></ul></li><li><a href="#dedupe">Dedupe</a></li><li><a href="#test-a-whole-group">Test a whole group</a></li><li><a href="#troubleshooting-a-subscription">Troubleshooting a subscription</a></li></ul></details>
+    <h2 id="groups">Groups<a class="headerlink" href="#groups" title="Permanent link">#</a></h2>
+<p>A group is a folder of profiles. The tabs at the top of the main screen are your groups, the same
+way NekoBox shows them. Swipe between them or tap a tab.</p>
+<ul>
+<li><strong>Local</strong> is the default group for profiles you added yourself.</li>
+<li>Each <strong>subscription</strong> gets its own group, named after the subscription.</li>
+<li>Create your own groups from the <strong>+</strong> menu, for example <code>Work</code> or <code>Travel</code>.</li>
+</ul>
+<h2 id="subscriptions">Subscriptions<a class="headerlink" href="#subscriptions" title="Permanent link">#</a></h2>
+<p>A subscription is a web address. When MatenLi opens it, the response is a list of links, either plain
+text or Base64 encoded. Every link becomes a profile in that group.</p>
+<h3 id="add-a-subscription">Add a subscription<a class="headerlink" href="#add-a-subscription" title="Permanent link">#</a></h3>
+<ol>
+<li>Tap <strong>+</strong> and choose <strong>Add subscription</strong>.</li>
+<li>Paste the address and give the group a name.</li>
+<li>Optional: set <strong>Auto update</strong> and an <strong>interval</strong> in minutes. The minimum is 15.</li>
+<li>Optional: set a <strong>filter</strong>. Only profiles whose name matches the filter (a regular expression) are kept.</li>
+<li>Optional: set a <strong>user agent</strong>. Some providers only answer known clients.</li>
+<li>Tap <strong>Save</strong>. MatenLi downloads the list and shows what changed.</li>
+</ol>
+<h3 id="what-an-update-does">What an update does<a class="headerlink" href="#what-an-update-does" title="Permanent link">#</a></h3>
+<p>When a subscription updates, MatenLi compares the new list with the old one and shows a dialog:</p>
+<table>
+<thead>
+<tr>
+<th>Result</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Added</td>
+<td>A new link appeared. It is added to the group.</td>
+</tr>
+<tr>
+<td>Updated</td>
+<td>The same profile now has different settings. It is replaced.</td>
+</tr>
+<tr>
+<td>Deleted</td>
+<td>A link disappeared. It is removed from the group.</td>
+</tr>
+</tbody>
+</table>
+<p>Profiles you added to the group by hand are <strong>not</strong> touched by an update.</p>
+<h3 id="example-a-filter">Example: a filter<a class="headerlink" href="#example-a-filter" title="Permanent link">#</a></h3>
+<p>Your provider lists 40 servers, and you only want the ones in Europe whose names start with <code>EU</code>:</p>
+<pre><code class="language-text">^EU
+</code></pre>
+<p>Save the group. Only profiles whose names start with <code>EU</code> remain.</p>
+<h2 id="dedupe">Dedupe<a class="headerlink" href="#dedupe" title="Permanent link">#</a></h2>
+<p>If two links point to the same server and port, <strong>dedupe</strong> keeps only one of them. Turn it on when
+a provider repeats servers.</p>
+<h2 id="test-a-whole-group">Test a whole group<a class="headerlink" href="#test-a-whole-group" title="Permanent link">#</a></h2>
+<p>Open the group menu and choose <strong>Test all</strong>. Each profile in the group is tested in turn. The results
+appear on the cards, and the list can be sorted by latency.</p>
+<h2 id="troubleshooting-a-subscription">Troubleshooting a subscription<a class="headerlink" href="#troubleshooting-a-subscription" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>What to try</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"Could not download"</td>
+<td>Open the address in a browser. If it does not load there, the provider is down or the address changed.</td>
+</tr>
+<tr>
+<td>Everything is removed</td>
+<td>The filter may be too strict. Clear it and update again.</td>
+</tr>
+<tr>
+<td>Some servers never appear</td>
+<td>Set a different <strong>user agent</strong>, or ask the provider whether the list is for a specific client.</td>
+</tr>
+</tbody>
+</table>
+    <nav class="pager"><a class="prev" href="/en/wiki/profiles/">&larr; Profiles and links</a><a class="next" href="/en/wiki/connecting/">Connecting and tests &rarr;</a></nav>
+  </main>
+</div>
+<footer class="foot">MatenLi is open source. Contact: <a href="https://t.me/r_FFR_r">@r_FFR_r</a></footer>
+</body>
+</html>

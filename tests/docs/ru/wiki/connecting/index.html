@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Подключение и проверки · документация MatenLi</title>
+<meta name="description" content="Что означают кнопка подключения, нижняя панель и числа задержки.">
+<link rel="icon" href="/assets/icon-512.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/wiki.css">
+<link rel="alternate" hreflang="en" href="/en/wiki/connecting/">
+<link rel="alternate" hreflang="ru" href="/ru/wiki/connecting/">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/"><img src="/assets/icon-512.png" alt="" width="32" height="32"> MatenLi</a>
+  <nav>
+    <a href="/ru/wiki/">Документация</a>
+    <a href="/download/">Скачать</a>
+    <a href="https://github.com/MatenLi/MatenLi">GitHub</a>
+    <a class="lang-switch" href="/en/wiki/connecting/" hreflang="en" lang="en">English</a>
+  </nav>
+</header>
+<div class="layout">
+  <aside class="side">
+    <p class="side-title">Документация</p>
+    <nav class="toc-side"><a href="/ru/wiki/getting-started/">С чего начать</a><a href="/ru/wiki/profiles/">Профили и ссылки</a><a href="/ru/wiki/groups/">Группы и подписки</a><a class="active" href="/ru/wiki/connecting/">Подключение и проверки</a><a href="/ru/wiki/routing/">Маршрутизация, DNS и входящие</a><a href="/ru/wiki/settings/">Справочник настроек</a><a href="/ru/wiki/modules/">Модули</a><a href="/ru/wiki/plugins/">Плагины</a><a href="/ru/wiki/make-a-plugin/">Написать свой плагин</a><a href="/ru/wiki/examples/">Примеры</a><a href="/ru/wiki/troubleshooting/">Решение проблем</a><a href="/ru/wiki/ai-prompt/">Промпт для ИИ</a></nav>
+  </aside>
+  <main class="content">
+    <p class="crumbs"><a href="/ru/wiki/">Документация</a> / Подключение и проверки</p>
+    <h1>Подключение и проверки</h1>
+    <p class="summary">Что означают кнопка подключения, нижняя панель и числа задержки.</p>
+    <details class="on-this-page" open><summary>На этой странице</summary><ul><li><a href="#кнопка-подключения">Кнопка подключения</a></li><li><a href="#нижняя-панель">Нижняя панель</a></li><li><a href="#проверка-по-url">Проверка по URL</a></li><li><a href="#tcp-пинг">TCP-пинг</a></li><li><a href="#как-читать-числа">Как читать числа</a></li><li><a href="#пример">Пример</a></li><li><a href="#настройки-которые-меняют-поведение-подключения">Настройки, которые меняют поведение подключения</a></li></ul></details>
+    <h2 id="кнопка-подключения">Кнопка подключения<a class="headerlink" href="#кнопка-подключения" title="Permanent link">#</a></h2>
+<p>Большая кнопка внизу главного экрана подключает и отключает VPN. Её значок показывает состояние:</p>
+<table>
+<thead>
+<tr>
+<th>Значок</th>
+<th>Состояние</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Выключено</td>
+<td>Выкл</td>
+<td>Не подключено.</td>
+</tr>
+<tr>
+<td>Анимированный значок neurology</td>
+<td>Проверка</td>
+<td>Приложение проверяет выбранный сервер.</td>
+</tr>
+<tr>
+<td>Router off</td>
+<td>Ошибка</td>
+<td>Последняя проверка или подключение не удались. Причину читайте на нижней панели.</td>
+</tr>
+<tr>
+<td>Network intel</td>
+<td>Подключено</td>
+<td>Проверка прошла, VPN включён.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Статус:</strong> анимированные значки входят в следующий выпуск. Сейчас кнопка показывает обычное состояние
+подключения и отключения.</p>
+</blockquote>
+<h2 id="нижняя-панель">Нижняя панель<a class="headerlink" href="#нижняя-панель" title="Permanent link">#</a></h2>
+<p>Нижняя панель слева направо показывает:</p>
+<ul>
+<li><strong>Состояние</strong>: Выкл, Подключение, Подключено или Ошибка.</li>
+<li><strong>Скорость</strong>: отдача и загрузка, обновляется каждую секунду при подключении.</li>
+<li><strong>Задержку</strong>: время обмена с тестовым адресом, проверяется каждые десять секунд при подключении.</li>
+<li><strong>Страну</strong> выходного адреса, если поиск страны включён в настройках.</li>
+</ul>
+<h2 id="проверка-по-url">Проверка по URL<a class="headerlink" href="#проверка-по-url" title="Permanent link">#</a></h2>
+<p>Проверка по URL отправляет HTTPS-запрос на тестовый адрес и измеряет, сколько времени занимает ответ.
+Адрес по умолчанию — <code>https://www.gstatic.com/generate_204</code>. Он ничего не возвращает, поэтому запрос маленький и быстрый.</p>
+<p>Используйте её, чтобы сравнивать серверы. Нажмите <strong>Проверить</strong> на профиле или <strong>Проверить все</strong> на группе.</p>
+<h2 id="tcp-пинг">TCP-пинг<a class="headerlink" href="#tcp-пинг" title="Permanent link">#</a></h2>
+<p>TCP-пинг только проверяет, что порт сервера принимает соединение. Он не использует VPN, поэтому работает
+и при отключении, и гораздо быстрее. Неудачный TCP-пинг обычно значит, что сервер недоступен, порт закрыт
+или ваша сеть его блокирует.</p>
+<h2 id="как-читать-числа">Как читать числа<a class="headerlink" href="#как-читать-числа" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Задержка</th>
+<th>Цвет</th>
+<th>Что обычно значит</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Меньше 150 мс</td>
+<td>Зелёный</td>
+<td>Хорошо. Подходит для всего.</td>
+</tr>
+<tr>
+<td>От 150 до 400 мс</td>
+<td>Жёлтый</td>
+<td>Работает. Звонки и игры могут тормозить.</td>
+</tr>
+<tr>
+<td>Больше 400 мс</td>
+<td>Красный</td>
+<td>Медленно. Попробуйте другой сервер.</td>
+</tr>
+<tr>
+<td>Таймаут</td>
+<td>Красный, «таймаут»</td>
+<td>Сервер не ответил за отведённое время.</td>
+</tr>
+</tbody>
+</table>
+<p>Задержка зависит от расстояния. Сервер на другом континенте медленный, даже если он исправен.</p>
+<h2 id="пример">Пример<a class="headerlink" href="#пример" title="Permanent link">#</a></h2>
+<ol>
+<li>У вас три профиля. Нажмите <strong>Проверить все</strong> для группы.</li>
+<li>Результаты: 120 мс, 310 мс и таймаут.</li>
+<li>Выберите профиль на 120 мс и подключитесь.</li>
+<li>После подключения нижняя панель покажет около 125 мс, что близко к результату проверки.</li>
+</ol>
+<h2 id="настройки-которые-меняют-поведение-подключения">Настройки, которые меняют поведение подключения<a class="headerlink" href="#настройки-которые-меняют-поведение-подключения" title="Permanent link">#</a></h2>
+<p>Они находятся в <a href="/ru/wiki/settings/">Настройках</a>:</p>
+<ul>
+<li><strong>Автоподключение</strong> подключает при запуске приложения.</li>
+<li><strong>Пинг при подключении</strong> держит число задержки актуальным.</li>
+<li><strong>Таймаут пинга</strong> задаёт, сколько ждёт проверка, прежде чем сдаться.</li>
+<li><strong>Тестовый URL</strong> меняет адрес для проверок по URL.</li>
+</ul>
+    <nav class="pager"><a class="prev" href="/ru/wiki/groups/">&larr; Группы и подписки</a><a class="next" href="/ru/wiki/routing/">Маршрутизация, DNS и входящие &rarr;</a></nav>
+  </main>
+</div>
+<footer class="foot">MatenLi с открытым кодом. Связь: <a href="https://t.me/r_FFR_r">@r_FFR_r</a></footer>
+</body>
+</html>

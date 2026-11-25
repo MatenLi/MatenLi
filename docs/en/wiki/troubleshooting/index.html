@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Troubleshooting · MatenLi docs</title>
+<meta name="description" content="Fixes for the most common problems, from connection failures to port errors.">
+<link rel="icon" href="/assets/icon-512.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/wiki.css">
+<link rel="alternate" hreflang="en" href="/en/wiki/troubleshooting/">
+<link rel="alternate" hreflang="ru" href="/ru/wiki/troubleshooting/">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/"><img src="/assets/icon-512.png" alt="" width="32" height="32"> MatenLi</a>
+  <nav>
+    <a href="/en/wiki/">Documentation</a>
+    <a href="/download/">Download</a>
+    <a href="https://github.com/MatenLi/MatenLi">GitHub</a>
+    <a class="lang-switch" href="/ru/wiki/troubleshooting/" hreflang="ru" lang="ru">Русский</a>
+  </nav>
+</header>
+<div class="layout">
+  <aside class="side">
+    <p class="side-title">Documentation</p>
+    <nav class="toc-side"><a href="/en/wiki/getting-started/">Getting started</a><a href="/en/wiki/profiles/">Profiles and links</a><a href="/en/wiki/groups/">Groups and subscriptions</a><a href="/en/wiki/connecting/">Connecting and tests</a><a href="/en/wiki/routing/">Routing, DNS and inbound</a><a href="/en/wiki/settings/">Settings reference</a><a href="/en/wiki/modules/">Modules</a><a href="/en/wiki/plugins/">Plugins</a><a href="/en/wiki/make-a-plugin/">Make your own plugin</a><a href="/en/wiki/examples/">Examples</a><a class="active" href="/en/wiki/troubleshooting/">Troubleshooting</a><a href="/en/wiki/ai-prompt/">AI prompt</a><a href="/en/wiki/updating/">Updating and backup</a></nav>
+  </aside>
+  <main class="content">
+    <p class="crumbs"><a href="/en/wiki/">Documentation</a> / Troubleshooting</p>
+    <h1>Troubleshooting</h1>
+    <p class="summary">Fixes for the most common problems, from connection failures to port errors.</p>
+    <details class="on-this-page" open><summary>On this page</summary><ul><li><a href="#the-vpn-will-not-connect">The VPN will not connect</a></li><li><a href="#pages-are-slow">Pages are slow</a></li><li><a href="#a-site-or-app-does-not-work">A site or app does not work</a></li><li><a href="#a-subscription-does-not-update">A subscription does not update</a></li><li><a href="#a-module-does-not-load">A module does not load</a></li><li><a href="#collecting-information-for-a-bug-report">Collecting information for a bug report</a></li><li><a href="#still-stuck">Still stuck</a></li></ul></details>
+    <h2 id="the-vpn-will-not-connect">The VPN will not connect<a class="headerlink" href="#the-vpn-will-not-connect" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Likely cause</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Connect does nothing</td>
+<td>The VPN permission was refused</td>
+<td>Tap Connect again and allow the VPN.</td>
+</tr>
+<tr>
+<td>"XHTTP needs the Xray core"</td>
+<td>The link uses XHTTP</td>
+<td>Wait for the Xray core in the next release.</td>
+</tr>
+<tr>
+<td>"port already in use"</td>
+<td>An old core still holds the port</td>
+<td>Tap Disconnect, wait five seconds, then connect. Restart the phone if it persists.</td>
+</tr>
+<tr>
+<td>"outbound ... makes no sense"</td>
+<td>A config error in a custom config</td>
+<td>Remove Custom config in Settings, or fix the detour setting.</td>
+</tr>
+<tr>
+<td>Connects, but no pages load</td>
+<td>The server or DNS is wrong</td>
+<td>Use Test on the profile. If the TCP ping fails, the server is unreachable.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="pages-are-slow">Pages are slow<a class="headerlink" href="#pages-are-slow" title="Permanent link">#</a></h2>
+<ul>
+<li>Lower the <strong>MTU</strong> to <code>1280</code> in App settings.</li>
+<li>Test other profiles and pick the one with the lowest latency.</li>
+<li>Turn off <strong>Fake IP</strong> in DNS settings if some apps misbehave.</li>
+</ul>
+<h2 id="a-site-or-app-does-not-work">A site or app does not work<a class="headerlink" href="#a-site-or-app-does-not-work" title="Permanent link">#</a></h2>
+<ul>
+<li>Check whether it works with the VPN off. If not, the problem is not MatenLi.</li>
+<li>Add a <strong>Direct</strong> rule for that domain in <a href="/en/wiki/routing/">Routing</a>.</li>
+<li>Some apps detect VPNs. Use the <strong>Apps</strong> setting to bypass them.</li>
+</ul>
+<h2 id="a-subscription-does-not-update">A subscription does not update<a class="headerlink" href="#a-subscription-does-not-update" title="Permanent link">#</a></h2>
+<ul>
+<li>Open the subscription address in a browser. If it fails, the provider is down.</li>
+<li>Check the <strong>user agent</strong> setting for the group.</li>
+<li>Make sure the interval is at least 15 minutes.</li>
+</ul>
+<h2 id="a-module-does-not-load">A module does not load<a class="headerlink" href="#a-module-does-not-load" title="Permanent link">#</a></h2>
+<ul>
+<li>The <code>module.json</code> must be valid JSON. Check it with a JSON validator.</li>
+<li><code>apiVersion</code> must be <code>1</code>.</li>
+<li>The ZIP must contain <code>module.json</code> at the top, not inside a folder.</li>
+</ul>
+<h2 id="collecting-information-for-a-bug-report">Collecting information for a bug report<a class="headerlink" href="#collecting-information-for-a-bug-report" title="Permanent link">#</a></h2>
+<p>Open <strong>Settings &gt; About</strong> and copy the version and core versions. Then open the log and copy the last
+lines around the error. Post them in the Telegram group or the GitHub issues. Remove your server
+addresses and passwords first.</p>
+<h2 id="still-stuck">Still stuck<a class="headerlink" href="#still-stuck" title="Permanent link">#</a></h2>
+<p>Ask in the Telegram group: <a href="https://t.me/r_FFR_r">@r_FFR_r</a>.</p>
+    <nav class="pager"><a class="prev" href="/en/wiki/examples/">&larr; Examples</a><a class="next" href="/en/wiki/ai-prompt/">AI prompt &rarr;</a></nav>
+  </main>
+</div>
+<footer class="foot">MatenLi is open source. Contact: <a href="https://t.me/r_FFR_r">@r_FFR_r</a></footer>
+</body>
+</html>

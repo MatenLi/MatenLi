@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plugins · MatenLi docs</title>
+<meta name="description" content="What a plugin is, where it comes from, and how to find or write one.">
+<link rel="icon" href="/assets/icon-512.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/wiki.css">
+<link rel="alternate" hreflang="en" href="/en/wiki/plugins/">
+<link rel="alternate" hreflang="ru" href="/ru/wiki/plugins/">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/"><img src="/assets/icon-512.png" alt="" width="32" height="32"> MatenLi</a>
+  <nav>
+    <a href="/en/wiki/">Documentation</a>
+    <a href="/download/">Download</a>
+    <a href="https://github.com/MatenLi/MatenLi">GitHub</a>
+    <a class="lang-switch" href="/ru/wiki/plugins/" hreflang="ru" lang="ru">Русский</a>
+  </nav>
+</header>
+<div class="layout">
+  <aside class="side">
+    <p class="side-title">Documentation</p>
+    <nav class="toc-side"><a href="/en/wiki/getting-started/">Getting started</a><a href="/en/wiki/profiles/">Profiles and links</a><a href="/en/wiki/groups/">Groups and subscriptions</a><a href="/en/wiki/connecting/">Connecting and tests</a><a href="/en/wiki/routing/">Routing, DNS and inbound</a><a href="/en/wiki/settings/">Settings reference</a><a href="/en/wiki/modules/">Modules</a><a class="active" href="/en/wiki/plugins/">Plugins</a><a href="/en/wiki/make-a-plugin/">Make your own plugin</a><a href="/en/wiki/examples/">Examples</a><a href="/en/wiki/troubleshooting/">Troubleshooting</a><a href="/en/wiki/ai-prompt/">AI prompt</a></nav>
+  </aside>
+  <main class="content">
+    <p class="crumbs"><a href="/en/wiki/">Documentation</a> / Plugins</p>
+    <h1>Plugins</h1>
+    <p class="summary">What a plugin is, where it comes from, and how to find or write one.</p>
+    <details class="on-this-page" open><summary>On this page</summary><ul><li><a href="#what-a-plugin-can-add">What a plugin can add</a></li><li><a href="#installing-a-plugin">Installing a plugin</a></li><li><a href="#where-to-find-plugins">Where to find plugins</a></li><li><a href="#trust">Trust</a></li><li><a href="#making-your-own">Making your own</a></li></ul></details>
+    <p>Plugins are the add-ons that MatenLi loads as <a href="/en/wiki/modules/">modules</a>. This page is the overview.
+Use the other pages when you want to act:</p>
+<ul>
+<li><a href="/en/wiki/make-a-plugin/">Make your own plugin</a>: a step-by-step guide that needs no programming experience.</li>
+<li><a href="/en/wiki/examples/">Examples</a>: complete, working module files to copy.</li>
+<li><a href="/en/wiki/ai-prompt/">AI prompt</a>: a prompt that makes an AI assistant write a plugin for you.</li>
+</ul>
+<h2 id="what-a-plugin-can-add">What a plugin can add<a class="headerlink" href="#what-a-plugin-can-add" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Kind</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A protocol</td>
+<td>A new link type, such as <code>stormdns://</code>.</td>
+</tr>
+<tr>
+<td>A core setting</td>
+<td>A switch or choice that changes the generated config.</td>
+</tr>
+<tr>
+<td>A test</td>
+<td>A custom latency check for a protocol.</td>
+</tr>
+<tr>
+<td>A helper</td>
+<td>A native library that a protocol needs to run.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="installing-a-plugin">Installing a plugin<a class="headerlink" href="#installing-a-plugin" title="Permanent link">#</a></h2>
+<ol>
+<li>Download the plugin's <code>.zip</code> file.</li>
+<li>Open <strong>Modules</strong> in the drawer and tap <strong>Import (zip)</strong>.</li>
+<li>Choose the file. The plugin appears in the list.</li>
+<li>Open it to change its settings, pin it, or disable it.</li>
+</ol>
+<h2 id="where-to-find-plugins">Where to find plugins<a class="headerlink" href="#where-to-find-plugins" title="Permanent link">#</a></h2>
+<ul>
+<li>The MatenLi GitHub organisation lists the official plugins.</li>
+<li>Any GitHub repository that publishes a release with a <code>.zip</code> in the module format can be used.</li>
+<li>Ask in the Telegram group before you install a plugin from someone you do not know.</li>
+</ul>
+<h2 id="trust">Trust<a class="headerlink" href="#trust" title="Permanent link">#</a></h2>
+<p>A plugin runs code on your phone. Install only plugins whose source you can read, from releases you trust.
+Check the <code>updateUrl</code> before you enable automatic update checks.</p>
+<h2 id="making-your-own">Making your own<a class="headerlink" href="#making-your-own" title="Permanent link">#</a></h2>
+<p>Start with <a href="/en/wiki/make-a-plugin/">Make your own plugin</a>. Most plugins are just a <code>module.json</code> file. You only
+need a native library when the protocol needs code that is not written in JSON.</p>
+    <nav class="pager"><a class="prev" href="/en/wiki/modules/">&larr; Modules</a><a class="next" href="/en/wiki/make-a-plugin/">Make your own plugin &rarr;</a></nav>
+  </main>
+</div>
+<footer class="foot">MatenLi is open source. Contact: <a href="https://t.me/r_FFR_r">@r_FFR_r</a></footer>
+</body>
+</html>

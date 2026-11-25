@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="backup_section">Резервная копия</string>
+    <string name="backup_create">Создать резервную копию</string>
+    <string name="backup_create_summary">Сохранить профили, группы, маршруты, подписки и настройки в один файл</string>
+    <string name="backup_load">Загрузить резервную копию</string>
+    <string name="backup_load_summary">Восстановить из файла. Текущие данные будут заменены</string>
+    <string name="backup_created">Резервная копия сохранена: частей %1$d</string>
+    <string name="backup_failed">Не удалось создать копию: %1$s</string>
+    <string name="backup_confirm_title">Заменить текущие данные?</string>
+    <string name="backup_confirm_text">Загрузка копии заменит ваши профили, группы, маршруты, подписки и настройки. Если нужно, сначала сохраните текущие данные.</string>
+    <string name="backup_confirm_ok">Загрузить</string>
+    <string name="backup_cancel">Отмена</string>
+    <string name="backup_restored">Восстановлено: %1$s</string>
+    <string name="backup_restored_partial">Восстановлено: %1$s. Нет в копии: %2$s</string>
+    <string name="backup_invalid">Это не резервная копия MatenLi: %1$s</string>
+    <string name="backup_notice_title">Сделайте копию перед обновлением</string>
+    <string name="backup_notice_text">Перед удалением MatenLi или установкой новой версии поверх создайте резервную копию в Настройках. Удаление стирает все профили, группы, подписки, маршруты и настройки. После установки откройте Настройки и нажмите Загрузить резервную копию.</string>
+    <string name="backup_notice_ok">Понятно</string>
+</resources>

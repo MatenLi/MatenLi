@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="share_title">Share profile</string>
+    <string name="share_qr">QR code</string>
+    <string name="share_clipboard">Clipboard</string>
+    <string name="share_json">JConf</string>
+    <string name="share_standard">Standard</string>
+    <string name="share_sagernet">SagerNet</string>
+    <string name="share_sagernet_soon">SagerNet format is not ready yet.</string>
+    <string name="share_copied">Copied to clipboard</string>
+    <string name="share_clip">Clipboard</string>
+    <string name="share_file">File</string>
+    <string name="share_file_saved">Config saved</string>
+    <string name="share_file_failed">Could not save the file</string>
+    <string name="share_no_link">This protocol has no standard share link yet.</string>
+    <string name="per_app_mode">Per-app VPN</string>
+    <string name="per_app_off">All apps</string>
+    <string name="per_app_include">Only selected apps</string>
+    <string name="per_app_exclude">All except selected apps</string>
+    <string name="per_app_choose">Choose apps</string>
+    <string name="per_app_choose_summary">Used by the per-app mode above</string>
+    <string name="tun_address4">TUN IPv4 address</string>
+    <string name="tun_address6">TUN IPv6 address</string>
+    <string name="fakedns_range4">FakeIP IPv4 range</string>
+    <string name="fakedns_range6">FakeIP IPv6 range</string>
+</resources>

@@ -1,0 +1,80 @@
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var host = location.host || 'p.kfwl.lol';
+  $('host').textContent = host;
+  $('host2').textContent = host;
+
+  function build(){
+    var up = $('up').value.trim();
+    var parts = [];
+    if ($('ua').value) parts.push('ua=' + $('ua').value);
+    if ($('os').value) parts.push('os=' + $('os').value);
+    var sua = $('sua').value.trim();
+    if (sua) parts.push('sua="' + sua + '"');
+    var h = $('h').value.trim();
+    if (h) parts.push('h=' + h);
+    if ($('fmt').value) parts.push($('fmt').value);
+    if (up) parts.push(up);
+
+    var note = $('note');
+    if (!up) {
+      $('out').value = '';
+      note.textContent = '';
+      return '';
+    }
+    if (!/^(https?|happ|incy):\/\//i.test(up)) {
+      note.className = 'hint warn';
+      note.textContent = 'upstream должен начинаться с http://, https://, happ:// или incy://';
+    } else {
+      note.className = 'hint';
+      note.textContent = 'настройки идут перед upstream, разделитель — «/»';
+    }
+    var url = location.origin + '/' + parts.join('/');
+    $('out').value = url;
+    return url;
+  }
+
+  ['up','ua','os','sua','h','fmt'].forEach(function(id){
+    $(id).addEventListener('input', build);
+    $(id).addEventListener('change', build);
+  });
+
+  $('rnd').addEventListener('click', function(){
+    var bytes = new Uint8Array(8);
+    (window.crypto || window.msCrypto).getRandomValues(bytes);
+    var s = '';
+    for (var i = 0; i < bytes.length; i++) s += ('0' + bytes[i].toString(16)).slice(-2);
+    $('h').value = s;
+    build();
+  });
+
+  function toast(msg, el){
+    var old = el.textContent;
+    el.textContent = msg;
+    setTimeout(function(){ el.textContent = old; }, 1500);
+  }
+
+  $('copy').addEventListener('click', function(){
+    var url = build();
+    var note = $('note');
+    if (!url) { toast('сначала вставь upstream', note); return; }
+    function done(){ toast('скопировано', note); }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(done, function(){ fallback(url, done); });
+    } else { fallback(url, done); }
+    function fallback(t, cb){
+      var ta = document.createElement('textarea');
+      ta.value = t; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); } catch(e){}
+      ta.remove(); cb();
+    }
+  });
+
+  $('open').addEventListener('click', function(){
+    var url = build();
+    if (!url) { toast('сначала вставь upstream', $('note')); return; }
+    window.open(url, '_blank', 'noopener');
+  });
+
+  build();
+})();

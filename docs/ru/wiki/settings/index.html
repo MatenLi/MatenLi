@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Справочник настроек · документация MatenLi</title>
+<meta name="description" content="Все настройки MatenLi, что каждая делает и каким значением она задана по умолчанию.">
+<link rel="icon" href="/assets/icon-512.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/wiki.css">
+<link rel="alternate" hreflang="en" href="/en/wiki/settings/">
+<link rel="alternate" hreflang="ru" href="/ru/wiki/settings/">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/"><img src="/assets/icon-512.png" alt="" width="32" height="32"> MatenLi</a>
+  <nav>
+    <a href="/ru/wiki/">Документация</a>
+    <a href="/download/">Скачать</a>
+    <a href="https://github.com/MatenLi/MatenLi">GitHub</a>
+    <a class="lang-switch" href="/en/wiki/settings/" hreflang="en" lang="en">English</a>
+  </nav>
+</header>
+<div class="layout">
+  <aside class="side">
+    <p class="side-title">Документация</p>
+    <nav class="toc-side"><a href="/ru/wiki/getting-started/">С чего начать</a><a href="/ru/wiki/profiles/">Профили и ссылки</a><a href="/ru/wiki/groups/">Группы и подписки</a><a href="/ru/wiki/connecting/">Подключение и проверки</a><a href="/ru/wiki/routing/">Маршрутизация, DNS и входящие</a><a class="active" href="/ru/wiki/settings/">Справочник настроек</a><a href="/ru/wiki/modules/">Модули</a><a href="/ru/wiki/plugins/">Плагины</a><a href="/ru/wiki/make-a-plugin/">Написать свой плагин</a><a href="/ru/wiki/examples/">Примеры</a><a href="/ru/wiki/troubleshooting/">Решение проблем</a><a href="/ru/wiki/ai-prompt/">Промпт для ИИ</a><a href="/ru/wiki/updating/">Обновление и резервная копия</a></nav>
+  </aside>
+  <main class="content">
+    <p class="crumbs"><a href="/ru/wiki/">Документация</a> / Справочник настроек</p>
+    <h1>Справочник настроек</h1>
+    <p class="summary">Все настройки MatenLi, что каждая делает и каким значением она задана по умолчанию.</p>
+    <details class="on-this-page" open><summary>На этой странице</summary><ul><li><a href="#настройки-приложения">Настройки приложения</a></li><li><a href="#настройки-маршрутов">Настройки маршрутов</a></li><li><a href="#настройки-dns">Настройки DNS</a></li><li><a href="#настройки-входящих">Настройки входящих</a></li><li><a href="#проверка-соединения">Проверка соединения</a></li><li><a href="#поиск-страны">Поиск страны</a></li><li><a href="#модули">Модули</a></li><li><a href="#прочее">Прочее</a></li></ul></details>
+    <p>Откройте <strong>Настройки</strong> из боковой панели. Настройки сгруппированы по разделам. Эта страница перечисляет их в том же порядке.</p>
+<blockquote>
+<p><strong>Статус:</strong> Блокировка рекламы и Поиск страны появятся в следующем выпуске.
+Настройки маршрутов, DNS и входящих показаны здесь как целевая структура.</p>
+</blockquote>
+<h2 id="настройки-приложения">Настройки приложения<a class="headerlink" href="#настройки-приложения" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Настройка</th>
+<th>По умолчанию</th>
+<th>Что делает</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Автоподключение</td>
+<td>Выкл</td>
+<td>Подключается к выбранному профилю при открытии приложения.</td>
+</tr>
+<tr>
+<td>Ночной режим</td>
+<td>Системный</td>
+<td>Светлый, тёмный или как в системе.</td>
+</tr>
+<tr>
+<td>Тема приложения</td>
+<td>Динамическая</td>
+<td>Динамические цвета из обоев, один из пяти пресетов или свой цвет (hex, например <code>#7F52CF</code>).</td>
+</tr>
+<tr>
+<td>Показывать нижнюю панель</td>
+<td>Вкл</td>
+<td>Выключите, чтобы освободить место для списка.</td>
+</tr>
+<tr>
+<td>Режим службы</td>
+<td>VPN</td>
+<td>VPN — обычный режим. Только прокси запускает локальный прокси без VPN.</td>
+</tr>
+<tr>
+<td>Интерфейс TUN</td>
+<td>Вкл</td>
+<td>Виртуальное сетевое устройство, которое несёт весь трафик.</td>
+</tr>
+<tr>
+<td>MTU</td>
+<td>1500</td>
+<td>Размер пакета. Уменьшите (например, до 1280), если страницы зависают в некоторых сетях.</td>
+</tr>
+<tr>
+<td>Интервал скорости</td>
+<td>1 с</td>
+<td>Как часто обновляются цифры скорости.</td>
+</tr>
+<tr>
+<td>Уровень журнала</td>
+<td>Info</td>
+<td>Сколько ядро пишет в журнал. Debug — подробно.</td>
+</tr>
+<tr>
+<td>Свой конфиг</td>
+<td>Пусто</td>
+<td>Ваш JSON sing-box. Он заменяет сгенерированный конфиг. Для опытных.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="настройки-маршрутов">Настройки маршрутов<a class="headerlink" href="#настройки-маршрутов" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Настройка</th>
+<th>По умолчанию</th>
+<th>Что делает</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Выход по умолчанию</td>
+<td>Прокси</td>
+<td>Через что идёт трафик, который не подошёл ни под одно правило.</td>
+</tr>
+<tr>
+<td>Блокировать рекламу</td>
+<td>Выкл</td>
+<td>Блокирует список рекламных доменов.</td>
+</tr>
+<tr>
+<td>Обходить частные адреса</td>
+<td>Вкл</td>
+<td>Локальные адреса остаются напрямую.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="настройки-dns">Настройки DNS<a class="headerlink" href="#настройки-dns" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Настройка</th>
+<th>По умолчанию</th>
+<th>Что делает</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Удалённый DNS</td>
+<td><code>https://1.1.1.1/dns-query</code></td>
+<td>DNS для имён, которые идут через прокси.</td>
+</tr>
+<tr>
+<td>Локальный DNS</td>
+<td><code>8.8.8.8</code></td>
+<td>DNS для имён, которые идут напрямую.</td>
+</tr>
+<tr>
+<td>Fake IP</td>
+<td>Вкл</td>
+<td>См. <a href="/ru/wiki/routing/#dns">Маршрутизацию</a>.</td>
+</tr>
+<tr>
+<td>Стратегия</td>
+<td>IPv4 в приоритете</td>
+<td>Только IPv4, только IPv6 или предпочитать один из них.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="настройки-входящих">Настройки входящих<a class="headerlink" href="#настройки-входящих" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Настройка</th>
+<th>По умолчанию</th>
+<th>Что делает</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Смешанный порт</td>
+<td>2080</td>
+<td>Локальный порт SOCKS и HTTP.</td>
+</tr>
+<tr>
+<td>Разрешить LAN</td>
+<td>Выкл</td>
+<td>Позволяет другим устройствам пользоваться локальным прокси.</td>
+</tr>
+<tr>
+<td>Имя и пароль</td>
+<td>Пусто</td>
+<td>Защищают локальный прокси.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="проверка-соединения">Проверка соединения<a class="headerlink" href="#проверка-соединения" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Настройка</th>
+<th>По умолчанию</th>
+<th>Что делает</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Тестовый URL</td>
+<td><code>https://www.gstatic.com/generate_204</code></td>
+<td>Адрес для проверок по URL.</td>
+</tr>
+<tr>
+<td>Таймаут пинга</td>
+<td>5 с</td>
+<td>Сколько ждёт проверка.</td>
+</tr>
+<tr>
+<td>Пинг при подключении</td>
+<td>Вкл</td>
+<td>Держит число задержки актуальным.</td>
+</tr>
+<tr>
+<td>Параллельный пинг</td>
+<td>Выкл</td>
+<td>Проверяет несколько профилей одновременно. Может перегрузить медленную сеть.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="поиск-страны">Поиск страны<a class="headerlink" href="#поиск-страны" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Настройка</th>
+<th>По умолчанию</th>
+<th>Что делает</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Поиск страны</td>
+<td>Вкл</td>
+<td>Определяет страну выходного адреса через api.ip2location.io.</td>
+</tr>
+<tr>
+<td>Ключ API</td>
+<td>Пусто</td>
+<td>Необязательно. Без ключа бесплатный лимит — 1000 запросов в день.</td>
+</tr>
+</tbody>
+</table>
+<p>На ip2location.io отправляется только адрес выхода. Выключите эту настройку, если не хотите передавать адрес сторонним серверам.</p>
+<h2 id="модули">Модули<a class="headerlink" href="#модули" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Настройка</th>
+<th>Что делает</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Установленные модули</td>
+<td>Страница модулей. См. <a href="/ru/wiki/modules/">Модули</a>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="прочее">Прочее<a class="headerlink" href="#прочее" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Настройка</th>
+<th>Что делает</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Документация</td>
+<td>Открывает этот сайт.</td>
+</tr>
+<tr>
+<td>О приложении</td>
+<td>Версия, версии ядер и контакты.</td>
+</tr>
+<tr>
+<td>Создать резервную копию</td>
+<td>Сохраняет профили, группы, маршруты, подписки и настройки в один файл. См. <a href="/ru/wiki/updating/">Обновление и резервная копия</a>.</td>
+</tr>
+<tr>
+<td>Загрузить резервную копию</td>
+<td>Восстанавливает файл копии. Текущие данные заменяются.</td>
+</tr>
+</tbody>
+</table>
+    <nav class="pager"><a class="prev" href="/ru/wiki/routing/">&larr; Маршрутизация, DNS и входящие</a><a class="next" href="/ru/wiki/modules/">Модули &rarr;</a></nav>
+  </main>
+</div>
+<footer class="foot">MatenLi с открытым кодом. Связь: <a href="https://t.me/r_FFR_r">@r_FFR_r</a></footer>
+</body>
+</html>

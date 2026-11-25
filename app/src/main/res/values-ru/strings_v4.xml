@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="share_title">Поделиться профилем</string>
+    <string name="share_qr">QR-код</string>
+    <string name="share_clipboard">Буфер обмена</string>
+    <string name="share_json">JConf</string>
+    <string name="share_standard">Стандартный</string>
+    <string name="share_sagernet">SagerNet</string>
+    <string name="share_sagernet_soon">Формат SagerNet пока не готов.</string>
+    <string name="share_copied">Скопировано в буфер обмена</string>
+    <string name="share_clip">Буфер обмена</string>
+    <string name="share_file">Файл</string>
+    <string name="share_file_saved">Конфиг сохранён</string>
+    <string name="share_file_failed">Не удалось сохранить файл</string>
+    <string name="share_no_link">У этого протокола пока нет стандартной ссылки.</string>
+    <string name="per_app_mode">VPN для отдельных приложений</string>
+    <string name="per_app_off">Все приложения</string>
+    <string name="per_app_include">Только выбранные приложения</string>
+    <string name="per_app_exclude">Все, кроме выбранных приложений</string>
+    <string name="per_app_choose">Выбрать приложения</string>
+    <string name="per_app_choose_summary">Используется в режиме выше</string>
+    <string name="tun_address4">Адрес TUN IPv4</string>
+    <string name="tun_address6">Адрес TUN IPv6</string>
+    <string name="fakedns_range4">Диапазон FakeIP IPv4</string>
+    <string name="fakedns_range6">Диапазон FakeIP IPv6</string>
+</resources>

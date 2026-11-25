@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>С чего начать · документация MatenLi</title>
+<meta name="description" content="Пошаговое руководство для тех, кто никогда не пользовался VPN-клиентом.">
+<link rel="icon" href="/assets/icon-512.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/wiki.css">
+<link rel="alternate" hreflang="en" href="/en/wiki/getting-started/">
+<link rel="alternate" hreflang="ru" href="/ru/wiki/getting-started/">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/"><img src="/assets/icon-512.png" alt="" width="32" height="32"> MatenLi</a>
+  <nav>
+    <a href="/ru/wiki/">Документация</a>
+    <a href="/download/">Скачать</a>
+    <a href="https://github.com/MatenLi/MatenLi">GitHub</a>
+    <a class="lang-switch" href="/en/wiki/getting-started/" hreflang="en" lang="en">English</a>
+  </nav>
+</header>
+<div class="layout">
+  <aside class="side">
+    <p class="side-title">Документация</p>
+    <nav class="toc-side"><a class="active" href="/ru/wiki/getting-started/">С чего начать</a><a href="/ru/wiki/profiles/">Профили и ссылки</a><a href="/ru/wiki/groups/">Группы и подписки</a><a href="/ru/wiki/connecting/">Подключение и проверки</a><a href="/ru/wiki/routing/">Маршрутизация, DNS и входящие</a><a href="/ru/wiki/settings/">Справочник настроек</a><a href="/ru/wiki/modules/">Модули</a><a href="/ru/wiki/plugins/">Плагины</a><a href="/ru/wiki/make-a-plugin/">Написать свой плагин</a><a href="/ru/wiki/examples/">Примеры</a><a href="/ru/wiki/troubleshooting/">Решение проблем</a><a href="/ru/wiki/ai-prompt/">Промпт для ИИ</a></nav>
+  </aside>
+  <main class="content">
+    <p class="crumbs"><a href="/ru/wiki/">Документация</a> / С чего начать</p>
+    <h1>С чего начать</h1>
+    <p class="summary">Пошаговое руководство для тех, кто никогда не пользовался VPN-клиентом.</p>
+    <details class="on-this-page" open><summary>На этой странице</summary><ul><li><a href="#что-делает-matenli">Что делает MatenLi</a></li><li><a href="#установка">Установка</a></li><li><a href="#добавление-первого-сервера">Добавление первого сервера</a></li><li><a href="#подключение">Подключение</a></li><li><a href="#проверка">Проверка</a></li><li><a href="#слова-которые-вы-увидите">Слова, которые вы увидите</a></li><li><a href="#что-дальше">Что дальше</a></li></ul></details>
+    <h2 id="что-делает-matenli">Что делает MatenLi<a class="headerlink" href="#что-делает-matenli" title="Permanent link">#</a></h2>
+<p>MatenLi — приложение для Android, которое отправляет весь интернет-трафик телефона через <strong>сервер</strong>, который вы выбираете.
+Сервер принадлежит кому-то другому: VPN-провайдеру, знакомому или вам самим. MatenLi хранит только настройки,
+которые подсказывают, как к этому серверу подключиться.</p>
+<p>Понадобятся три вещи:</p>
+<ol>
+<li><strong>Телефон на Android</strong> версии 12 или новее.</li>
+<li><strong>Ссылка</strong> от провайдера. Она начинается со слова, например <code>vless://</code>, <code>vmess://</code>, <code>trojan://</code>,
+   <code>ss://</code> или <code>hysteria2://</code>. Иногда провайдер даёт вместо ссылки адрес, который называется <strong>подпиской</strong>.</li>
+<li><strong>APK-файл MatenLi</strong> со <a href="/download/">страницы загрузки</a>.</li>
+</ol>
+<h2 id="установка">Установка<a class="headerlink" href="#установка" title="Permanent link">#</a></h2>
+<ol>
+<li>Откройте <a href="/download/">страницу загрузки</a> на телефоне и скачайте свежий APK <code>matenli-debug</code>.</li>
+<li>Откройте файл. Android попросит разрешить установку из этого источника. Разрешите для браузера, которым скачали файл.</li>
+<li>Нажмите <strong>Установить</strong>. Приложения нет в Play Store, поэтому Android может показать предупреждение.
+   Это тот же APK, который собирает публичный конвейер сборки.</li>
+</ol>
+<blockquote>
+<p><strong>Совет:</strong> если видите «Приложение не установлено», скорее всего, уже стоит более старая версия MatenLi.
+Сначала удалите её, затем установите снова.</p>
+</blockquote>
+<h2 id="добавление-первого-сервера">Добавление первого сервера<a class="headerlink" href="#добавление-первого-сервера" title="Permanent link">#</a></h2>
+<ol>
+<li>Скопируйте ссылку, которую дал провайдер.</li>
+<li>Откройте MatenLi и нажмите кнопку <strong>+</strong> в правом нижнем углу.</li>
+<li>Выберите <strong>Вставить из буфера</strong>. Сервер появится в списке.</li>
+<li>Нажмите на сервер один раз, чтобы выбрать его. Галочка показывает, какой сервер выбран.</li>
+</ol>
+<p>Если вам дали адрес <strong>подписки</strong>, выберите в меню <strong>Добавить подписку</strong>, вставьте адрес и сохраните.
+Все серверы из подписки добавятся в группу.</p>
+<h2 id="подключение">Подключение<a class="headerlink" href="#подключение" title="Permanent link">#</a></h2>
+<ol>
+<li>Нажмите большую кнопку <strong>Подключить</strong>.</li>
+<li>Android попросит разрешить VPN. Нажмите <strong>OK</strong>. Значок ключа в строке состояния означает, что VPN включён.</li>
+<li>Посмотрите на нижнюю панель. Там показаны состояние, скорость и задержка до тестового адреса.</li>
+</ol>
+<p>Чтобы отключиться, снова нажмите ту же кнопку.</p>
+<h2 id="проверка">Проверка<a class="headerlink" href="#проверка" title="Permanent link">#</a></h2>
+<p>Откройте браузер и найдите «какой у меня ip». Адрес должен быть адресом вашего сервера, а не домашним или мобильным.</p>
+<p>Если страница не открывается, прочитайте раздел <a href="/ru/wiki/troubleshooting/">Решение проблем</a>.</p>
+<h2 id="слова-которые-вы-увидите">Слова, которые вы увидите<a class="headerlink" href="#слова-которые-вы-увидите" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Слово</th>
+<th>Что означает</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Профиль</td>
+<td>Один сервер со всеми его настройками.</td>
+</tr>
+<tr>
+<td>Группа</td>
+<td>Папка с профилями, обычно по одной на подписку.</td>
+</tr>
+<tr>
+<td>Подписка</td>
+<td>Веб-адрес, который содержит много профилей и может обновляться сам.</td>
+</tr>
+<tr>
+<td>Задержка</td>
+<td>Время одного обмена с тестовым адресом в миллисекундах. Чем меньше, тем лучше.</td>
+</tr>
+<tr>
+<td>Маршрут</td>
+<td>Правило, которое решает, какой трафик идёт через сервер, а какой напрямую.</td>
+</tr>
+<tr>
+<td>Модуль</td>
+<td>Дополнение, которое учит MatenLi новому протоколу или настройке. См. <a href="/ru/wiki/modules/">Модули</a>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="что-дальше">Что дальше<a class="headerlink" href="#что-дальше" title="Permanent link">#</a></h2>
+<ul>
+<li><a href="/ru/wiki/profiles/">Профили и ссылки</a>: добавление, редактирование, проверка и передача серверов.</li>
+<li><a href="/ru/wiki/groups/">Группы и подписки</a>: порядок в серверах и их автоматическое обновление.</li>
+<li><a href="/ru/wiki/connecting/">Подключение и проверки</a>: что означают числа задержки.</li>
+</ul>
+    <nav class="pager"><a class="next" href="/ru/wiki/profiles/">Профили и ссылки &rarr;</a></nav>
+  </main>
+</div>
+<footer class="foot">MatenLi с открытым кодом. Связь: <a href="https://t.me/r_FFR_r">@r_FFR_r</a></footer>
+</body>
+</html>

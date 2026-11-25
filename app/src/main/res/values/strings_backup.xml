@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="backup_section">Backup</string>
+    <string name="backup_create">Create backup</string>
+    <string name="backup_create_summary">Save profiles, groups, routes, subscriptions and settings to one file</string>
+    <string name="backup_load">Load backup</string>
+    <string name="backup_load_summary">Restore a backup file. Current data is replaced</string>
+    <string name="backup_created">Backup saved: %1$d parts</string>
+    <string name="backup_failed">Backup failed: %1$s</string>
+    <string name="backup_confirm_title">Replace current data?</string>
+    <string name="backup_confirm_text">Loading a backup replaces your profiles, groups, routes, subscriptions and settings. Create a backup of the current data first if you need it.</string>
+    <string name="backup_confirm_ok">Load</string>
+    <string name="backup_cancel">Cancel</string>
+    <string name="backup_restored">Restored: %1$s</string>
+    <string name="backup_restored_partial">Restored: %1$s. Not in the backup: %2$s</string>
+    <string name="backup_invalid">Not a valid MatenLi backup: %1$s</string>
+    <string name="backup_notice_title">Back up before you update</string>
+    <string name="backup_notice_text">Before you uninstall MatenLi or install a new version over it, create a backup in Settings. Uninstalling deletes all profiles, groups, subscriptions, routes and settings. After installing, open Settings and tap Load backup.</string>
+    <string name="backup_notice_ok">Got it</string>
+</resources>

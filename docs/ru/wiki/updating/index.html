@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Обновление и резервная копия · документация MatenLi</title>
+<meta name="description" content="Сделайте резервную копию перед удалением или обновлением, затем загрузите её в новую версию.">
+<link rel="icon" href="/assets/icon-512.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/wiki.css">
+<link rel="alternate" hreflang="en" href="/en/wiki/updating/">
+<link rel="alternate" hreflang="ru" href="/ru/wiki/updating/">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/"><img src="/assets/icon-512.png" alt="" width="32" height="32"> MatenLi</a>
+  <nav>
+    <a href="/ru/wiki/">Документация</a>
+    <a href="/download/">Скачать</a>
+    <a href="https://github.com/MatenLi/MatenLi">GitHub</a>
+    <a class="lang-switch" href="/en/wiki/updating/" hreflang="en" lang="en">English</a>
+  </nav>
+</header>
+<div class="layout">
+  <aside class="side">
+    <p class="side-title">Документация</p>
+    <nav class="toc-side"><a href="/ru/wiki/getting-started/">С чего начать</a><a href="/ru/wiki/profiles/">Профили и ссылки</a><a href="/ru/wiki/groups/">Группы и подписки</a><a href="/ru/wiki/connecting/">Подключение и проверки</a><a href="/ru/wiki/routing/">Маршрутизация, DNS и входящие</a><a href="/ru/wiki/settings/">Справочник настроек</a><a href="/ru/wiki/modules/">Модули</a><a href="/ru/wiki/plugins/">Плагины</a><a href="/ru/wiki/make-a-plugin/">Написать свой плагин</a><a href="/ru/wiki/examples/">Примеры</a><a href="/ru/wiki/troubleshooting/">Решение проблем</a><a href="/ru/wiki/ai-prompt/">Промпт для ИИ</a><a class="active" href="/ru/wiki/updating/">Обновление и резервная копия</a></nav>
+  </aside>
+  <main class="content">
+    <p class="crumbs"><a href="/ru/wiki/">Документация</a> / Обновление и резервная копия</p>
+    <h1>Обновление и резервная копия</h1>
+    <p class="summary">Сделайте резервную копию перед удалением или обновлением, затем загрузите её в новую версию.</p>
+    <details class="on-this-page" open><summary>На этой странице</summary><ul><li><a href="#перед-обновлением-или-удалением">Перед обновлением или удалением</a></li><li><a href="#после-установки-новой-версии">После установки новой версии</a></li><li><a href="#если-вы-забыли-сделать-копию">Если вы забыли сделать копию</a></li><li><a href="#кратко">Кратко</a></li></ul></details>
+    <blockquote>
+<p><strong>Важно:</strong> перед <strong>удалением</strong> MatenLi или <strong>установкой новой версии поверх</strong> сделайте резервную копию.
+Удаление стирает все профили, группы, подписки, маршруты, модули и настройки на телефоне.</p>
+</blockquote>
+<h2 id="перед-обновлением-или-удалением">Перед обновлением или удалением<a class="headerlink" href="#перед-обновлением-или-удалением" title="Permanent link">#</a></h2>
+<ol>
+<li>Откройте <strong>Настройки</strong> и нажмите <strong>Создать резервную копию</strong>.</li>
+<li>Выберите, куда сохранить файл. Сохраните его вне приложения, например в папку «Загрузки» или в облако.</li>
+<li>Убедитесь, что файл на месте и его размер не нулевой.</li>
+<li>Только после этого удаляйте приложение или устанавливайте новую версию.</li>
+</ol>
+<p>Файл резервной копии содержит профили, группы, подписки, маршруты, модули и настройки. Храните его в секрете:
+в нём есть пароли и ссылки на ваши серверы.</p>
+<h2 id="после-установки-новой-версии">После установки новой версии<a class="headerlink" href="#после-установки-новой-версии" title="Permanent link">#</a></h2>
+<ol>
+<li>Откройте MatenLi. Уведомление при первом запуске напомнит загрузить резервную копию.</li>
+<li>Откройте <strong>Настройки</strong> и нажмите <strong>Загрузить резервную копию</strong>.</li>
+<li>Выберите файл резервной копии.</li>
+<li>Проверьте профили и группы. Нажмите <strong>Проверить все</strong>, чтобы убедиться, что серверы отвечают.</li>
+</ol>
+<blockquote>
+<p><strong>Примечание:</strong> если новая версия меняет формат резервной копии, MatenLi сообщит, какие части не удалось
+загрузить, и сохранит остальные. Ничего не перезаписывается, пока вы не подтвердите.</p>
+</blockquote>
+<h2 id="если-вы-забыли-сделать-копию">Если вы забыли сделать копию<a class="headerlink" href="#если-вы-забыли-сделать-копию" title="Permanent link">#</a></h2>
+<p>После удаления профили и подписки пропадут. Попросите у провайдера ссылки заново или используйте адрес подписки:
+если добавить его снова, восстановятся все серверы группы.</p>
+<h2 id="кратко">Кратко<a class="headerlink" href="#кратко" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Шаг</th>
+<th>Когда</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Резервная копия</td>
+<td>Перед удалением или обновлением</td>
+<td>Настройки &gt; Создать резервную копию</td>
+</tr>
+<tr>
+<td>Установка</td>
+<td>Потом</td>
+<td>Установите новый APK</td>
+</tr>
+<tr>
+<td>Загрузка</td>
+<td>После установки</td>
+<td>Настройки &gt; Загрузить резервную копию</td>
+</tr>
+</tbody>
+</table>
+    <nav class="pager"><a class="prev" href="/ru/wiki/ai-prompt/">&larr; Промпт для ИИ</a></nav>
+  </main>
+</div>
+<footer class="foot">MatenLi с открытым кодом. Связь: <a href="https://t.me/r_FFR_r">@r_FFR_r</a></footer>
+</body>
+</html>

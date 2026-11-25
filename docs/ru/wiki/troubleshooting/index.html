@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Решение проблем · документация MatenLi</title>
+<meta name="description" content="Решения самых частых проблем: от сбоев подключения до ошибок портов.">
+<link rel="icon" href="/assets/icon-512.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/wiki.css">
+<link rel="alternate" hreflang="en" href="/en/wiki/troubleshooting/">
+<link rel="alternate" hreflang="ru" href="/ru/wiki/troubleshooting/">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/"><img src="/assets/icon-512.png" alt="" width="32" height="32"> MatenLi</a>
+  <nav>
+    <a href="/ru/wiki/">Документация</a>
+    <a href="/download/">Скачать</a>
+    <a href="https://github.com/MatenLi/MatenLi">GitHub</a>
+    <a class="lang-switch" href="/en/wiki/troubleshooting/" hreflang="en" lang="en">English</a>
+  </nav>
+</header>
+<div class="layout">
+  <aside class="side">
+    <p class="side-title">Документация</p>
+    <nav class="toc-side"><a href="/ru/wiki/getting-started/">С чего начать</a><a href="/ru/wiki/profiles/">Профили и ссылки</a><a href="/ru/wiki/groups/">Группы и подписки</a><a href="/ru/wiki/connecting/">Подключение и проверки</a><a href="/ru/wiki/routing/">Маршрутизация, DNS и входящие</a><a href="/ru/wiki/settings/">Справочник настроек</a><a href="/ru/wiki/modules/">Модули</a><a href="/ru/wiki/plugins/">Плагины</a><a href="/ru/wiki/make-a-plugin/">Написать свой плагин</a><a href="/ru/wiki/examples/">Примеры</a><a class="active" href="/ru/wiki/troubleshooting/">Решение проблем</a><a href="/ru/wiki/ai-prompt/">Промпт для ИИ</a><a href="/ru/wiki/updating/">Обновление и резервная копия</a></nav>
+  </aside>
+  <main class="content">
+    <p class="crumbs"><a href="/ru/wiki/">Документация</a> / Решение проблем</p>
+    <h1>Решение проблем</h1>
+    <p class="summary">Решения самых частых проблем: от сбоев подключения до ошибок портов.</p>
+    <details class="on-this-page" open><summary>На этой странице</summary><ul><li><a href="#vpn-не-подключается">VPN не подключается</a></li><li><a href="#страницы-медленные">Страницы медленные</a></li><li><a href="#сайт-или-приложение-не-работает">Сайт или приложение не работает</a></li><li><a href="#подписка-не-обновляется">Подписка не обновляется</a></li><li><a href="#модуль-не-загружается">Модуль не загружается</a></li><li><a href="#сбор-данных-для-сообщения-об-ошибке">Сбор данных для сообщения об ошибке</a></li><li><a href="#всё-ещё-не-получается">Всё ещё не получается</a></li></ul></details>
+    <h2 id="vpn-не-подключается">VPN не подключается<a class="headerlink" href="#vpn-не-подключается" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Симптом</th>
+<th>Вероятная причина</th>
+<th>Решение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Кнопка подключения ничего не делает</td>
+<td>Вы отказали в разрешении VPN</td>
+<td>Нажмите «Подключить» снова и разрешите VPN.</td>
+</tr>
+<tr>
+<td>«XHTTP требует ядро Xray»</td>
+<td>Ссылка использует XHTTP</td>
+<td>Дождитесь ядра Xray в следующем выпуске.</td>
+</tr>
+<tr>
+<td>«port already in use»</td>
+<td>Старое ядро ещё держит порт</td>
+<td>Нажмите «Отключить», подождите пять секунд и подключитесь. Если не помогает, перезагрузите телефон.</td>
+</tr>
+<tr>
+<td>«outbound ... makes no sense»</td>
+<td>Ошибка в собственном конфиге</td>
+<td>Удалите «Свой конфиг» в Настройках или исправьте настройку detour.</td>
+</tr>
+<tr>
+<td>Подключается, но страницы не открываются</td>
+<td>Неверный сервер или DNS</td>
+<td>Нажмите «Проверить» на профиле. Если TCP-пинг не проходит, сервер недоступен.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="страницы-медленные">Страницы медленные<a class="headerlink" href="#страницы-медленные" title="Permanent link">#</a></h2>
+<ul>
+<li>Уменьшите <strong>MTU</strong> до <code>1280</code> в настройках приложения.</li>
+<li>Проверьте другие профили и выберите тот, у которого меньше задержка.</li>
+<li>Выключите <strong>Fake IP</strong> в настройках DNS, если какие-то приложения работают неправильно.</li>
+</ul>
+<h2 id="сайт-или-приложение-не-работает">Сайт или приложение не работает<a class="headerlink" href="#сайт-или-приложение-не-работает" title="Permanent link">#</a></h2>
+<ul>
+<li>Проверьте, работает ли он без VPN. Если нет, проблема не в MatenLi.</li>
+<li>Добавьте правило <strong>Напрямую</strong> для этого домена в <a href="/ru/wiki/routing/">Маршрутизации</a>.</li>
+<li>Некоторые приложения определяют VPN. Используйте настройку <strong>Приложения</strong>, чтобы обойти их.</li>
+</ul>
+<h2 id="подписка-не-обновляется">Подписка не обновляется<a class="headerlink" href="#подписка-не-обновляется" title="Permanent link">#</a></h2>
+<ul>
+<li>Откройте адрес подписки в браузере. Если он не открывается, провайдер недоступен.</li>
+<li>Проверьте настройку <strong>User-Agent</strong> для группы.</li>
+<li>Убедитесь, что интервал не меньше 15 минут.</li>
+</ul>
+<h2 id="модуль-не-загружается">Модуль не загружается<a class="headerlink" href="#модуль-не-загружается" title="Permanent link">#</a></h2>
+<ul>
+<li><code>module.json</code> должен быть корректным JSON. Проверьте его проверщиком JSON.</li>
+<li><code>apiVersion</code> должен быть <code>1</code>.</li>
+<li>ZIP должен содержать <code>module.json</code> в корне, а не внутри папки.</li>
+</ul>
+<h2 id="сбор-данных-для-сообщения-об-ошибке">Сбор данных для сообщения об ошибке<a class="headerlink" href="#сбор-данных-для-сообщения-об-ошибке" title="Permanent link">#</a></h2>
+<p>Откройте <strong>Настройки &gt; О приложении</strong> и скопируйте версию и версии ядер. Затем откройте журнал и скопируйте
+последние строки вокруг ошибки. Перед отправкой уберите адреса серверов и пароли. Отправьте их в Telegram-группу
+или в GitHub Issues.</p>
+<h2 id="всё-ещё-не-получается">Всё ещё не получается<a class="headerlink" href="#всё-ещё-не-получается" title="Permanent link">#</a></h2>
+<p>Спросите в Telegram-группе: <a href="https://t.me/r_FFR_r">@r_FFR_r</a>.</p>
+    <nav class="pager"><a class="prev" href="/ru/wiki/examples/">&larr; Примеры</a><a class="next" href="/ru/wiki/ai-prompt/">Промпт для ИИ &rarr;</a></nav>
+  </main>
+</div>
+<footer class="foot">MatenLi с открытым кодом. Связь: <a href="https://t.me/r_FFR_r">@r_FFR_r</a></footer>
+</body>
+</html>

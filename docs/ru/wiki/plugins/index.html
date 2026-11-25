@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Плагины · документация MatenLi</title>
+<meta name="description" content="Что такое плагин, где его взять и как написать.">
+<link rel="icon" href="/assets/icon-512.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/wiki.css">
+<link rel="alternate" hreflang="en" href="/en/wiki/plugins/">
+<link rel="alternate" hreflang="ru" href="/ru/wiki/plugins/">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/"><img src="/assets/icon-512.png" alt="" width="32" height="32"> MatenLi</a>
+  <nav>
+    <a href="/ru/wiki/">Документация</a>
+    <a href="/download/">Скачать</a>
+    <a href="https://github.com/MatenLi/MatenLi">GitHub</a>
+    <a class="lang-switch" href="/en/wiki/plugins/" hreflang="en" lang="en">English</a>
+  </nav>
+</header>
+<div class="layout">
+  <aside class="side">
+    <p class="side-title">Документация</p>
+    <nav class="toc-side"><a href="/ru/wiki/getting-started/">С чего начать</a><a href="/ru/wiki/profiles/">Профили и ссылки</a><a href="/ru/wiki/groups/">Группы и подписки</a><a href="/ru/wiki/connecting/">Подключение и проверки</a><a href="/ru/wiki/routing/">Маршрутизация, DNS и входящие</a><a href="/ru/wiki/settings/">Справочник настроек</a><a href="/ru/wiki/modules/">Модули</a><a class="active" href="/ru/wiki/plugins/">Плагины</a><a href="/ru/wiki/make-a-plugin/">Написать свой плагин</a><a href="/ru/wiki/examples/">Примеры</a><a href="/ru/wiki/troubleshooting/">Решение проблем</a><a href="/ru/wiki/ai-prompt/">Промпт для ИИ</a><a href="/ru/wiki/updating/">Обновление и резервная копия</a></nav>
+  </aside>
+  <main class="content">
+    <p class="crumbs"><a href="/ru/wiki/">Документация</a> / Плагины</p>
+    <h1>Плагины</h1>
+    <p class="summary">Что такое плагин, где его взять и как написать.</p>
+    <details class="on-this-page" open><summary>На этой странице</summary><ul><li><a href="#что-может-добавить-плагин">Что может добавить плагин</a></li><li><a href="#установка-плагина">Установка плагина</a></li><li><a href="#где-искать-плагины">Где искать плагины</a></li><li><a href="#доверие">Доверие</a></li><li><a href="#как-написать-свой">Как написать свой</a></li></ul></details>
+    <p>Плагины — это дополнения, которые MatenLi загружает как <a href="/ru/wiki/modules/">модули</a>. Эта страница — обзор.
+Для действий используйте другие страницы:</p>
+<ul>
+<li><a href="/ru/wiki/make-a-plugin/">Написать свой плагин</a>: пошаговое руководство, которое не требует опыта программирования.</li>
+<li><a href="/ru/wiki/examples/">Примеры</a>: готовые полные файлы модулей для копирования.</li>
+<li><a href="/ru/wiki/ai-prompt/">Промпт для ИИ</a>: промпт, который заставит ассистента ИИ написать плагин за вас.</li>
+</ul>
+<h2 id="что-может-добавить-плагин">Что может добавить плагин<a class="headerlink" href="#что-может-добавить-плагин" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Вид</th>
+<th>Пример</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Протокол</td>
+<td>Новый тип ссылки, например <code>stormdns://</code>.</td>
+</tr>
+<tr>
+<td>Настройка ядра</td>
+<td>Переключатель или выбор, который меняет сгенерированный конфиг.</td>
+</tr>
+<tr>
+<td>Проверка</td>
+<td>Своя проверка задержки для протокола.</td>
+</tr>
+<tr>
+<td>Помощник</td>
+<td>Нативная библиотека, которая нужна протоколу для работы.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="установка-плагина">Установка плагина<a class="headerlink" href="#установка-плагина" title="Permanent link">#</a></h2>
+<ol>
+<li>Скачайте файл <code>.zip</code> плагина.</li>
+<li>Откройте <strong>Модули</strong> в боковой панели и нажмите <strong>Импорт (zip)</strong>.</li>
+<li>Выберите файл. Плагин появится в списке.</li>
+<li>Откройте его, чтобы изменить настройки, закрепить или выключить.</li>
+</ol>
+<h2 id="где-искать-плагины">Где искать плагины<a class="headerlink" href="#где-искать-плагины" title="Permanent link">#</a></h2>
+<ul>
+<li>В организации MatenLi на GitHub перечислены официальные плагины.</li>
+<li>Можно использовать любой репозиторий GitHub, который публикует релиз с <code>.zip</code> в формате модулей.</li>
+<li>Прежде чем установить плагин от незнакомого человека, спросите в Telegram-группе.</li>
+</ul>
+<h2 id="доверие">Доверие<a class="headerlink" href="#доверие" title="Permanent link">#</a></h2>
+<p>Плагин запускает код на вашем телефоне. Устанавливайте только плагины, исходный код которых вы можете прочитать,
+из релизов, которым доверяете. Проверьте <code>updateUrl</code>, прежде чем включать автоматическую проверку обновлений.</p>
+<h2 id="как-написать-свой">Как написать свой<a class="headerlink" href="#как-написать-свой" title="Permanent link">#</a></h2>
+<p>Начните с <a href="/ru/wiki/make-a-plugin/">Написать свой плагин</a>. Большинство плагинов — это просто файл <code>module.json</code>.
+Нативная библиотека нужна, только если протоколу требуется код, который нельзя описать в JSON.</p>
+    <nav class="pager"><a class="prev" href="/ru/wiki/modules/">&larr; Модули</a><a class="next" href="/ru/wiki/make-a-plugin/">Написать свой плагин &rarr;</a></nav>
+  </main>
+</div>
+<footer class="foot">MatenLi с открытым кодом. Связь: <a href="https://t.me/r_FFR_r">@r_FFR_r</a></footer>
+</body>
+</html>

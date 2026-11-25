@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Модули · документация MatenLi</title>
+<meta name="description" content="Как модули расширяют MatenLi новыми протоколами и настройками, и как ими управлять.">
+<link rel="icon" href="/assets/icon-512.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/wiki.css">
+<link rel="alternate" hreflang="en" href="/en/wiki/modules/">
+<link rel="alternate" hreflang="ru" href="/ru/wiki/modules/">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/"><img src="/assets/icon-512.png" alt="" width="32" height="32"> MatenLi</a>
+  <nav>
+    <a href="/ru/wiki/">Документация</a>
+    <a href="/download/">Скачать</a>
+    <a href="https://github.com/MatenLi/MatenLi">GitHub</a>
+    <a class="lang-switch" href="/en/wiki/modules/" hreflang="en" lang="en">English</a>
+  </nav>
+</header>
+<div class="layout">
+  <aside class="side">
+    <p class="side-title">Документация</p>
+    <nav class="toc-side"><a href="/ru/wiki/getting-started/">С чего начать</a><a href="/ru/wiki/profiles/">Профили и ссылки</a><a href="/ru/wiki/groups/">Группы и подписки</a><a href="/ru/wiki/connecting/">Подключение и проверки</a><a href="/ru/wiki/routing/">Маршрутизация, DNS и входящие</a><a href="/ru/wiki/settings/">Справочник настроек</a><a class="active" href="/ru/wiki/modules/">Модули</a><a href="/ru/wiki/plugins/">Плагины</a><a href="/ru/wiki/make-a-plugin/">Написать свой плагин</a><a href="/ru/wiki/examples/">Примеры</a><a href="/ru/wiki/troubleshooting/">Решение проблем</a><a href="/ru/wiki/ai-prompt/">Промпт для ИИ</a><a href="/ru/wiki/updating/">Обновление и резервная копия</a></nav>
+  </aside>
+  <main class="content">
+    <p class="crumbs"><a href="/ru/wiki/">Документация</a> / Модули</p>
+    <h1>Модули</h1>
+    <p class="summary">Как модули расширяют MatenLi новыми протоколами и настройками, и как ими управлять.</p>
+    <details class="on-this-page" open><summary>На этой странице</summary><ul><li><a href="#что-такое-модуль">Что такое модуль</a></li><li><a href="#что-можно-сделать-с-модулем">Что можно сделать с модулем</a></li><li><a href="#схема-modulejson-версия-1">Схема module.json (версия 1)</a><ul><li><a href="#протоколы">Протоколы</a></li><li><a href="#пользовательские-настройки">Пользовательские настройки</a></li></ul></li><li><a href="#пример-модуль-stormdns">Пример: модуль StormDNS</a></li><li><a href="#обновление-модуля-с-github">Обновление модуля с GitHub</a></li><li><a href="#правила-и-ограничения">Правила и ограничения</a></li></ul></details>
+    <blockquote>
+<p><strong>Статус:</strong> эта страница описывает формат модулей версии 1, который реализует следующий выпуск.
+Схема ниже — контракт, на который могут опираться авторы модулей.</p>
+</blockquote>
+<h2 id="что-такое-модуль">Что такое модуль<a class="headerlink" href="#что-такое-модуль" title="Permanent link">#</a></h2>
+<p>Модуль — это <strong>ZIP-архив</strong> с двумя видами файлов внутри:</p>
+<ol>
+<li><code>module.json</code>: описывает модуль. Название, протоколы, которые он добавляет, и настройки, которые ему нужны.</li>
+<li>Файлы нативных библиотек (<code>.so</code>): код, который нужен модулю во время работы, если он вообще нужен.</li>
+</ol>
+<p>Установите модуль через <strong>Модули &gt; Импорт (zip)</strong>. Приложение прочитает JSON, проверит его и покажет модуль в списке.</p>
+<pre><code class="language-text">my-module.zip
+├── module.json
+└── libmymodule.so
+</code></pre>
+<h2 id="что-можно-сделать-с-модулем">Что можно сделать с модулем<a class="headerlink" href="#что-можно-сделать-с-модулем" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Действие</th>
+<th>Что делает</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Закрепить</td>
+<td>Держит модуль в начале списка.</td>
+</tr>
+<tr>
+<td>Включить или выключить</td>
+<td>Включает или выключает протоколы модуля, не удаляя его.</td>
+</tr>
+<tr>
+<td>Удалить</td>
+<td>Удаляет модуль и его настройки.</td>
+</tr>
+<tr>
+<td>Обновить</td>
+<td>Проверяет GitHub-релизы модуля на более новую версию.</td>
+</tr>
+<tr>
+<td>Настройки</td>
+<td>Открывает пользовательские настройки модуля.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="схема-modulejson-версия-1">Схема module.json (версия 1)<a class="headerlink" href="#схема-modulejson-версия-1" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Поле</th>
+<th>Тип</th>
+<th>Обязательно</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>apiVersion</code></td>
+<td>число</td>
+<td>да</td>
+<td>Должно быть <code>1</code>.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>текст</td>
+<td>да</td>
+<td>Показывается в списке.</td>
+</tr>
+<tr>
+<td><code>version</code></td>
+<td>текст</td>
+<td>да</td>
+<td>Семантическая версия, например <code>1.2.0</code>. Используется обновлениями.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>текст</td>
+<td>да</td>
+<td>Одно-два предложения.</td>
+</tr>
+<tr>
+<td><code>homepage</code></td>
+<td>URL</td>
+<td>нет</td>
+<td>Страница проекта.</td>
+</tr>
+<tr>
+<td><code>updateUrl</code></td>
+<td>URL</td>
+<td>нет</td>
+<td>Репозиторий GitHub, например <code>https://github.com/owner/repo</code>. Обновления берутся из его последнего релиза.</td>
+</tr>
+<tr>
+<td><code>schemes</code></td>
+<td>список текстов</td>
+<td>нет</td>
+<td>Начала ссылок, которые модуль обрабатывает на уровне модуля.</td>
+</tr>
+<tr>
+<td><code>helperBinary</code></td>
+<td>объект</td>
+<td>нет</td>
+<td>Нативная библиотека для загрузки по платформам. Например <code>{"android": "libmymodule.so"}</code>.</td>
+</tr>
+<tr>
+<td><code>parallelPing</code></td>
+<td>логический</td>
+<td>нет</td>
+<td>Проверять профили модуля одновременно. По умолчанию <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>pingWhileConnected</code></td>
+<td>логический</td>
+<td>нет</td>
+<td>Обновлять задержку при подключении. По умолчанию <code>true</code>.</td>
+</tr>
+<tr>
+<td><code>pingTimeoutSec</code></td>
+<td>число</td>
+<td>нет</td>
+<td>Секунд до отказа проверки. По умолчанию <code>10</code>.</td>
+</tr>
+<tr>
+<td><code>handoverMode</code></td>
+<td>текст</td>
+<td>нет</td>
+<td>Как модуль передаёт трафик. В версии 1 единственное значение — <code>signal</code>.</td>
+</tr>
+<tr>
+<td><code>relayWindowSec</code></td>
+<td>число</td>
+<td>нет</td>
+<td>Секунд, которые ретранслятор живёт при передаче. По умолчанию <code>0</code>.</td>
+</tr>
+<tr>
+<td><code>protocols</code></td>
+<td>список</td>
+<td>нет</td>
+<td>Протоколы, которые добавляет модуль. См. ниже.</td>
+</tr>
+<tr>
+<td><code>customSettings</code></td>
+<td>список</td>
+<td>нет</td>
+<td>Настройки на странице модуля. См. ниже.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="протоколы">Протоколы<a class="headerlink" href="#протоколы" title="Permanent link">#</a></h3>
+<p>Каждый элемент <code>protocols</code> добавляет один протокол в разбор ссылок и в ядро:</p>
+<table>
+<thead>
+<tr>
+<th>Поле</th>
+<th>Тип</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>текст</td>
+<td>Уникальный идентификатор в нижнем регистре, например <code>stormdns-dns</code>.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>текст</td>
+<td>Показывается в редакторе профиля.</td>
+</tr>
+<tr>
+<td><code>core</code></td>
+<td>текст</td>
+<td><code>sing-box</code> или <code>xray</code>. Ядро, которое запускает протокол.</td>
+</tr>
+<tr>
+<td><code>schemes</code></td>
+<td>список текстов</td>
+<td>Начала ссылок, например <code>["stormdns"]</code>.</td>
+</tr>
+<tr>
+<td><code>outbound</code></td>
+<td>объект</td>
+<td>Конфигурация outbound (или ядра). Используйте заполнители <code>${key}</code>, которые заполняются из профиля и из <code>customSettings</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="пользовательские-настройки">Пользовательские настройки<a class="headerlink" href="#пользовательские-настройки" title="Permanent link">#</a></h3>
+<p>Каждый элемент <code>customSettings</code> становится элементом управления на странице модуля:</p>
+<table>
+<thead>
+<tr>
+<th>Поле</th>
+<th>Тип</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>key</code></td>
+<td>текст</td>
+<td>Уникальное имя. Используйте его в заполнителях <code>${key}</code>.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td>текст</td>
+<td>Подпись.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>текст</td>
+<td><code>text</code>, <code>number</code>, <code>switch</code> или <code>choice</code>.</td>
+</tr>
+<tr>
+<td><code>default</code></td>
+<td>любой</td>
+<td>Начальное значение.</td>
+</tr>
+<tr>
+<td><code>min</code>, <code>max</code></td>
+<td>число</td>
+<td>Ограничения для <code>number</code>.</td>
+</tr>
+<tr>
+<td><code>options</code></td>
+<td>список текстов</td>
+<td>Варианты для <code>choice</code>.</td>
+</tr>
+<tr>
+<td><code>help</code></td>
+<td>текст</td>
+<td>Короткое пояснение под элементом.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="пример-модуль-stormdns">Пример: модуль StormDNS<a class="headerlink" href="#пример-модуль-stormdns" title="Permanent link">#</a></h2>
+<p>Это полный <code>module.json</code> с добавленными полями протокола и настроек. Описание взято из вашего исходного текста о StormDNS.</p>
+<pre><code class="language-json">{
+  &quot;apiVersion&quot;: 1,
+  &quot;name&quot;: &quot;StormDNS&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;DNS-туннель: трафик инкапсулируется в DNS-запросы к открытым рекурсивным резолверам. Полезен там, где открыт только DNS (порт 53). Пропускает только TCP и DNS — UDP/QUIC не туннелируются, поэтому UDP-протоколы (hysteria2/tuic/wireguard) каскадом за ним не работают.&quot;,
+  &quot;homepage&quot;: &quot;https://github.com/masterking32/MasterDnsVPN&quot;,
+  &quot;updateUrl&quot;: &quot;https://github.com/MatenLi/stormdns-module&quot;,
+  &quot;schemes&quot;: [&quot;stormdns&quot;],
+  &quot;parallelPing&quot;: false,
+  &quot;pingWhileConnected&quot;: true,
+  &quot;handoverMode&quot;: &quot;signal&quot;,
+  &quot;relayWindowSec&quot;: 0,
+  &quot;pingTimeoutSec&quot;: 60,
+  &quot;helperBinary&quot;: { &quot;android&quot;: &quot;libmdvpnhelper.so&quot; },
+  &quot;protocols&quot;: [
+    {
+      &quot;id&quot;: &quot;stormdns-dns&quot;,
+      &quot;name&quot;: &quot;StormDNS&quot;,
+      &quot;core&quot;: &quot;sing-box&quot;,
+      &quot;schemes&quot;: [&quot;stormdns&quot;],
+      &quot;outbound&quot;: {
+        &quot;type&quot;: &quot;socks&quot;,
+        &quot;server&quot;: &quot;127.0.0.1&quot;,
+        &quot;server_port&quot;: &quot;${localPort}&quot;,
+        &quot;version&quot;: &quot;5&quot;
+      }
+    }
+  ],
+  &quot;customSettings&quot;: [
+    {
+      &quot;key&quot;: &quot;localPort&quot;,
+      &quot;title&quot;: &quot;Локальный порт&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;default&quot;: 5353,
+      &quot;min&quot;: 1024,
+      &quot;max&quot;: 65535,
+      &quot;help&quot;: &quot;Порт, на котором слушает помощник.&quot;
+    },
+    {
+      &quot;key&quot;: &quot;resolvers&quot;,
+      &quot;title&quot;: &quot;Резолверы&quot;,
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;default&quot;: &quot;&quot;,
+      &quot;help&quot;: &quot;DNS-резолверы через запятую. Оставьте пустым, чтобы использовать встроенный список.&quot;
+    },
+    {
+      &quot;key&quot;: &quot;mode&quot;,
+      &quot;title&quot;: &quot;Режим&quot;,
+      &quot;type&quot;: &quot;choice&quot;,
+      &quot;default&quot;: &quot;fast&quot;,
+      &quot;options&quot;: [&quot;fast&quot;, &quot;stable&quot;],
+      &quot;help&quot;: &quot;Fast быстрее, stable выдерживает плохие сети.&quot;
+    },
+    {
+      &quot;key&quot;: &quot;compression&quot;,
+      &quot;title&quot;: &quot;Сжатие&quot;,
+      &quot;type&quot;: &quot;switch&quot;,
+      &quot;default&quot;: true
+    }
+  ]
+}
+</code></pre>
+<p>Что делает каждая часть этого примера:</p>
+<ul>
+<li>Элемент <code>protocols</code> означает, что ссылка, начинающаяся с <code>stormdns://</code>, создаёт профиль StormDNS.</li>
+<li><code>${localPort}</code> заменяется значением со страницы модуля, поэтому порт можно менять без правки модуля.</li>
+<li><code>helperBinary</code> называет нативную библиотеку, которая запускает DNS-туннель. Приложение загружает её при подключении профиля.</li>
+</ul>
+<h2 id="обновление-модуля-с-github">Обновление модуля с GitHub<a class="headerlink" href="#обновление-модуля-с-github" title="Permanent link">#</a></h2>
+<p>Если задан <code>updateUrl</code>, кнопка <strong>Проверить обновление</strong> читает последний релиз этого репозитория. Когда его
+<code>version</code> выше установленной, модуль показывает <strong>Обновить</strong>. Релиз должен содержать файл <code>.zip</code>
+в описанном выше формате.</p>
+<h2 id="правила-и-ограничения">Правила и ограничения<a class="headerlink" href="#правила-и-ограничения" title="Permanent link">#</a></h2>
+<ul>
+<li>Модуль не может менять файлы самого приложения или других модулей.</li>
+<li>Держите <code>module.json</code> в корректном JSON. MatenLi показывает строку и столбец первой ошибки.</li>
+<li><code>helperBinary</code> загружается внутри приложения как библиотека. Программы, которые работают отдельными процессами,
+  ограничены Android, поэтому модуль не должен зависеть от запуска собственного исполняемого файла.</li>
+<li>Устанавливайте только модули от людей, которым доверяете. Модуль запускает нативный код.</li>
+<li>Как написать модуль, см. на странице <a href="/ru/wiki/plugins/">Плагины</a>.</li>
+</ul>
+    <nav class="pager"><a class="prev" href="/ru/wiki/settings/">&larr; Справочник настроек</a><a class="next" href="/ru/wiki/plugins/">Плагины &rarr;</a></nav>
+  </main>
+</div>
+<footer class="foot">MatenLi с открытым кодом. Связь: <a href="https://t.me/r_FFR_r">@r_FFR_r</a></footer>
+</body>
+</html>

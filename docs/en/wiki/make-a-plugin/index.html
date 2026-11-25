@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Make your own plugin · MatenLi docs</title>
+<meta name="description" content="A plain-language guide to building a MatenLi module, with no programming experience needed.">
+<link rel="icon" href="/assets/icon-512.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/wiki.css">
+<link rel="alternate" hreflang="en" href="/en/wiki/make-a-plugin/">
+<link rel="alternate" hreflang="ru" href="/ru/wiki/make-a-plugin/">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/"><img src="/assets/icon-512.png" alt="" width="32" height="32"> MatenLi</a>
+  <nav>
+    <a href="/en/wiki/">Documentation</a>
+    <a href="/download/">Download</a>
+    <a href="https://github.com/MatenLi/MatenLi">GitHub</a>
+    <a class="lang-switch" href="/ru/wiki/make-a-plugin/" hreflang="ru" lang="ru">Русский</a>
+  </nav>
+</header>
+<div class="layout">
+  <aside class="side">
+    <p class="side-title">Documentation</p>
+    <nav class="toc-side"><a href="/en/wiki/getting-started/">Getting started</a><a href="/en/wiki/profiles/">Profiles and links</a><a href="/en/wiki/groups/">Groups and subscriptions</a><a href="/en/wiki/connecting/">Connecting and tests</a><a href="/en/wiki/routing/">Routing, DNS and inbound</a><a href="/en/wiki/settings/">Settings reference</a><a href="/en/wiki/modules/">Modules</a><a href="/en/wiki/plugins/">Plugins</a><a class="active" href="/en/wiki/make-a-plugin/">Make your own plugin</a><a href="/en/wiki/examples/">Examples</a><a href="/en/wiki/troubleshooting/">Troubleshooting</a><a href="/en/wiki/ai-prompt/">AI prompt</a><a href="/en/wiki/updating/">Updating and backup</a></nav>
+  </aside>
+  <main class="content">
+    <p class="crumbs"><a href="/en/wiki/">Documentation</a> / Make your own plugin</p>
+    <h1>Make your own plugin</h1>
+    <p class="summary">A plain-language guide to building a MatenLi module, with no programming experience needed.</p>
+    <details class="on-this-page" open><summary>On this page</summary><ul><li><a href="#step-1-understand-the-parts">Step 1: understand the parts</a></li><li><a href="#step-2-write-modulejson">Step 2: write module.json</a></li><li><a href="#step-3-check-the-file">Step 3: check the file</a></li><li><a href="#step-4-add-a-setting">Step 4: add a setting</a></li><li><a href="#step-5-add-a-protocol">Step 5: add a protocol</a></li><li><a href="#step-6-zip-it">Step 6: zip it</a></li><li><a href="#step-7-publish-it-on-github">Step 7: publish it on GitHub</a></li><li><a href="#common-problems">Common problems</a></li></ul></details>
+    <p>This guide builds a small plugin from scratch. You need a text editor, a ZIP tool, and a GitHub account
+if you want to publish it. No programming is needed for the first version.</p>
+<h2 id="step-1-understand-the-parts">Step 1: understand the parts<a class="headerlink" href="#step-1-understand-the-parts" title="Permanent link">#</a></h2>
+<p>A plugin is a folder that becomes a ZIP file:</p>
+<pre><code class="language-text">my-plugin/
+└── module.json
+</code></pre>
+<p><code>module.json</code> is a text file that describes your plugin. That is all a simple plugin needs.</p>
+<h2 id="step-2-write-modulejson">Step 2: write module.json<a class="headerlink" href="#step-2-write-modulejson" title="Permanent link">#</a></h2>
+<p>Create a file called <code>module.json</code> with a text editor. Copy this to start:</p>
+<pre><code class="language-json">{
+  &quot;apiVersion&quot;: 1,
+  &quot;name&quot;: &quot;My first plugin&quot;,
+  &quot;version&quot;: &quot;0.1.0&quot;,
+  &quot;description&quot;: &quot;Adds a setting to my own server.&quot;
+}
+</code></pre>
+<p>Save it. This plugin does nothing yet, but MatenLi accepts it. You can now test the import.</p>
+<h2 id="step-3-check-the-file">Step 3: check the file<a class="headerlink" href="#step-3-check-the-file" title="Permanent link">#</a></h2>
+<p>Paste the content into any JSON checker, for example a page that says "JSON validator". If it says valid, the
+file is correct. A common mistake is a missing comma or a missing quote. Each <code>"</code> must have a pair.</p>
+<h2 id="step-4-add-a-setting">Step 4: add a setting<a class="headerlink" href="#step-4-add-a-setting" title="Permanent link">#</a></h2>
+<p>A setting appears on the module page. Add a <code>customSettings</code> list:</p>
+<pre><code class="language-json">{
+  &quot;apiVersion&quot;: 1,
+  &quot;name&quot;: &quot;My first plugin&quot;,
+  &quot;version&quot;: &quot;0.1.0&quot;,
+  &quot;description&quot;: &quot;Adds a setting to my own server.&quot;,
+  &quot;customSettings&quot;: [
+    {
+      &quot;key&quot;: &quot;greeting&quot;,
+      &quot;title&quot;: &quot;Greeting&quot;,
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;default&quot;: &quot;hello&quot;,
+      &quot;help&quot;: &quot;Any text you like.&quot;
+    }
+  ]
+}
+</code></pre>
+<p>Import the file again. The module page now shows a text box called <strong>Greeting</strong>.</p>
+<h2 id="step-5-add-a-protocol">Step 5: add a protocol<a class="headerlink" href="#step-5-add-a-protocol" title="Permanent link">#</a></h2>
+<p>A protocol tells MatenLi how to build a connection from a link. This is the part that needs care.
+Copy the example in <a href="/en/wiki/examples/">Examples</a> and change only the names and the scheme. The
+<a href="/en/wiki/modules/">Modules</a> page lists every field.</p>
+<h2 id="step-6-zip-it">Step 6: zip it<a class="headerlink" href="#step-6-zip-it" title="Permanent link">#</a></h2>
+<ol>
+<li>Select <code>module.json</code> and any other files.</li>
+<li>Right-click and choose <strong>Compress</strong> (Windows) or <strong>Create archive</strong> (macOS, Linux).</li>
+<li>Name the archive <code>my-plugin.zip</code>. The file must be a ZIP, not a RAR or 7z.</li>
+</ol>
+<h2 id="step-7-publish-it-on-github">Step 7: publish it on GitHub<a class="headerlink" href="#step-7-publish-it-on-github" title="Permanent link">#</a></h2>
+<ol>
+<li>Create a new public repository, for example <code>my-plugin</code>.</li>
+<li>Upload <code>module.json</code> in the repository.</li>
+<li>Open <strong>Releases</strong>, click <strong>Create a new release</strong>, choose a tag like <code>v0.1.0</code>, and attach <code>my-plugin.zip</code>.</li>
+<li>Add <code>"updateUrl": "https://github.com/your-name/my-plugin"</code> to <code>module.json</code> so updates work.</li>
+</ol>
+<p>When you raise the <code>version</code> and publish a new release, the app offers the update.</p>
+<h2 id="common-problems">Common problems<a class="headerlink" href="#common-problems" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"Invalid JSON"</td>
+<td>Check commas, quotes and brackets. Use a JSON validator.</td>
+</tr>
+<tr>
+<td>"Unsupported apiVersion"</td>
+<td>Set <code>"apiVersion": 1</code>.</td>
+</tr>
+<tr>
+<td>The setting does not show</td>
+<td>Check that <code>customSettings</code> is inside the main object, not inside another item.</td>
+</tr>
+<tr>
+<td>Update does not appear</td>
+<td>The release tag must be higher than the installed <code>version</code>.</td>
+</tr>
+</tbody>
+</table>
+    <nav class="pager"><a class="prev" href="/en/wiki/plugins/">&larr; Plugins</a><a class="next" href="/en/wiki/examples/">Examples &rarr;</a></nav>
+  </main>
+</div>
+<footer class="foot">MatenLi is open source. Contact: <a href="https://t.me/r_FFR_r">@r_FFR_r</a></footer>
+</body>
+</html>

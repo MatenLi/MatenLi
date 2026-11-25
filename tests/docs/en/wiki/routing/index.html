@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Routing, DNS and inbound · MatenLi docs</title>
+<meta name="description" content="Choose what goes through the server, how names are resolved, and how local apps connect.">
+<link rel="icon" href="/assets/icon-512.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/wiki.css">
+<link rel="alternate" hreflang="en" href="/en/wiki/routing/">
+<link rel="alternate" hreflang="ru" href="/ru/wiki/routing/">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/"><img src="/assets/icon-512.png" alt="" width="32" height="32"> MatenLi</a>
+  <nav>
+    <a href="/en/wiki/">Documentation</a>
+    <a href="/download/">Download</a>
+    <a href="https://github.com/MatenLi/MatenLi">GitHub</a>
+    <a class="lang-switch" href="/ru/wiki/routing/" hreflang="ru" lang="ru">Русский</a>
+  </nav>
+</header>
+<div class="layout">
+  <aside class="side">
+    <p class="side-title">Documentation</p>
+    <nav class="toc-side"><a href="/en/wiki/getting-started/">Getting started</a><a href="/en/wiki/profiles/">Profiles and links</a><a href="/en/wiki/groups/">Groups and subscriptions</a><a href="/en/wiki/connecting/">Connecting and tests</a><a class="active" href="/en/wiki/routing/">Routing, DNS and inbound</a><a href="/en/wiki/settings/">Settings reference</a><a href="/en/wiki/modules/">Modules</a><a href="/en/wiki/plugins/">Plugins</a><a href="/en/wiki/make-a-plugin/">Make your own plugin</a><a href="/en/wiki/examples/">Examples</a><a href="/en/wiki/troubleshooting/">Troubleshooting</a><a href="/en/wiki/ai-prompt/">AI prompt</a></nav>
+  </aside>
+  <main class="content">
+    <p class="crumbs"><a href="/en/wiki/">Documentation</a> / Routing, DNS and inbound</p>
+    <h1>Routing, DNS and inbound</h1>
+    <p class="summary">Choose what goes through the server, how names are resolved, and how local apps connect.</p>
+    <details class="on-this-page" open><summary>On this page</summary><ul><li><a href="#routing">Routing</a><ul><li><a href="#examples">Examples</a></li></ul></li><li><a href="#dns">DNS</a></li><li><a href="#inbound-local-proxy">Inbound (local proxy)</a></li><li><a href="#apps-per-app-vpn">Apps (per-app VPN)</a></li></ul></details>
+    <h2 id="routing">Routing<a class="headerlink" href="#routing" title="Permanent link">#</a></h2>
+<p>A <strong>route</strong> is a rule. For each connection, MatenLi checks the rules from top to bottom. The first rule that
+matches decides what happens to the traffic.</p>
+<p>Each rule has three parts:</p>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Example</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Match type</td>
+<td>Domain, IP, port, app</td>
+<td>What the rule looks at.</td>
+</tr>
+<tr>
+<td>Value</td>
+<td><code>*.example.org</code></td>
+<td>The text or range to match.</td>
+</tr>
+<tr>
+<td>Outbound</td>
+<td>Proxy, Direct, Block</td>
+<td>Where matching traffic goes.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Goal</th>
+<th>Match type</th>
+<th>Value</th>
+<th>Outbound</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Local banking app bypasses the VPN</td>
+<td>Domain</td>
+<td><code>bank.example.com</code></td>
+<td>Direct</td>
+</tr>
+<tr>
+<td>Your home network stays local</td>
+<td>IP</td>
+<td><code>192.168.0.0/16</code></td>
+<td>Direct</td>
+</tr>
+<tr>
+<td>Block a tracker</td>
+<td>Domain</td>
+<td><code>tracker.example.net</code></td>
+<td>Block</td>
+</tr>
+<tr>
+<td>Route all video through the server</td>
+<td>Port</td>
+<td><code>1935</code></td>
+<td>Proxy</td>
+</tr>
+</tbody>
+</table>
+<p>Private addresses (<code>10.x</code>, <code>192.168.x</code>, <code>127.x</code>) are always sent direct so local devices keep working.</p>
+<h2 id="dns">DNS<a class="headerlink" href="#dns" title="Permanent link">#</a></h2>
+<p>DNS turns a name such as <code>example.org</code> into an address. MatenLi has three DNS servers:</p>
+<table>
+<thead>
+<tr>
+<th>Server</th>
+<th>Used for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Remote</td>
+<td>Names going through the proxy. Resolved on the server side.</td>
+</tr>
+<tr>
+<td>Local</td>
+<td>Names going direct, for example your home router.</td>
+</tr>
+<tr>
+<td>Fake IP</td>
+<td>Lets MatenLi see which name an app asked for, even for IP-only traffic. Turn it off if apps break.</td>
+</tr>
+</tbody>
+</table>
+<p>Settings for each server are in <a href="/en/wiki/settings/#dns-settings">Settings</a>.</p>
+<h2 id="inbound-local-proxy">Inbound (local proxy)<a class="headerlink" href="#inbound-local-proxy" title="Permanent link">#</a></h2>
+<p>MatenLi can also open a local proxy on your phone. Other apps, or another device on your Wi-Fi, can then
+use MatenLi as a SOCKS or HTTP proxy.</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Default</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mixed port</td>
+<td>2080</td>
+<td>SOCKS and HTTP on one port.</td>
+</tr>
+<tr>
+<td>Allow LAN</td>
+<td>Off</td>
+<td>Turn on only on a trusted network.</td>
+</tr>
+<tr>
+<td>Auth</td>
+<td>None</td>
+<td>Add a user name and password before you allow LAN access.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Warning:</strong> an open proxy on a public network lets strangers use your server. Keep auth on.</p>
+</blockquote>
+<h2 id="apps-per-app-vpn">Apps (per-app VPN)<a class="headerlink" href="#apps-per-app-vpn" title="Permanent link">#</a></h2>
+<p>By default every app goes through the VPN. The <strong>Apps</strong> setting lets you choose:</p>
+<ul>
+<li><strong>Proxy all apps</strong>: the default.</li>
+<li><strong>Only selected apps</strong>: only the apps you tick go through the VPN.</li>
+<li><strong>Bypass selected apps</strong>: every app goes through the VPN except the ones you tick.</li>
+</ul>
+<p>Pick apps from the list. Search by name when the list is long.</p>
+<blockquote>
+<p><strong>Status:</strong> the per-app picker replaces an earlier on/off switch. It arrives in the next release.</p>
+</blockquote>
+    <nav class="pager"><a class="prev" href="/en/wiki/connecting/">&larr; Connecting and tests</a><a class="next" href="/en/wiki/settings/">Settings reference &rarr;</a></nav>
+  </main>
+</div>
+<footer class="foot">MatenLi is open source. Contact: <a href="https://t.me/r_FFR_r">@r_FFR_r</a></footer>
+</body>
+</html>

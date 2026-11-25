@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Modules · MatenLi docs</title>
+<meta name="description" content="How modules extend MatenLi with new protocols and settings, and how to manage them.">
+<link rel="icon" href="/assets/icon-512.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/wiki.css">
+<link rel="alternate" hreflang="en" href="/en/wiki/modules/">
+<link rel="alternate" hreflang="ru" href="/ru/wiki/modules/">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/"><img src="/assets/icon-512.png" alt="" width="32" height="32"> MatenLi</a>
+  <nav>
+    <a href="/en/wiki/">Documentation</a>
+    <a href="/download/">Download</a>
+    <a href="https://github.com/MatenLi/MatenLi">GitHub</a>
+    <a class="lang-switch" href="/ru/wiki/modules/" hreflang="ru" lang="ru">Русский</a>
+  </nav>
+</header>
+<div class="layout">
+  <aside class="side">
+    <p class="side-title">Documentation</p>
+    <nav class="toc-side"><a href="/en/wiki/getting-started/">Getting started</a><a href="/en/wiki/profiles/">Profiles and links</a><a href="/en/wiki/groups/">Groups and subscriptions</a><a href="/en/wiki/connecting/">Connecting and tests</a><a href="/en/wiki/routing/">Routing, DNS and inbound</a><a href="/en/wiki/settings/">Settings reference</a><a class="active" href="/en/wiki/modules/">Modules</a><a href="/en/wiki/plugins/">Plugins</a><a href="/en/wiki/make-a-plugin/">Make your own plugin</a><a href="/en/wiki/examples/">Examples</a><a href="/en/wiki/troubleshooting/">Troubleshooting</a><a href="/en/wiki/ai-prompt/">AI prompt</a><a href="/en/wiki/updating/">Updating and backup</a></nav>
+  </aside>
+  <main class="content">
+    <p class="crumbs"><a href="/en/wiki/">Documentation</a> / Modules</p>
+    <h1>Modules</h1>
+    <p class="summary">How modules extend MatenLi with new protocols and settings, and how to manage them.</p>
+    <details class="on-this-page" open><summary>On this page</summary><ul><li><a href="#what-a-module-is">What a module is</a></li><li><a href="#what-you-can-do-with-a-module">What you can do with a module</a></li><li><a href="#the-modulejson-schema-version-1">The module.json schema (version 1)</a><ul><li><a href="#protocols">Protocols</a></li><li><a href="#custom-settings">Custom settings</a></li></ul></li><li><a href="#example-the-stormdns-module">Example: the StormDNS module</a></li><li><a href="#updating-a-module-from-github">Updating a module from GitHub</a></li><li><a href="#rules-and-limits">Rules and limits</a></li></ul></details>
+    <blockquote>
+<p><strong>Status:</strong> this page describes module format version 1, which the next release implements.
+The schema below is the contract that module authors can rely on.</p>
+</blockquote>
+<h2 id="what-a-module-is">What a module is<a class="headerlink" href="#what-a-module-is" title="Permanent link">#</a></h2>
+<p>A module is a <strong>ZIP archive</strong> with two kinds of file inside:</p>
+<ol>
+<li><code>module.json</code>: describes the module. The name, the protocols it adds, and the settings it needs.</li>
+<li>Native library files (<code>.so</code>): code that the module needs at runtime, if any.</li>
+</ol>
+<p>Install a module with <strong>Modules &gt; Import (zip)</strong>. The app reads the JSON, checks it, and lists the module.</p>
+<pre><code class="language-text">my-module.zip
+├── module.json
+└── libmymodule.so
+</code></pre>
+<h2 id="what-you-can-do-with-a-module">What you can do with a module<a class="headerlink" href="#what-you-can-do-with-a-module" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pin</td>
+<td>Keeps the module at the top of the list.</td>
+</tr>
+<tr>
+<td>Enable or disable</td>
+<td>Turns the module's protocols on or off without deleting it.</td>
+</tr>
+<tr>
+<td>Delete</td>
+<td>Removes the module and its settings.</td>
+</tr>
+<tr>
+<td>Update</td>
+<td>Checks the GitHub releases of the module for a newer version.</td>
+</tr>
+<tr>
+<td>Settings</td>
+<td>Opens the module's custom settings.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="the-modulejson-schema-version-1">The module.json schema (version 1)<a class="headerlink" href="#the-modulejson-schema-version-1" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>apiVersion</code></td>
+<td>number</td>
+<td>yes</td>
+<td>Must be <code>1</code>.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>text</td>
+<td>yes</td>
+<td>Shown in the list.</td>
+</tr>
+<tr>
+<td><code>version</code></td>
+<td>text</td>
+<td>yes</td>
+<td>Semantic version, for example <code>1.2.0</code>. Used by updates.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>text</td>
+<td>yes</td>
+<td>One or two sentences.</td>
+</tr>
+<tr>
+<td><code>homepage</code></td>
+<td>URL</td>
+<td>no</td>
+<td>Project page.</td>
+</tr>
+<tr>
+<td><code>updateUrl</code></td>
+<td>URL</td>
+<td>no</td>
+<td>GitHub repository, for example <code>https://github.com/owner/repo</code>. Updates come from its latest release.</td>
+</tr>
+<tr>
+<td><code>schemes</code></td>
+<td>list of text</td>
+<td>no</td>
+<td>Link prefixes the module handles at module level.</td>
+</tr>
+<tr>
+<td><code>helperBinary</code></td>
+<td>object</td>
+<td>no</td>
+<td>Native library to load, per platform. For example <code>{"android": "libmymodule.so"}</code>.</td>
+</tr>
+<tr>
+<td><code>parallelPing</code></td>
+<td>boolean</td>
+<td>no</td>
+<td>Ping this module's profiles at the same time. Default <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>pingWhileConnected</code></td>
+<td>boolean</td>
+<td>no</td>
+<td>Keep latency updated while connected. Default <code>true</code>.</td>
+</tr>
+<tr>
+<td><code>pingTimeoutSec</code></td>
+<td>number</td>
+<td>no</td>
+<td>Seconds before a ping gives up. Default <code>10</code>.</td>
+</tr>
+<tr>
+<td><code>handoverMode</code></td>
+<td>text</td>
+<td>no</td>
+<td>How the module hands traffic over. <code>signal</code> is the only value in version 1.</td>
+</tr>
+<tr>
+<td><code>relayWindowSec</code></td>
+<td>number</td>
+<td>no</td>
+<td>Seconds to keep a relay alive during a handover. Default <code>0</code>.</td>
+</tr>
+<tr>
+<td><code>protocols</code></td>
+<td>list</td>
+<td>no</td>
+<td>Protocols the module adds. See below.</td>
+</tr>
+<tr>
+<td><code>customSettings</code></td>
+<td>list</td>
+<td>no</td>
+<td>Settings shown on the module page. See below.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="protocols">Protocols<a class="headerlink" href="#protocols" title="Permanent link">#</a></h3>
+<p>Each entry in <code>protocols</code> adds one protocol to the link parser and to the core:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>text</td>
+<td>Unique id, lowercase, for example <code>stormdns-dns</code>.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>text</td>
+<td>Shown in the profile editor.</td>
+</tr>
+<tr>
+<td><code>core</code></td>
+<td>text</td>
+<td><code>sing-box</code> or <code>xray</code>. The core that runs this protocol.</td>
+</tr>
+<tr>
+<td><code>schemes</code></td>
+<td>list of text</td>
+<td>Link prefixes, for example <code>["stormdns"]</code>.</td>
+</tr>
+<tr>
+<td><code>outbound</code></td>
+<td>object</td>
+<td>The outbound (or core) configuration. Use <code>${key}</code> placeholders filled from the profile and from <code>customSettings</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="custom-settings">Custom settings<a class="headerlink" href="#custom-settings" title="Permanent link">#</a></h3>
+<p>Each entry in <code>customSettings</code> becomes a control on the module page:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>key</code></td>
+<td>text</td>
+<td>Unique name. Use it in <code>${key}</code> placeholders.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td>text</td>
+<td>The label.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>text</td>
+<td><code>text</code>, <code>number</code>, <code>switch</code> or <code>choice</code>.</td>
+</tr>
+<tr>
+<td><code>default</code></td>
+<td>any</td>
+<td>Starting value.</td>
+</tr>
+<tr>
+<td><code>min</code>, <code>max</code></td>
+<td>number</td>
+<td>Limits for <code>number</code>.</td>
+</tr>
+<tr>
+<td><code>options</code></td>
+<td>list of text</td>
+<td>Choices for <code>choice</code>.</td>
+</tr>
+<tr>
+<td><code>help</code></td>
+<td>text</td>
+<td>A short explanation shown under the control.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="example-the-stormdns-module">Example: the StormDNS module<a class="headerlink" href="#example-the-stormdns-module" title="Permanent link">#</a></h2>
+<p>This is a complete <code>module.json</code> with the protocol and settings fields added. The first fields come from the
+original StormDNS description.</p>
+<pre><code class="language-json">{
+  &quot;apiVersion&quot;: 1,
+  &quot;name&quot;: &quot;StormDNS&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;DNS tunnel: traffic is wrapped in DNS queries to open recursive resolvers. Useful where only DNS (port 53) is open. Carries TCP and DNS only, so UDP protocols do not work through it.&quot;,
+  &quot;homepage&quot;: &quot;https://github.com/masterking32/MasterDnsVPN&quot;,
+  &quot;updateUrl&quot;: &quot;https://github.com/MatenLi/stormdns-module&quot;,
+  &quot;schemes&quot;: [&quot;stormdns&quot;],
+  &quot;parallelPing&quot;: false,
+  &quot;pingWhileConnected&quot;: true,
+  &quot;handoverMode&quot;: &quot;signal&quot;,
+  &quot;relayWindowSec&quot;: 0,
+  &quot;pingTimeoutSec&quot;: 60,
+  &quot;helperBinary&quot;: { &quot;android&quot;: &quot;libmdvpnhelper.so&quot; },
+  &quot;protocols&quot;: [
+    {
+      &quot;id&quot;: &quot;stormdns-dns&quot;,
+      &quot;name&quot;: &quot;StormDNS&quot;,
+      &quot;core&quot;: &quot;sing-box&quot;,
+      &quot;schemes&quot;: [&quot;stormdns&quot;],
+      &quot;outbound&quot;: {
+        &quot;type&quot;: &quot;socks&quot;,
+        &quot;server&quot;: &quot;127.0.0.1&quot;,
+        &quot;server_port&quot;: &quot;${localPort}&quot;,
+        &quot;version&quot;: &quot;5&quot;
+      }
+    }
+  ],
+  &quot;customSettings&quot;: [
+    {
+      &quot;key&quot;: &quot;localPort&quot;,
+      &quot;title&quot;: &quot;Local port&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;default&quot;: 5353,
+      &quot;min&quot;: 1024,
+      &quot;max&quot;: 65535,
+      &quot;help&quot;: &quot;The port the helper listens on.&quot;
+    },
+    {
+      &quot;key&quot;: &quot;resolvers&quot;,
+      &quot;title&quot;: &quot;Resolvers&quot;,
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;default&quot;: &quot;&quot;,
+      &quot;help&quot;: &quot;Comma separated DNS resolvers. Leave empty to use the built-in list.&quot;
+    },
+    {
+      &quot;key&quot;: &quot;mode&quot;,
+      &quot;title&quot;: &quot;Mode&quot;,
+      &quot;type&quot;: &quot;choice&quot;,
+      &quot;default&quot;: &quot;fast&quot;,
+      &quot;options&quot;: [&quot;fast&quot;, &quot;stable&quot;],
+      &quot;help&quot;: &quot;Fast is quicker, stable survives poor networks.&quot;
+    },
+    {
+      &quot;key&quot;: &quot;compression&quot;,
+      &quot;title&quot;: &quot;Compression&quot;,
+      &quot;type&quot;: &quot;switch&quot;,
+      &quot;default&quot;: true
+    }
+  ]
+}
+</code></pre>
+<p>What each part does in this example:</p>
+<ul>
+<li>The <code>protocols</code> entry means a link starting with <code>stormdns://</code> creates a StormDNS profile.</li>
+<li><code>${localPort}</code> is replaced with the value from the module page, so you can change the port without editing the module.</li>
+<li><code>helperBinary</code> names the native library that runs the DNS tunnel. The app loads it when the profile connects.</li>
+</ul>
+<h2 id="updating-a-module-from-github">Updating a module from GitHub<a class="headerlink" href="#updating-a-module-from-github" title="Permanent link">#</a></h2>
+<p>If <code>updateUrl</code> is set, <strong>Check for update</strong> reads the latest release of that repository. When its
+<code>version</code> is higher than the installed one, the module shows <strong>Update</strong>. The release must contain a <code>.zip</code>
+file in the format above.</p>
+<h2 id="rules-and-limits">Rules and limits<a class="headerlink" href="#rules-and-limits" title="Permanent link">#</a></h2>
+<ul>
+<li>A module cannot change the app's own files or other modules.</li>
+<li>Keep <code>module.json</code> valid JSON. MatenLi shows the line and column of the first error.</li>
+<li><code>helperBinary</code> is loaded as a library inside the app. Programs that run as separate processes are
+  limited by Android, so a module must not depend on starting its own executable.</li>
+<li>Only install modules from people you trust. A module runs native code.</li>
+<li>See the <a href="/en/wiki/plugins/">Plugins</a> page for how to write one.</li>
+</ul>
+    <nav class="pager"><a class="prev" href="/en/wiki/settings/">&larr; Settings reference</a><a class="next" href="/en/wiki/plugins/">Plugins &rarr;</a></nav>
+  </main>
+</div>
+<footer class="foot">MatenLi is open source. Contact: <a href="https://t.me/r_FFR_r">@r_FFR_r</a></footer>
+</body>
+</html>

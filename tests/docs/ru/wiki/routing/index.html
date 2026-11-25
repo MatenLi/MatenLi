@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Маршрутизация, DNS и входящие · документация MatenLi</title>
+<meta name="description" content="Что идёт через сервер, как разрешаются имена и как к приложению подключаются локальные программы.">
+<link rel="icon" href="/assets/icon-512.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/wiki.css">
+<link rel="alternate" hreflang="en" href="/en/wiki/routing/">
+<link rel="alternate" hreflang="ru" href="/ru/wiki/routing/">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/"><img src="/assets/icon-512.png" alt="" width="32" height="32"> MatenLi</a>
+  <nav>
+    <a href="/ru/wiki/">Документация</a>
+    <a href="/download/">Скачать</a>
+    <a href="https://github.com/MatenLi/MatenLi">GitHub</a>
+    <a class="lang-switch" href="/en/wiki/routing/" hreflang="en" lang="en">English</a>
+  </nav>
+</header>
+<div class="layout">
+  <aside class="side">
+    <p class="side-title">Документация</p>
+    <nav class="toc-side"><a href="/ru/wiki/getting-started/">С чего начать</a><a href="/ru/wiki/profiles/">Профили и ссылки</a><a href="/ru/wiki/groups/">Группы и подписки</a><a href="/ru/wiki/connecting/">Подключение и проверки</a><a class="active" href="/ru/wiki/routing/">Маршрутизация, DNS и входящие</a><a href="/ru/wiki/settings/">Справочник настроек</a><a href="/ru/wiki/modules/">Модули</a><a href="/ru/wiki/plugins/">Плагины</a><a href="/ru/wiki/make-a-plugin/">Написать свой плагин</a><a href="/ru/wiki/examples/">Примеры</a><a href="/ru/wiki/troubleshooting/">Решение проблем</a><a href="/ru/wiki/ai-prompt/">Промпт для ИИ</a></nav>
+  </aside>
+  <main class="content">
+    <p class="crumbs"><a href="/ru/wiki/">Документация</a> / Маршрутизация, DNS и входящие</p>
+    <h1>Маршрутизация, DNS и входящие</h1>
+    <p class="summary">Что идёт через сервер, как разрешаются имена и как к приложению подключаются локальные программы.</p>
+    <details class="on-this-page" open><summary>На этой странице</summary><ul><li><a href="#маршрутизация">Маршрутизация</a><ul><li><a href="#примеры">Примеры</a></li></ul></li><li><a href="#dns">DNS</a></li><li><a href="#входящий-прокси-inbound">Входящий прокси (inbound)</a></li><li><a href="#приложения-vpn-для-отдельных-приложений">Приложения (VPN для отдельных приложений)</a></li></ul></details>
+    <h2 id="маршрутизация">Маршрутизация<a class="headerlink" href="#маршрутизация" title="Permanent link">#</a></h2>
+<p><strong>Маршрут</strong> — это правило. Для каждого соединения MatenLi проверяет правила сверху вниз.
+Первое подходящее правило решает, что будет с трафиком.</p>
+<p>У каждого правила три части:</p>
+<table>
+<thead>
+<tr>
+<th>Часть</th>
+<th>Пример</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Тип совпадения</td>
+<td>Домен, IP, порт, приложение</td>
+<td>Что проверяет правило.</td>
+</tr>
+<tr>
+<td>Значение</td>
+<td><code>*.example.org</code></td>
+<td>Текст или диапазон для сравнения.</td>
+</tr>
+<tr>
+<td>Выход</td>
+<td>Прокси, Напрямую, Блок</td>
+<td>Куда идёт подходящий трафик.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="примеры">Примеры<a class="headerlink" href="#примеры" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Цель</th>
+<th>Тип совпадения</th>
+<th>Значение</th>
+<th>Выход</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Банковское приложение обходит VPN</td>
+<td>Домен</td>
+<td><code>bank.example.com</code></td>
+<td>Напрямую</td>
+</tr>
+<tr>
+<td>Домашняя сеть остаётся локальной</td>
+<td>IP</td>
+<td><code>192.168.0.0/16</code></td>
+<td>Напрямую</td>
+</tr>
+<tr>
+<td>Блокировать трекер</td>
+<td>Домен</td>
+<td><code>tracker.example.net</code></td>
+<td>Блок</td>
+</tr>
+<tr>
+<td>Всё видео через сервер</td>
+<td>Порт</td>
+<td><code>1935</code></td>
+<td>Прокси</td>
+</tr>
+</tbody>
+</table>
+<p>Частные адреса (<code>10.x</code>, <code>192.168.x</code>, <code>127.x</code>) всегда идут напрямую, чтобы локальные устройства работали.</p>
+<h2 id="dns">DNS<a class="headerlink" href="#dns" title="Permanent link">#</a></h2>
+<p>DNS превращает имя, например <code>example.org</code>, в адрес. У MatenLi три DNS-сервера:</p>
+<table>
+<thead>
+<tr>
+<th>Сервер</th>
+<th>Для чего</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Удалённый</td>
+<td>Имена, которые идут через прокси. Разрешаются на стороне сервера.</td>
+</tr>
+<tr>
+<td>Локальный</td>
+<td>Имена, которые идут напрямую, например ваш домашний роутер.</td>
+</tr>
+<tr>
+<td>Fake IP</td>
+<td>Позволяет MatenLi видеть, какое имя запросило приложение, даже для трафика только по IP. Выключите, если приложения ломаются.</td>
+</tr>
+</tbody>
+</table>
+<p>Настройки каждого сервера — в <a href="/ru/wiki/settings/#настройки-dns">Настройках</a>.</p>
+<h2 id="входящий-прокси-inbound">Входящий прокси (inbound)<a class="headerlink" href="#входящий-прокси-inbound" title="Permanent link">#</a></h2>
+<p>MatenLi может открыть локальный прокси на вашем телефоне. Тогда другие приложения или другое устройство
+в вашей Wi-Fi-сети смогут использовать MatenLi как SOCKS- или HTTP-прокси.</p>
+<table>
+<thead>
+<tr>
+<th>Настройка</th>
+<th>По умолчанию</th>
+<th>Примечания</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Смешанный порт</td>
+<td>2080</td>
+<td>SOCKS и HTTP на одном порту.</td>
+</tr>
+<tr>
+<td>Разрешить LAN</td>
+<td>Выкл</td>
+<td>Включайте только в доверенной сети.</td>
+</tr>
+<tr>
+<td>Авторизация</td>
+<td>Нет</td>
+<td>Добавьте имя пользователя и пароль, прежде чем разрешать доступ из LAN.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Внимание:</strong> открытый прокси в публичной сети позволяет посторонним пользоваться вашим сервером. Держите авторизацию включённой.</p>
+</blockquote>
+<h2 id="приложения-vpn-для-отдельных-приложений">Приложения (VPN для отдельных приложений)<a class="headerlink" href="#приложения-vpn-для-отдельных-приложений" title="Permanent link">#</a></h2>
+<p>По умолчанию весь трафик идёт через VPN. Настройка <strong>Приложения</strong> позволяет выбрать:</p>
+<ul>
+<li><strong>Все приложения через прокси</strong>: по умолчанию.</li>
+<li><strong>Только выбранные приложения</strong>: через VPN идут только отмеченные приложения.</li>
+<li><strong>Обходить выбранные приложения</strong>: через VPN идут все, кроме отмеченных.</li>
+</ul>
+<p>Выбирайте приложения из списка. Ищите по названию, если список длинный.</p>
+<blockquote>
+<p><strong>Статус:</strong> выбор приложений заменяет прежний переключатель. Он появится в следующем выпуске.</p>
+</blockquote>
+    <nav class="pager"><a class="prev" href="/ru/wiki/connecting/">&larr; Подключение и проверки</a><a class="next" href="/ru/wiki/settings/">Справочник настроек &rarr;</a></nav>
+  </main>
+</div>
+<footer class="foot">MatenLi с открытым кодом. Связь: <a href="https://t.me/r_FFR_r">@r_FFR_r</a></footer>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Examples · MatenLi docs</title>
+<meta name="description" content="Complete module files you can copy, with notes on what each part does.">
+<link rel="icon" href="/assets/icon-512.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/wiki.css">
+<link rel="alternate" hreflang="en" href="/en/wiki/examples/">
+<link rel="alternate" hreflang="ru" href="/ru/wiki/examples/">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/"><img src="/assets/icon-512.png" alt="" width="32" height="32"> MatenLi</a>
+  <nav>
+    <a href="/en/wiki/">Documentation</a>
+    <a href="/download/">Download</a>
+    <a href="https://github.com/MatenLi/MatenLi">GitHub</a>
+    <a class="lang-switch" href="/ru/wiki/examples/" hreflang="ru" lang="ru">Русский</a>
+  </nav>
+</header>
+<div class="layout">
+  <aside class="side">
+    <p class="side-title">Documentation</p>
+    <nav class="toc-side"><a href="/en/wiki/getting-started/">Getting started</a><a href="/en/wiki/profiles/">Profiles and links</a><a href="/en/wiki/groups/">Groups and subscriptions</a><a href="/en/wiki/connecting/">Connecting and tests</a><a href="/en/wiki/routing/">Routing, DNS and inbound</a><a href="/en/wiki/settings/">Settings reference</a><a href="/en/wiki/modules/">Modules</a><a href="/en/wiki/plugins/">Plugins</a><a href="/en/wiki/make-a-plugin/">Make your own plugin</a><a class="active" href="/en/wiki/examples/">Examples</a><a href="/en/wiki/troubleshooting/">Troubleshooting</a><a href="/en/wiki/ai-prompt/">AI prompt</a></nav>
+  </aside>
+  <main class="content">
+    <p class="crumbs"><a href="/en/wiki/">Documentation</a> / Examples</p>
+    <h1>Examples</h1>
+    <p class="summary">Complete module files you can copy, with notes on what each part does.</p>
+    <details class="on-this-page" open><summary>On this page</summary><ul><li><a href="#example-1-a-setting-only">Example 1: a setting only</a></li><li><a href="#example-2-a-protocol-with-a-choice">Example 2: a protocol with a choice</a></li><li><a href="#example-3-a-helper-library">Example 3: a helper library</a></li><li><a href="#example-4-updating-from-github">Example 4: updating from GitHub</a></li><li><a href="#checklist-before-you-publish">Checklist before you publish</a></li></ul></details>
+    <p>Each example is a complete <code>module.json</code>. Copy one into a file with that name, put it in a folder,
+zip the folder, and import the ZIP.</p>
+<h2 id="example-1-a-setting-only">Example 1: a setting only<a class="headerlink" href="#example-1-a-setting-only" title="Permanent link">#</a></h2>
+<p>Adds a switch to MatenLi without any protocol. Useful to learn the format.</p>
+<pre><code class="language-json">{
+  &quot;apiVersion&quot;: 1,
+  &quot;name&quot;: &quot;Extra logging&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;Writes more detail to the log for debugging.&quot;,
+  &quot;customSettings&quot;: [
+    {
+      &quot;key&quot;: &quot;verbose&quot;,
+      &quot;title&quot;: &quot;Verbose log&quot;,
+      &quot;type&quot;: &quot;switch&quot;,
+      &quot;default&quot;: false,
+      &quot;help&quot;: &quot;Shows extra lines in the log. Turn off after debugging.&quot;
+    }
+  ]
+}
+</code></pre>
+<h2 id="example-2-a-protocol-with-a-choice">Example 2: a protocol with a choice<a class="headerlink" href="#example-2-a-protocol-with-a-choice" title="Permanent link">#</a></h2>
+<p>Adds a new link type that runs on sing-box and lets the user pick a mode.</p>
+<pre><code class="language-json">{
+  &quot;apiVersion&quot;: 1,
+  &quot;name&quot;: &quot;Example tunnel&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;A demo protocol that shows how links become profiles.&quot;,
+  &quot;updateUrl&quot;: &quot;https://github.com/your-name/example-tunnel&quot;,
+  &quot;schemes&quot;: [&quot;extunnel&quot;],
+  &quot;protocols&quot;: [
+    {
+      &quot;id&quot;: &quot;extunnel&quot;,
+      &quot;name&quot;: &quot;Example tunnel&quot;,
+      &quot;core&quot;: &quot;sing-box&quot;,
+      &quot;schemes&quot;: [&quot;extunnel&quot;],
+      &quot;outbound&quot;: {
+        &quot;type&quot;: &quot;socks&quot;,
+        &quot;server&quot;: &quot;${host}&quot;,
+        &quot;server_port&quot;: &quot;${port}&quot;,
+        &quot;version&quot;: &quot;5&quot;
+      }
+    }
+  ],
+  &quot;customSettings&quot;: [
+    {
+      &quot;key&quot;: &quot;mode&quot;,
+      &quot;title&quot;: &quot;Mode&quot;,
+      &quot;type&quot;: &quot;choice&quot;,
+      &quot;default&quot;: &quot;auto&quot;,
+      &quot;options&quot;: [&quot;auto&quot;, &quot;fast&quot;, &quot;safe&quot;],
+      &quot;help&quot;: &quot;Auto chooses for you.&quot;
+    }
+  ]
+}
+</code></pre>
+<p>A link <code>extunnel://example.org:1080</code> would create a profile whose host is <code>example.org</code> and whose port
+is <code>1080</code>.</p>
+<h2 id="example-3-a-helper-library">Example 3: a helper library<a class="headerlink" href="#example-3-a-helper-library" title="Permanent link">#</a></h2>
+<p>Adds a protocol that needs a native library. The library is placed in the ZIP next to <code>module.json</code>.</p>
+<pre><code class="language-json">{
+  &quot;apiVersion&quot;: 1,
+  &quot;name&quot;: &quot;Helper protocol&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;Runs a helper library that the protocol needs.&quot;,
+  &quot;helperBinary&quot;: { &quot;android&quot;: &quot;libhelper.so&quot; },
+  &quot;pingTimeoutSec&quot;: 30,
+  &quot;protocols&quot;: [
+    {
+      &quot;id&quot;: &quot;helper-proto&quot;,
+      &quot;name&quot;: &quot;Helper protocol&quot;,
+      &quot;core&quot;: &quot;sing-box&quot;,
+      &quot;schemes&quot;: [&quot;helper&quot;],
+      &quot;outbound&quot;: {
+        &quot;type&quot;: &quot;socks&quot;,
+        &quot;server&quot;: &quot;127.0.0.1&quot;,
+        &quot;server_port&quot;: &quot;${localPort}&quot;
+      }
+    }
+  ],
+  &quot;customSettings&quot;: [
+    {
+      &quot;key&quot;: &quot;localPort&quot;,
+      &quot;title&quot;: &quot;Local port&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;default&quot;: 1080,
+      &quot;min&quot;: 1024,
+      &quot;max&quot;: 65535
+    }
+  ]
+}
+</code></pre>
+<p>The ZIP then contains <code>module.json</code> and <code>libhelper.so</code>. Only use a library built for the phone's
+processor (arm64 for almost all modern Android phones).</p>
+<h2 id="example-4-updating-from-github">Example 4: updating from GitHub<a class="headerlink" href="#example-4-updating-from-github" title="Permanent link">#</a></h2>
+<p>Set <code>updateUrl</code> to the repository. Every new release with a higher <code>version</code> is offered as an update:</p>
+<pre><code class="language-json">{
+  &quot;apiVersion&quot;: 1,
+  &quot;name&quot;: &quot;Updatable plugin&quot;,
+  &quot;version&quot;: &quot;2.3.1&quot;,
+  &quot;description&quot;: &quot;Checks its own repository for updates.&quot;,
+  &quot;updateUrl&quot;: &quot;https://github.com/your-name/updatable-plugin&quot;
+}
+</code></pre>
+<h2 id="checklist-before-you-publish">Checklist before you publish<a class="headerlink" href="#checklist-before-you-publish" title="Permanent link">#</a></h2>
+<ul>
+<li>The file is valid JSON.</li>
+<li><code>apiVersion</code> is <code>1</code>.</li>
+<li>Every <code>key</code> in <code>customSettings</code> is unique.</li>
+<li>Every <code>${name}</code> in an outbound has a matching <code>key</code>, or a field the profile provides.</li>
+<li>The ZIP contains <code>module.json</code> at the top level, not inside another folder.</li>
+</ul>
+    <nav class="pager"><a class="prev" href="/en/wiki/make-a-plugin/">&larr; Make your own plugin</a><a class="next" href="/en/wiki/troubleshooting/">Troubleshooting &rarr;</a></nav>
+  </main>
+</div>
+<footer class="foot">MatenLi is open source. Contact: <a href="https://t.me/r_FFR_r">@r_FFR_r</a></footer>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Профили и ссылки · документация MatenLi</title>
+<meta name="description" content="Добавление, редактирование, проверка, копирование, передача и удаление серверов.">
+<link rel="icon" href="/assets/icon-512.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/wiki.css">
+<link rel="alternate" hreflang="en" href="/en/wiki/profiles/">
+<link rel="alternate" hreflang="ru" href="/ru/wiki/profiles/">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/"><img src="/assets/icon-512.png" alt="" width="32" height="32"> MatenLi</a>
+  <nav>
+    <a href="/ru/wiki/">Документация</a>
+    <a href="/download/">Скачать</a>
+    <a href="https://github.com/MatenLi/MatenLi">GitHub</a>
+    <a class="lang-switch" href="/en/wiki/profiles/" hreflang="en" lang="en">English</a>
+  </nav>
+</header>
+<div class="layout">
+  <aside class="side">
+    <p class="side-title">Документация</p>
+    <nav class="toc-side"><a href="/ru/wiki/getting-started/">С чего начать</a><a class="active" href="/ru/wiki/profiles/">Профили и ссылки</a><a href="/ru/wiki/groups/">Группы и подписки</a><a href="/ru/wiki/connecting/">Подключение и проверки</a><a href="/ru/wiki/routing/">Маршрутизация, DNS и входящие</a><a href="/ru/wiki/settings/">Справочник настроек</a><a href="/ru/wiki/modules/">Модули</a><a href="/ru/wiki/plugins/">Плагины</a><a href="/ru/wiki/make-a-plugin/">Написать свой плагин</a><a href="/ru/wiki/examples/">Примеры</a><a href="/ru/wiki/troubleshooting/">Решение проблем</a><a href="/ru/wiki/ai-prompt/">Промпт для ИИ</a><a href="/ru/wiki/updating/">Обновление и резервная копия</a></nav>
+  </aside>
+  <main class="content">
+    <p class="crumbs"><a href="/ru/wiki/">Документация</a> / Профили и ссылки</p>
+    <h1>Профили и ссылки</h1>
+    <p class="summary">Добавление, редактирование, проверка, копирование, передача и удаление серверов.</p>
+    <details class="on-this-page" open><summary>На этой странице</summary><ul><li><a href="#что-такое-профиль">Что такое профиль</a></li><li><a href="#добавление-профиля">Добавление профиля</a><ul><li><a href="#поддерживаемые-типы-ссылок">Поддерживаемые типы ссылок</a></li></ul></li><li><a href="#редактирование-профиля">Редактирование профиля</a></li><li><a href="#действия-с-профилем">Действия с профилем</a></li><li><a href="#пример">Пример</a></li><li><a href="#советы">Советы</a></li></ul></details>
+    <h2 id="что-такое-профиль">Что такое профиль<a class="headerlink" href="#что-такое-профиль" title="Permanent link">#</a></h2>
+<p>Профиль — это один сервер вместе со всем, что нужно для подключения к нему: адрес, порт,
+протокол, настройки безопасности и имя. Каждый профиль хранится только на вашем телефоне.</p>
+<h2 id="добавление-профиля">Добавление профиля<a class="headerlink" href="#добавление-профиля" title="Permanent link">#</a></h2>
+<p>Есть пять способов. Нажмите <strong>+</strong> в правом нижнем углу и выберите:</p>
+<table>
+<thead>
+<tr>
+<th>Способ</th>
+<th>Когда использовать</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Вставить из буфера</td>
+<td>Вы скопировали ссылку. Это обычный способ.</td>
+</tr>
+<tr>
+<td>Сканировать QR-код</td>
+<td>Провайдер показывает QR-код.</td>
+</tr>
+<tr>
+<td>Импорт из файла</td>
+<td>У вас есть текстовый файл с одной ссылкой в строке.</td>
+</tr>
+<tr>
+<td>Добавить вручную</td>
+<td>Вы знаете данные сервера и хотите ввести их сами.</td>
+</tr>
+<tr>
+<td>Добавить подписку</td>
+<td>У вас есть адрес подписки. См. <a href="/ru/wiki/groups/">Группы</a>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="поддерживаемые-типы-ссылок">Поддерживаемые типы ссылок<a class="headerlink" href="#поддерживаемые-типы-ссылок" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Начало ссылки</th>
+<th>Протокол</th>
+<th>Примечания</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>vless://</code></td>
+<td>VLESS</td>
+<td>Работает с Reality и TLS.</td>
+</tr>
+<tr>
+<td><code>vmess://</code></td>
+<td>VMess</td>
+<td></td>
+</tr>
+<tr>
+<td><code>trojan://</code></td>
+<td>Trojan</td>
+<td></td>
+</tr>
+<tr>
+<td><code>ss://</code></td>
+<td>Shadowsocks</td>
+<td></td>
+</tr>
+<tr>
+<td><code>hysteria2://</code> или <code>hy2://</code></td>
+<td>Hysteria 2</td>
+<td>Работает на UDP.</td>
+</tr>
+<tr>
+<td><code>tuic://</code></td>
+<td>TUIC</td>
+<td>Работает на ядре sing-box.</td>
+</tr>
+<tr>
+<td><code>socks://</code>, <code>http://</code></td>
+<td>SOCKS, HTTP-прокси</td>
+<td></td>
+</tr>
+<tr>
+<td><code>{ ... }</code></td>
+<td>Сырой JSON sing-box</td>
+<td>Вставьте полный объект outbound.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Статус:</strong> ссылки XHTTP (SplitHTTP) требуют ядро Xray. Это ядро добавляется в следующем выпуске. До тех пор
+MatenLi показывает сообщение «XHTTP требует ядро Xray» и не подключается.</p>
+</blockquote>
+<h2 id="редактирование-профиля">Редактирование профиля<a class="headerlink" href="#редактирование-профиля" title="Permanent link">#</a></h2>
+<p>Нажмите на профиль и удерживайте его или нажмите кнопку <strong>...</strong> на нём, затем выберите <strong>Изменить</strong>. Редактор
+показывает все поля для этого протокола. Поля, которые не нужны для протокола, скрыты.</p>
+<ul>
+<li>Измените <strong>имя</strong> на такое, которое вы узнаете.</li>
+<li>Не трогайте <strong>дополнительные</strong> поля, если провайдер не просил их менять.</li>
+<li>Нажмите <strong>Сохранить</strong>. Ошибки появятся под полем, которое их вызвало.</li>
+</ul>
+<h2 id="действия-с-профилем">Действия с профилем<a class="headerlink" href="#действия-с-профилем" title="Permanent link">#</a></h2>
+<p>Нажмите кнопку <strong>...</strong> на профиле, чтобы открыть его меню:</p>
+<table>
+<thead>
+<tr>
+<th>Действие</th>
+<th>Что делает</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Проверить</td>
+<td>Измеряет задержку до тестового адреса. Результат появится на карточке.</td>
+</tr>
+<tr>
+<td>TCP-пинг</td>
+<td>Проверяет, что порт сервера отвечает. Быстрее и не требует VPN.</td>
+</tr>
+<tr>
+<td>Изменить</td>
+<td>Открывает редактор.</td>
+</tr>
+<tr>
+<td>Дублировать</td>
+<td>Создаёт копию, полезно для другого порта или маршрута.</td>
+</tr>
+<tr>
+<td>Поделиться ссылкой</td>
+<td>Показывает ссылку и QR-код.</td>
+</tr>
+<tr>
+<td>Копировать ссылку</td>
+<td>Копирует ссылку в буфер обмена.</td>
+</tr>
+<tr>
+<td>Переместить в группу</td>
+<td>Перемещает профиль в другую группу.</td>
+</tr>
+<tr>
+<td>Удалить</td>
+<td>Удаляет профиль. Профиль из подписки вернётся при следующем обновлении подписки.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="пример">Пример<a class="headerlink" href="#пример" title="Permanent link">#</a></h2>
+<p>У вас есть ссылка:</p>
+<pre><code class="language-text">vless://0f5c1a2e-1111-4444-9999-abcdef012345@example.org:443?security=tls&amp;type=ws&amp;path=%2Fchat&amp;sni=example.org#My%20home%20server
+</code></pre>
+<p>Её вставка создаст профиль с именем <strong>My home server</strong>. Сервер — <code>example.org</code>, порт <code>443</code>,
+TLS и WebSocket. Нажмите <strong>Проверить</strong>, чтобы измерить задержку.</p>
+<h2 id="советы">Советы<a class="headerlink" href="#советы" title="Permanent link">#</a></h2>
+<ul>
+<li>Держите один профиль на один сервер. Дублируйте его, когда нужен вариант.</li>
+<li>Называйте профили по месту и провайдеру, например <code>Хельсинки, провайдер А</code>. Имена пишутся свободно.</li>
+<li>Не делитесь ссылками, которых вы сами не создавали. Ссылка содержит пароль к серверу.</li>
+</ul>
+    <nav class="pager"><a class="prev" href="/ru/wiki/getting-started/">&larr; С чего начать</a><a class="next" href="/ru/wiki/groups/">Группы и подписки &rarr;</a></nav>
+  </main>
+</div>
+<footer class="foot">MatenLi с открытым кодом. Связь: <a href="https://t.me/r_FFR_r">@r_FFR_r</a></footer>
+</body>
+</html>

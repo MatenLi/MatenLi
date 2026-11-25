@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MatenLi · Android VPN and proxy client</title>
+<meta name="description" content="MatenLi is an open source Android VPN and proxy client with sing-box and Xray cores, modules and a full documentation site.">
+<link rel="icon" href="/assets/icon-512.png">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+  :root { --primary: #7F52CF; --coral: #E15371; --surface: #FFFBFE; --on-surface: #1C1B1F;
+          --surface-variant: #E7E0EC; --on-surface-variant: #49454F; --primary-container: #EADDFF; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --primary: #CFBCFF; --surface: #1C1B1F; --on-surface: #E6E1E5;
+      --surface-variant: #49454F; --on-surface-variant: #CAC4D0; --primary-container: #4F378B; }
+  }
+  :root[data-theme="dark"] { --primary: #CFBCFF; --surface: #1C1B1F; --on-surface: #E6E1E5;
+    --surface-variant: #49454F; --on-surface-variant: #CAC4D0; --primary-container: #4F378B; }
+  body { margin: 0; min-height: 100vh; background: var(--surface); color: var(--on-surface);
+    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; display: grid; place-items: center; padding: 24px 16px; box-sizing: border-box; }
+  .hero { text-align: center; max-width: 560px; animation: rise .6s cubic-bezier(.2,.8,.2,1) both; }
+  .hero img { width: 128px; height: 128px; border-radius: 32px; box-shadow: 0 8px 28px rgba(127,82,207,.25); }
+  h1 { font-size: 2.6rem; margin: 18px 0 4px; letter-spacing: -.02em; }
+  .tagline { font-size: 1.15rem; color: var(--on-surface-variant); margin: 0 0 18px; }
+  .links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 0 0 24px; }
+  .links a { text-decoration: none; padding: 10px 18px; border-radius: 999px; background: var(--surface-variant);
+    color: var(--on-surface); font-weight: 500; transition: background .2s ease, transform .2s ease; }
+  .links a:hover { background: var(--primary-container); transform: translateY(-1px); }
+  .cta { display: inline-block; text-decoration: none; padding: 16px 32px; border-radius: 999px; background: var(--primary);
+    color: #fff; font-weight: 700; font-size: 1.05rem; box-shadow: 0 6px 18px rgba(127,82,207,.35); transition: transform .2s ease; }
+  .cta:hover { transform: translateY(-2px); }
+  .ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+  .cta-alt { background: var(--surface-variant); color: var(--on-surface); box-shadow: none; }
+  .cta:focus-visible, .links a:focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; }
+  .note { font-size: 14px; color: var(--on-surface-variant); margin-top: 22px; }
+  @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .hero, .cta, .links a { animation: none; transition: none; } }
+</style>
+</head>
+<body>
+<main class="hero">
+  <img src="/assets/icon-512.png" alt="MatenLi icon" width="128" height="128">
+  <h1>MatenLi</h1>
+  <p class="tagline">An open source Android VPN and proxy client. Connect with the core that fits your server, and extend it with modules.</p>
+  <nav class="links" aria-label="Project links">
+    <a href="/download/">Download</a>
+    <a href="https://github.com/MatenLi/MatenLi">GitHub</a>
+    <a href="https://t.me/r_FFR_r">Telegram</a>
+  </nav>
+  <div class="ctas">
+    <a class="cta" href="/en/wiki/" hreflang="en" lang="en">Read the documentation</a>
+    <a class="cta cta-alt" href="/ru/wiki/" hreflang="ru" lang="ru">Документация на русском</a>
+  </div>
+  <p class="note">Guides for beginners, settings, modules, plugins and examples. / Руководства для новичков, настройки, модули, плагины и примеры.</p>
+</main>
+</body>
+</html>

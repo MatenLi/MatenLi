@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Download MatenLi</title>
+<meta name="description" content="Download the latest MatenLi APK. Taken from the newest GitHub release.">
+<meta name="theme-color" content="#7F52CF">
+<link rel="icon" href="../assets/icon-512.png" type="image/png">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="../"><img src="../assets/icon-512.png" alt="" width="32" height="32"><span>MatenLi</span></a>
+  <nav>
+    <a href="../">Home</a>
+    <a href="https://github.com/MatenLi/MatenLi">GitHub</a>
+    <a href="https://t.me/r_FFR_r">Telegram</a>
+  </nav>
+</header>
+
+<main>
+  <section class="page-head">
+    <h1>Download</h1>
+    <p class="lead">This page reads the newest release from GitHub each time it opens, so the version and file list are never out of date.</p>
+  </section>
+
+  <section id="release" class="card wide" aria-live="polite">
+    <p class="muted">Checking the latest release...</p>
+  </section>
+
+  <section class="card wide">
+    <h2>Before you install</h2>
+    <ul>
+      <li>Android 12 or newer, arm64-v8a or armeabi-v7a.</li>
+      <li>Allow installs from this source when Android asks. The app is not on Google Play.</li>
+      <li>Check the SHA-256 of the file against the release notes when they list one.</li>
+    </ul>
+  </section>
+
+  <section class="card wide">
+    <h2>Build it yourself</h2>
+    <p>Every push builds a debug APK. Open the <a href="https://github.com/MatenLi/MatenLi/actions/workflows/build.yml">Build debug APK</a> workflow and download the <code>matenli-debug</code> artifact from the latest run.</p>
+  </section>
+</main>
+
+<footer class="footer">
+  <p>Apache License 2.0. Copyright 2026 MatenLi contributors.</p>
+  <p>Contact: <a href="https://t.me/r_FFR_r">Telegram @r_FFR_r</a></p>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+  var REPO = "MatenLi/MatenLi";
+  var box = document.getElementById("release");
+
+  function el(tag, cls, text) {
+    var node = document.createElement(tag);
+    if (cls) node.className = cls;
+    if (text !== undefined && text !== null) node.textContent = text;
+    return node;
+  }
+
+  function mb(bytes) {
+    return (bytes / 1048576).toFixed(1) + " MB";
+  }
+
+  function showMessage(text, linkHref, linkText) {
+    box.textContent = "";
+    box.appendChild(el("p", "muted", text));
+    if (linkHref) {
+      var p = el("p");
+      var a = el("a", "btn tonal", linkText);
+      a.href = linkHref;
+      p.appendChild(a);
+      box.appendChild(p);
+    }
+  }
+
+  function render(release) {
+    box.textContent = "";
+    box.appendChild(el("h2", null, release.name || release.tag_name));
+    var when = release.published_at ? new Date(release.published_at).toLocaleDateString() : "";
+    box.appendChild(el("p", "muted", "Version " + release.tag_name + (when ? " - published " + when : "")));
+
+    var apks = (release.assets || []).filter(function (a) { return /\.apk$/i.test(a.name); });
+    if (apks.length === 0) {
+      box.appendChild(el("p", "muted", "This release has no APK attached yet."));
+    } else {
+      var list = el("ul", "downloads");
+      apks.forEach(function (asset) {
+        var li = el("li");
+        var a = el("a", "btn filled", asset.name);
+        a.href = asset.browser_download_url;
+        li.appendChild(a);
+        li.appendChild(el("span", "muted", " " + mb(asset.size) + " - " + asset.download_count + " downloads"));
+        list.appendChild(li);
+      });
+      box.appendChild(list);
+    }
+
+    if (release.body) {
+      box.appendChild(el("h3", null, "Release notes"));
+      box.appendChild(el("div", "notes-text", release.body));
+    }
+
+    var more = el("p");
+    var link = el("a", null, "All releases on GitHub");
+    link.href = release.html_url || ("https://github.com/" + REPO + "/releases");
+    more.appendChild(link);
+    box.appendChild(more);
+  }
+
+  fetch("https://api.github.com/repos/" + REPO + "/releases/latest", {
+    headers: { "Accept": "application/vnd.github+json" }
+  })
+    .then(function (response) {
+      if (response.status === 404) {
+        return null;
+      }
+      if (!response.ok) {
+        throw new Error("GitHub answered " + response.status);
+      }
+      return response.json();
+    })
+    .then(function (release) {
+      if (!release) {
+        showMessage("No release has been published yet.",
+          "https://github.com/" + REPO + "/actions/workflows/build.yml",
+          "Open the latest CI build");
+        return;
+      }
+      render(release);
+    })
+    .catch(function (error) {
+      showMessage("Could not load the release list (" + error.message + ").",
+        "https://github.com/" + REPO + "/releases",
+        "Open the releases page");
+    });
+})();
+</script>
+</body>
+</html>

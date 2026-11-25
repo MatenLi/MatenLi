@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Примеры · документация MatenLi</title>
+<meta name="description" content="Полные файлы модулей, которые можно копировать, с пояснениями к каждой части.">
+<link rel="icon" href="/assets/icon-512.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/wiki.css">
+<link rel="alternate" hreflang="en" href="/en/wiki/examples/">
+<link rel="alternate" hreflang="ru" href="/ru/wiki/examples/">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/"><img src="/assets/icon-512.png" alt="" width="32" height="32"> MatenLi</a>
+  <nav>
+    <a href="/ru/wiki/">Документация</a>
+    <a href="/download/">Скачать</a>
+    <a href="https://github.com/MatenLi/MatenLi">GitHub</a>
+    <a class="lang-switch" href="/en/wiki/examples/" hreflang="en" lang="en">English</a>
+  </nav>
+</header>
+<div class="layout">
+  <aside class="side">
+    <p class="side-title">Документация</p>
+    <nav class="toc-side"><a href="/ru/wiki/getting-started/">С чего начать</a><a href="/ru/wiki/profiles/">Профили и ссылки</a><a href="/ru/wiki/groups/">Группы и подписки</a><a href="/ru/wiki/connecting/">Подключение и проверки</a><a href="/ru/wiki/routing/">Маршрутизация, DNS и входящие</a><a href="/ru/wiki/settings/">Справочник настроек</a><a href="/ru/wiki/modules/">Модули</a><a href="/ru/wiki/plugins/">Плагины</a><a href="/ru/wiki/make-a-plugin/">Написать свой плагин</a><a class="active" href="/ru/wiki/examples/">Примеры</a><a href="/ru/wiki/troubleshooting/">Решение проблем</a><a href="/ru/wiki/ai-prompt/">Промпт для ИИ</a></nav>
+  </aside>
+  <main class="content">
+    <p class="crumbs"><a href="/ru/wiki/">Документация</a> / Примеры</p>
+    <h1>Примеры</h1>
+    <p class="summary">Полные файлы модулей, которые можно копировать, с пояснениями к каждой части.</p>
+    <details class="on-this-page" open><summary>На этой странице</summary><ul><li><a href="#пример-1-только-настройка">Пример 1: только настройка</a></li><li><a href="#пример-2-протокол-с-выбором">Пример 2: протокол с выбором</a></li><li><a href="#пример-3-помощник-библиотека">Пример 3: помощник-библиотека</a></li><li><a href="#пример-4-обновление-с-github">Пример 4: обновление с GitHub</a></li><li><a href="#чек-лист-перед-публикацией">Чек-лист перед публикацией</a></li></ul></details>
+    <p>Каждый пример — полный <code>module.json</code>. Скопируйте его в файл с таким же именем, положите в папку,
+заархивируйте папку и импортируйте ZIP.</p>
+<h2 id="пример-1-только-настройка">Пример 1: только настройка<a class="headerlink" href="#пример-1-только-настройка" title="Permanent link">#</a></h2>
+<p>Добавляет переключатель в MatenLi без протокола. Полезно, чтобы изучить формат.</p>
+<pre><code class="language-json">{
+  &quot;apiVersion&quot;: 1,
+  &quot;name&quot;: &quot;Дополнительный журнал&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;Пишет в журнал больше подробностей для отладки.&quot;,
+  &quot;customSettings&quot;: [
+    {
+      &quot;key&quot;: &quot;verbose&quot;,
+      &quot;title&quot;: &quot;Подробный журнал&quot;,
+      &quot;type&quot;: &quot;switch&quot;,
+      &quot;default&quot;: false,
+      &quot;help&quot;: &quot;Показывает дополнительные строки в журнале. Выключите после отладки.&quot;
+    }
+  ]
+}
+</code></pre>
+<h2 id="пример-2-протокол-с-выбором">Пример 2: протокол с выбором<a class="headerlink" href="#пример-2-протокол-с-выбором" title="Permanent link">#</a></h2>
+<p>Добавляет новый тип ссылки, который работает на sing-box и позволяет выбрать режим.</p>
+<pre><code class="language-json">{
+  &quot;apiVersion&quot;: 1,
+  &quot;name&quot;: &quot;Пример туннеля&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;Демонстрационный протокол, который показывает, как ссылки превращаются в профили.&quot;,
+  &quot;updateUrl&quot;: &quot;https://github.com/your-name/example-tunnel&quot;,
+  &quot;schemes&quot;: [&quot;extunnel&quot;],
+  &quot;protocols&quot;: [
+    {
+      &quot;id&quot;: &quot;extunnel&quot;,
+      &quot;name&quot;: &quot;Пример туннеля&quot;,
+      &quot;core&quot;: &quot;sing-box&quot;,
+      &quot;schemes&quot;: [&quot;extunnel&quot;],
+      &quot;outbound&quot;: {
+        &quot;type&quot;: &quot;socks&quot;,
+        &quot;server&quot;: &quot;${host}&quot;,
+        &quot;server_port&quot;: &quot;${port}&quot;,
+        &quot;version&quot;: &quot;5&quot;
+      }
+    }
+  ],
+  &quot;customSettings&quot;: [
+    {
+      &quot;key&quot;: &quot;mode&quot;,
+      &quot;title&quot;: &quot;Режим&quot;,
+      &quot;type&quot;: &quot;choice&quot;,
+      &quot;default&quot;: &quot;auto&quot;,
+      &quot;options&quot;: [&quot;auto&quot;, &quot;fast&quot;, &quot;safe&quot;],
+      &quot;help&quot;: &quot;Auto выбирает за вас.&quot;
+    }
+  ]
+}
+</code></pre>
+<p>Ссылка <code>extunnel://example.org:1080</code> создаст профиль с хостом <code>example.org</code> и портом <code>1080</code>.</p>
+<h2 id="пример-3-помощник-библиотека">Пример 3: помощник-библиотека<a class="headerlink" href="#пример-3-помощник-библиотека" title="Permanent link">#</a></h2>
+<p>Добавляет протокол, которому нужна нативная библиотека. Библиотека лежит в ZIP рядом с <code>module.json</code>.</p>
+<pre><code class="language-json">{
+  &quot;apiVersion&quot;: 1,
+  &quot;name&quot;: &quot;Протокол с помощником&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;Запускает библиотеку-помощник, которая нужна протоколу.&quot;,
+  &quot;helperBinary&quot;: { &quot;android&quot;: &quot;libhelper.so&quot; },
+  &quot;pingTimeoutSec&quot;: 30,
+  &quot;protocols&quot;: [
+    {
+      &quot;id&quot;: &quot;helper-proto&quot;,
+      &quot;name&quot;: &quot;Протокол с помощником&quot;,
+      &quot;core&quot;: &quot;sing-box&quot;,
+      &quot;schemes&quot;: [&quot;helper&quot;],
+      &quot;outbound&quot;: {
+        &quot;type&quot;: &quot;socks&quot;,
+        &quot;server&quot;: &quot;127.0.0.1&quot;,
+        &quot;server_port&quot;: &quot;${localPort}&quot;
+      }
+    }
+  ],
+  &quot;customSettings&quot;: [
+    {
+      &quot;key&quot;: &quot;localPort&quot;,
+      &quot;title&quot;: &quot;Локальный порт&quot;,
+      &quot;type&quot;: &quot;number&quot;,
+      &quot;default&quot;: 1080,
+      &quot;min&quot;: 1024,
+      &quot;max&quot;: 65535
+    }
+  ]
+}
+</code></pre>
+<p>ZIP тогда содержит <code>module.json</code> и <code>libhelper.so</code>. Используйте только библиотеку, собранную под процессор телефона
+(для почти всех современных Android-телефонов это arm64).</p>
+<h2 id="пример-4-обновление-с-github">Пример 4: обновление с GitHub<a class="headerlink" href="#пример-4-обновление-с-github" title="Permanent link">#</a></h2>
+<p>Укажите в <code>updateUrl</code> репозиторий. Каждый новый релиз с большим <code>version</code> предлагается как обновление:</p>
+<pre><code class="language-json">{
+  &quot;apiVersion&quot;: 1,
+  &quot;name&quot;: &quot;Плагин с обновлениями&quot;,
+  &quot;version&quot;: &quot;2.3.1&quot;,
+  &quot;description&quot;: &quot;Проверяет собственный репозиторий на обновления.&quot;,
+  &quot;updateUrl&quot;: &quot;https://github.com/your-name/updatable-plugin&quot;
+}
+</code></pre>
+<h2 id="чек-лист-перед-публикацией">Чек-лист перед публикацией<a class="headerlink" href="#чек-лист-перед-публикацией" title="Permanent link">#</a></h2>
+<ul>
+<li>Файл — корректный JSON.</li>
+<li><code>apiVersion</code> равен <code>1</code>.</li>
+<li>Каждый <code>key</code> в <code>customSettings</code> уникален.</li>
+<li>Каждый <code>${name}</code> в outbound имеет соответствующий <code>key</code> или поле, которое даёт профиль.</li>
+<li>ZIP содержит <code>module.json</code> в корне, а не внутри другой папки.</li>
+</ul>
+    <nav class="pager"><a class="prev" href="/ru/wiki/make-a-plugin/">&larr; Написать свой плагин</a><a class="next" href="/ru/wiki/troubleshooting/">Решение проблем &rarr;</a></nav>
+  </main>
+</div>
+<footer class="foot">MatenLi с открытым кодом. Связь: <a href="https://t.me/r_FFR_r">@r_FFR_r</a></footer>
+</body>
+</html>

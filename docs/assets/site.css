@@ -1,0 +1,229 @@
+/* Material You tokens derived from the app icon (seed #7F52CF, coral #E15371). */
+:root {
+  --seed: #7F52CF;
+  --accent: #E15371;
+  --warm: #E8B500;
+
+  --primary: var(--seed);
+  --on-primary: #FFFFFF;
+  --primary-container: color-mix(in oklch, var(--seed) 18%, white);
+  --on-primary-container: color-mix(in oklch, var(--seed) 60%, black);
+  --tonal: color-mix(in oklch, var(--seed) 16%, white);
+  --on-tonal: color-mix(in oklch, var(--seed) 55%, black);
+  --accent-container: color-mix(in oklch, var(--accent) 16%, white);
+  --warm-container: color-mix(in oklch, var(--warm) 22%, white);
+
+  --surface: color-mix(in oklch, var(--seed) 3%, white);
+  --surface-container: color-mix(in oklch, var(--seed) 7%, white);
+  --surface-container-high: color-mix(in oklch, var(--seed) 11%, white);
+  --on-surface: color-mix(in oklch, var(--seed) 12%, black);
+  --on-surface-variant: #4A4458;
+  --outline: #7A7289;
+  --link: color-mix(in oklch, var(--seed) 70%, black);
+
+  --radius-card: 28px;
+  --radius-btn: 999px;
+  --max: 980px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --primary: color-mix(in oklch, var(--seed) 45%, white);
+    --on-primary: color-mix(in oklch, var(--seed) 25%, black);
+    --primary-container: color-mix(in oklch, var(--seed) 35%, black);
+    --on-primary-container: color-mix(in oklch, var(--seed) 20%, white);
+    --tonal: color-mix(in oklch, var(--seed) 30%, black);
+    --on-tonal: color-mix(in oklch, var(--seed) 20%, white);
+    --accent-container: color-mix(in oklch, var(--accent) 30%, black);
+    --warm-container: color-mix(in oklch, var(--warm) 25%, black);
+    --surface: color-mix(in oklch, var(--seed) 8%, black);
+    --surface-container: color-mix(in oklch, var(--seed) 12%, black);
+    --surface-container-high: color-mix(in oklch, var(--seed) 18%, black);
+    --on-surface: color-mix(in oklch, var(--seed) 8%, white);
+    --on-surface-variant: #CAC4D0;
+    --outline: #938F99;
+    --link: color-mix(in oklch, var(--seed) 40%, white);
+  }
+}
+
+:root[data-theme="dark"] {
+  --primary: color-mix(in oklch, var(--seed) 45%, white);
+  --on-primary: color-mix(in oklch, var(--seed) 25%, black);
+  --primary-container: color-mix(in oklch, var(--seed) 35%, black);
+  --on-primary-container: color-mix(in oklch, var(--seed) 20%, white);
+  --tonal: color-mix(in oklch, var(--seed) 30%, black);
+  --on-tonal: color-mix(in oklch, var(--seed) 20%, white);
+  --accent-container: color-mix(in oklch, var(--accent) 30%, black);
+  --warm-container: color-mix(in oklch, var(--warm) 25%, black);
+  --surface: color-mix(in oklch, var(--seed) 8%, black);
+  --surface-container: color-mix(in oklch, var(--seed) 12%, black);
+  --surface-container-high: color-mix(in oklch, var(--seed) 18%, black);
+  --on-surface: color-mix(in oklch, var(--seed) 8%, white);
+  --on-surface-variant: #CAC4D0;
+  --outline: #938F99;
+  --link: color-mix(in oklch, var(--seed) 40%, white);
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; }
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--surface);
+  color: var(--on-surface);
+  line-height: 1.55;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a { color: var(--link); }
+
+main {
+  flex: 1;
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--surface-container);
+  backdrop-filter: blur(8px);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--on-surface);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.brand img { border-radius: 8px; }
+
+.topbar nav { display: flex; flex-wrap: wrap; gap: 14px; }
+.topbar nav a { text-decoration: none; font-weight: 500; }
+
+.hero {
+  text-align: center;
+  padding: 40px 8px 24px;
+}
+
+.hero-icon {
+  border-radius: 28px;
+  box-shadow: 0 10px 30px color-mix(in oklch, var(--seed) 35%, transparent);
+}
+
+h1 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  line-height: 1.2;
+  margin: 20px 0 12px;
+}
+
+.page-head h1 { margin-top: 0; }
+
+.lead {
+  font-size: 1.1rem;
+  color: var(--on-surface-variant);
+  max-width: 44rem;
+  margin: 0 auto;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 22px;
+  border-radius: var(--radius-btn);
+  text-decoration: none;
+  font-weight: 600;
+  border: 0;
+  cursor: pointer;
+}
+
+.btn.filled { background: var(--primary); color: var(--on-primary); }
+.btn.tonal { background: var(--tonal); color: var(--on-tonal); }
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.card {
+  background: var(--surface-container-high);
+  border-radius: var(--radius-card);
+  padding: 22px;
+}
+
+.card.wide { margin-top: 20px; }
+
+.card h2, .notice h2, .card h3 { margin: 0 0 8px; font-size: 1.15rem; }
+
+.card p { margin: 0; color: var(--on-surface-variant); }
+
+.notice {
+  margin-top: 24px;
+  padding: 22px;
+  border-radius: var(--radius-card);
+  background: var(--warm-container);
+}
+
+.notice p { margin: 0; }
+
+.muted { color: var(--on-surface-variant); }
+
+.downloads { list-style: none; padding: 0; margin: 12px 0; }
+.downloads li { margin: 8px 0; }
+
+.notes-text {
+  white-space: pre-wrap;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.9rem;
+  background: var(--surface);
+  padding: 14px;
+  border-radius: 16px;
+  overflow-x: auto;
+}
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  background: var(--surface);
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+.footer {
+  padding: 24px 16px;
+  text-align: center;
+  color: var(--on-surface-variant);
+  background: var(--surface-container);
+}
+
+.footer p { margin: 4px 0; }
+
+@media (max-width: 480px) {
+  .topbar { flex-direction: column; align-items: flex-start; }
+  main { padding: 16px 16px 40px; }
+}

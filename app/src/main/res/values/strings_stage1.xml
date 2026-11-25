@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_test">Test</string>
+    <string name="action_test_all">Test all profiles</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_more">More</string>
+    <string name="action_search">Search</string>
+    <string name="action_sort_delay">Sort by delay</string>
+
+    <string name="menu_scan_qr">Scan QR code</string>
+    <string name="menu_import_clipboard">Import from clipboard</string>
+    <string name="menu_import_file">Import from file</string>
+    <string name="menu_paste">Paste links or JSON</string>
+    <string name="menu_manual">Manual settings</string>
+    <string name="manual_settings_title">Choose a protocol</string>
+    <string name="import_none">Nothing to import</string>
+    <string name="import_summary">Added %1$d, failed %2$d</string>
+    <string name="import_file_failed">Could not read the file</string>
+
+    <string name="profile_search_hint">Search by name or server</string>
+    <string name="profile_edit_title">Edit %1$s</string>
+    <string name="profile_name">Name</string>
+    <string name="profile_saved">Profile saved</string>
+    <string name="profile_ping_ms">%1$d ms</string>
+    <string name="profile_timeout">timeout</string>
+
+    <string name="latency_none">HTTPS: --</string>
+    <string name="latency_format">HTTPS: %1$d ms</string>
+
+    <string name="diff_title">Updated: %1$s</string>
+    <string name="diff_none">No changes</string>
+    <string name="diff_added">Added</string>
+    <string name="diff_updated">Updated</string>
+    <string name="diff_deleted">Deleted</string>
+
+    <string name="group_settings_title">Group settings</string>
+    <string name="group_auto_update">Auto update</string>
+    <string name="group_auto_update_minutes">Update every (minutes, at least 15)</string>
+    <string name="group_filter">Filter by name (regex, empty keeps all)</string>
+    <string name="group_dedupe">Remove duplicate servers</string>
+    <string name="group_user_agent">User agent sent on refresh</string>
+    <string name="sub_url_invalid">The URL must start with http:// or https://</string>
+    <string name="group_interval_invalid">Enter at least 15 minutes</string>
+    <string name="sub_filter_invalid">The filter is not a valid regular expression</string>
+</resources>

@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Connecting and tests · MatenLi docs</title>
+<meta name="description" content="What the Connect button, the bottom bar and the latency numbers mean.">
+<link rel="icon" href="/assets/icon-512.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/wiki.css">
+<link rel="alternate" hreflang="en" href="/en/wiki/connecting/">
+<link rel="alternate" hreflang="ru" href="/ru/wiki/connecting/">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/"><img src="/assets/icon-512.png" alt="" width="32" height="32"> MatenLi</a>
+  <nav>
+    <a href="/en/wiki/">Documentation</a>
+    <a href="/download/">Download</a>
+    <a href="https://github.com/MatenLi/MatenLi">GitHub</a>
+    <a class="lang-switch" href="/ru/wiki/connecting/" hreflang="ru" lang="ru">Русский</a>
+  </nav>
+</header>
+<div class="layout">
+  <aside class="side">
+    <p class="side-title">Documentation</p>
+    <nav class="toc-side"><a href="/en/wiki/getting-started/">Getting started</a><a href="/en/wiki/profiles/">Profiles and links</a><a href="/en/wiki/groups/">Groups and subscriptions</a><a class="active" href="/en/wiki/connecting/">Connecting and tests</a><a href="/en/wiki/routing/">Routing, DNS and inbound</a><a href="/en/wiki/settings/">Settings reference</a><a href="/en/wiki/modules/">Modules</a><a href="/en/wiki/plugins/">Plugins</a><a href="/en/wiki/make-a-plugin/">Make your own plugin</a><a href="/en/wiki/examples/">Examples</a><a href="/en/wiki/troubleshooting/">Troubleshooting</a><a href="/en/wiki/ai-prompt/">AI prompt</a></nav>
+  </aside>
+  <main class="content">
+    <p class="crumbs"><a href="/en/wiki/">Documentation</a> / Connecting and tests</p>
+    <h1>Connecting and tests</h1>
+    <p class="summary">What the Connect button, the bottom bar and the latency numbers mean.</p>
+    <details class="on-this-page" open><summary>On this page</summary><ul><li><a href="#the-connect-button">The Connect button</a></li><li><a href="#the-bottom-bar">The bottom bar</a></li><li><a href="#url-test">URL test</a></li><li><a href="#tcp-ping">TCP ping</a></li><li><a href="#reading-the-numbers">Reading the numbers</a></li><li><a href="#example">Example</a></li><li><a href="#settings-that-change-connection-behaviour">Settings that change connection behaviour</a></li></ul></details>
+    <h2 id="the-connect-button">The Connect button<a class="headerlink" href="#the-connect-button" title="Permanent link">#</a></h2>
+<p>The big button at the bottom of the main screen connects and disconnects. Its icon shows the state:</p>
+<table>
+<thead>
+<tr>
+<th>Icon</th>
+<th>State</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Power off</td>
+<td>Off</td>
+<td>Not connected.</td>
+</tr>
+<tr>
+<td>Animated neurology icon</td>
+<td>Testing</td>
+<td>The app is testing the selected server.</td>
+</tr>
+<tr>
+<td>Router off</td>
+<td>Error</td>
+<td>The last test or connection failed. Read the message in the bottom bar.</td>
+</tr>
+<tr>
+<td>Network intel</td>
+<td>Connected</td>
+<td>The test succeeded and the VPN is on.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Status:</strong> the animated icons are part of the next release. Today the button shows a plain
+connect and disconnect state.</p>
+</blockquote>
+<h2 id="the-bottom-bar">The bottom bar<a class="headerlink" href="#the-bottom-bar" title="Permanent link">#</a></h2>
+<p>The bottom bar shows, from left to right:</p>
+<ul>
+<li>The <strong>status</strong>: Off, Connecting, Connected or Error.</li>
+<li>The <strong>speed</strong>: upload and download, updated every second while connected.</li>
+<li>The <strong>latency</strong>: the round-trip time to the test address, checked every ten seconds while connected.</li>
+<li>The <strong>country</strong> of your exit address, when the country lookup is turned on in settings.</li>
+</ul>
+<h2 id="url-test">URL test<a class="headerlink" href="#url-test" title="Permanent link">#</a></h2>
+<p>A URL test sends an HTTPS request to a test address and measures how long the answer takes. The default
+address is <code>https://www.gstatic.com/generate_204</code>. It returns no content, so it is small and fast.</p>
+<p>Use it to compare servers. Tap <strong>Test</strong> on a profile, or <strong>Test all</strong> on a group.</p>
+<h2 id="tcp-ping">TCP ping<a class="headerlink" href="#tcp-ping" title="Permanent link">#</a></h2>
+<p>A TCP ping only checks that the server port accepts a connection. It does not use the VPN, so it works
+while you are disconnected and it is much faster. A failed TCP ping usually means the server is down,
+the port is closed, or your network blocks it.</p>
+<h2 id="reading-the-numbers">Reading the numbers<a class="headerlink" href="#reading-the-numbers" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Latency</th>
+<th>Colour</th>
+<th>What it usually means</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Under 150 ms</td>
+<td>Green</td>
+<td>Good. Suitable for everything.</td>
+</tr>
+<tr>
+<td>150 to 400 ms</td>
+<td>Amber</td>
+<td>Usable. Calls and games may feel slow.</td>
+</tr>
+<tr>
+<td>Over 400 ms</td>
+<td>Red</td>
+<td>Slow. Try another server.</td>
+</tr>
+<tr>
+<td>Timeout</td>
+<td>Red, "timeout"</td>
+<td>The server did not answer within the timeout.</td>
+</tr>
+</tbody>
+</table>
+<p>Latency depends on distance. A server on another continent is slow even when it is healthy.</p>
+<h2 id="example">Example<a class="headerlink" href="#example" title="Permanent link">#</a></h2>
+<ol>
+<li>You have three profiles. Tap <strong>Test all</strong> on the group.</li>
+<li>The results show 120 ms, 310 ms and a timeout.</li>
+<li>Select the 120 ms profile and connect.</li>
+<li>Once connected, the bottom bar shows about 125 ms, which is close to the test result.</li>
+</ol>
+<h2 id="settings-that-change-connection-behaviour">Settings that change connection behaviour<a class="headerlink" href="#settings-that-change-connection-behaviour" title="Permanent link">#</a></h2>
+<p>These are in <a href="/en/wiki/settings/">Settings</a>:</p>
+<ul>
+<li><strong>Auto connect</strong> connects when the app starts.</li>
+<li><strong>Ping while connected</strong> keeps the latency number up to date.</li>
+<li><strong>Ping timeout</strong> sets how long a test waits before it gives up.</li>
+<li><strong>Test URL</strong> changes the address used for URL tests.</li>
+</ul>
+    <nav class="pager"><a class="prev" href="/en/wiki/groups/">&larr; Groups and subscriptions</a><a class="next" href="/en/wiki/routing/">Routing, DNS and inbound &rarr;</a></nav>
+  </main>
+</div>
+<footer class="foot">MatenLi is open source. Contact: <a href="https://t.me/r_FFR_r">@r_FFR_r</a></footer>
+</body>
+</html>

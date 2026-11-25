@@ -1,0 +1,26 @@
+# Gradle
+.gradle/
+build/
+**/build/
+.kotlin/
+
+# Local config
+local.properties
+
+# IntelliJ / Android Studio
+*.iml
+.idea/
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Signing
+*.keystore
+
+# Stray copy of the bootstrap script
+u
+*.jks
+
+# OS
+.DS_Store
+Thumbs.db

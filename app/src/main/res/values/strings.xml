@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MatenLi</string>
+
+    <!-- Drawer and top bar -->
+    <string name="nav_configuration">Configuration</string>
+    <string name="nav_group">Group</string>
+    <string name="nav_route">Route</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_logs">Logs</string>
+    <string name="nav_about">About</string>
+    <string name="menu_open">Open navigation menu</string>
+    <string name="add_profile">Add profile</string>
+
+    <!-- Main page and common actions -->
+    <string name="status_disconnected">Not connected</string>
+    <string name="status_connecting">Connecting</string>
+    <string name="status_connected">Connected</string>
+    <string name="action_connect">Connect</string>
+    <string name="action_disconnect">Disconnect</string>
+    <string name="action_ok">OK</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_save">Save</string>
+    <string name="copy_config">Copy sing-box config</string>
+    <string name="notification_running">Core is running</string>
+    <string name="config_copied">sing-box config copied to clipboard</string>
+    <string name="route_empty_title">No routes</string>
+    <string name="log_empty_title">No log lines</string>
+
+    <!-- Notice shown on connect and add -->
+
+    <!-- Dashboard -->
+    <string name="stat_url_test">URL test</string>
+    <string name="stat_tcp_ping">TCP ping</string>
+    <string name="value_empty">--</string>
+
+    <!-- About -->
+    <string name="about_app_description">A universal proxy client for Android, written in Kotlin, with sing-box and Xray cores.</string>
+    <string name="about_version_title">Version</string>
+    <string name="about_version_value">0.1.0</string>
+    <string name="about_engine_singbox">Version (sing-box)</string>
+    <string name="about_modules_title">Other modules</string>
+    <string name="about_modules_value">No modules installed</string>
+    <string name="about_project_title">Project</string>
+    <string name="about_source_code">Source code</string>
+    <string name="about_design_notes">Design notes</string>
+    <string name="about_license_title">License</string>
+    <string name="about_copyright">Copyright 2026 MatenLi contributors</string>
+    <string name="about_license_text">Licensed under the Apache License, Version 2.0. The software is provided as is, without warranty of any kind.</string>
+    <string name="about_full_license">Full license text</string>
+    <string name="about_telegram">Telegram: @r_FFR_r</string>
+
+    <!-- Settings sections (NekoBox wording) -->
+    <string name="general_settings">App Settings</string>
+    <string name="cag_route">Route Settings</string>
+    <string name="cag_dns">DNS Settings</string>
+    <string name="inbound_settings">Inbound Settings</string>
+    <string name="cag_misc">Misc Settings</string>
+
+    <!-- App settings -->
+    <string name="auto_connect">Auto Connect</string>
+    <string name="auto_connect_summary">Enable proxy on startup/app update if it was running before</string>
+    <string name="night_mode">Night Mode</string>
+    <string name="app_theme">App Theme</string>
+    <string name="theme_dynamic">Dynamic</string>
+    <string name="theme_purple">Purple</string>
+    <string name="theme_blue">Blue</string>
+    <string name="theme_green">Green</string>
+    <string name="theme_red">Red</string>
+    <string name="theme_orange">Orange</string>
+    <string name="show_bottom_bar">Show Bottom Bar</string>
+    <string name="show_bottom_bar_summary">Hide the traffic bar and connect button. The connect button moves to the top bar.</string>
+    <string name="follow_system">Follow System</string>
+    <string name="enable">Enable</string>
+    <string name="disable">Disable</string>
+    <string name="auto">Auto</string>
+    <string name="service_mode">Service Mode</string>
+    <string name="service_mode_vpn">VPN</string>
+    <string name="service_mode_proxy">Proxy only</string>
+    <string name="service_mode_transproxy">Transparent proxy</string>
+    <string name="tun_implementation">TUN Implementation</string>
+    <string name="tun_gvisor">gVisor</string>
+    <string name="tun_system">System</string>
+    <string name="tun_mixed">Mixed</string>
+    <string name="mtu">MTU</string>
+    <string name="speed_interval">Speed Notification Update Interval</string>
+    <string name="speed_500ms">500 ms</string>
+    <string name="speed_1s">1 s</string>
+    <string name="speed_3s">3 s</string>
+    <string name="speed_10s">10 s</string>
+    <string name="profile_traffic_statistics">Profile Traffic Statistics</string>
+    <string name="profile_traffic_statistics_summary">When disabled, the used traffic will not be counted</string>
+    <string name="show_direct_speed">Show Direct Speed</string>
+    <string name="show_direct_speed_sum">Show the traffic speed without proxy in the notification as well</string>
+    <string name="show_group_in_notification">Show group name in notification</string>
+    <string name="always_show_address">Always Show Address</string>
+    <string name="always_show_address_sum">Always display the server address on the configuration card</string>
+    <string name="metered">Metered Hint</string>
+    <string name="metered_summary">Hint system to treat VPN as metered</string>
+    <string name="acquire_wake_lock">Acquire WakeLock</string>
+    <string name="acquire_wake_lock_summary">Keep the CPU on</string>
+    <string name="log_level">Log Level</string>
+    <string name="log_level_none">None</string>
+    <string name="log_level_warn">Warn</string>
+    <string name="log_level_info">Info</string>
+    <string name="log_level_debug">Debug</string>
+    <string name="log_level_trace">Trace</string>
+    <string name="custom_config">Custom Config</string>
+
+    <!-- Route settings -->
+    <string name="proxied_apps">Apps VPN mode</string>
+    <string name="proxied_apps_summary">Configure VPN mode for selected apps</string>
+    <string name="route_opt_bypass_lan">Bypass LAN</string>
+    <string name="bypass_lan_in_core">Bypass LAN in Core</string>
+    <string name="traffic_sniffing">Enable Traffic Sniffing</string>
+    <string name="off">Off</string>
+    <string name="sniff_routing">Sniff result for routing</string>
+    <string name="sniff_override">Sniff result for destination</string>
+    <string name="resolve_destination">Resolve Destination</string>
+    <string name="resolve_destination_summary">If the destination address is a domain, it is then passed out based on the IPv6 strategy (conflicts with FakeDNS)</string>
+    <string name="ipv6">IPv6 Route</string>
+    <string name="prefer">Prefer</string>
+    <string name="only">Only</string>
+    <string name="route_rules_provider">Rule Assets Provider</string>
+    <string name="route_rules_official">Official</string>
+    <string name="rules_loyalsoldier">Loyalsoldier (soffchen/sing-geosite)</string>
+    <string name="rules_chocolate">Chocolate4U/Iran-sing-box-rules</string>
+    <string name="rules_l11r">L11R/Antizapret-sing-box-geo</string>
+
+    <!-- DNS settings -->
+    <string name="remote_dns">Remote DNS</string>
+    <string name="direct_dns">Direct DNS</string>
+    <string name="domain_strategy_for_remote">Domain strategy for Remote</string>
+    <string name="domain_strategy_for_direct">Domain strategy for Direct</string>
+    <string name="domain_strategy_for_server">Domain strategy for Server address</string>
+    <string name="dns_strategy_auto">Auto</string>
+    <string name="dns_strategy_prefer_ipv6">Prefer IPv6</string>
+    <string name="dns_strategy_prefer_ipv4">Prefer IPv4</string>
+    <string name="dns_strategy_ipv4_only">IPv4 only</string>
+    <string name="dns_strategy_ipv6_only">IPv6 only</string>
+    <string name="enable_dns_routing">Enable DNS Routing</string>
+    <string name="dns_routing_message">Resolve domains in bypass routes with Direct DNS. Be aware of potential DNS leaks</string>
+    <string name="enable_fakedns">Enable FakeDNS</string>
+    <string name="fakedns_message">May cause other applications need to be restarted to reconnect to the network after proxy stopped</string>
+
+    <!-- Inbound settings -->
+    <string name="port_proxy">Proxy Port</string>
+    <string name="append_http_proxy">Append HTTP Proxy to VPN</string>
+    <string name="append_http_proxy_sum">HTTP proxy will be used directly from (browser/ some supported apps), without going through the virtual NIC device (Android 10+)</string>
+    <string name="allow_access">Allow Connections from the LAN</string>
+    <string name="allow_access_sum">Bind inbound servers to 0.0.0.0</string>
+
+    <!-- Misc settings -->
+    <string name="connection_test_url">Connection Test URL</string>
+    <string name="enable_clash_api">Enable Clash API</string>
+    <string name="enable_clash_api_summary">Provide clash api and yacd dashboard at 127.0.0.1:9090</string>
+    <string name="network_change_reset_connections">Reset outbound connections when network changes</string>
+    <string name="wake_reset_connections">Reset outbound connections when device wake from sleep</string>
+    <string name="global_allow_insecure">Always allow insecure</string>
+    <string name="allow_insecure_on_request_sum">Disable certificate checking when updating subscriptions</string>
+    <string name="app_tls_version">Subscription Min TLS Version</string>
+</resources>

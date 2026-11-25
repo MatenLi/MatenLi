@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="url_test_busy">Проверка по URL уже идёт.</string>
+    <string name="profile_url_error">URL: %1$s</string>
+    <string name="mirror_section">Зеркало подписок</string>
+    <string name="mirror_enabled">Использовать зеркало</string>
+    <string name="mirror_summary">Подписки сначала загружаются через зеркало. Если оно не работает или в нём нет серверов, используется исходная ссылка.</string>
+    <string name="mirror_base">Адрес зеркала</string>
+    <string name="mirror_ua">User-agent зеркала (ua)</string>
+    <string name="mirror_os">ОС для зеркала (os)</string>
+    <string name="mirror_sua">sua зеркала (необязательно)</string>
+    <string name="mirror_hwid">Идентификатор устройства (h, создаётся сам)</string>
+    <string name="mirror_fmt">Формат зеркала (необязательно, например b64)</string>
+</resources>

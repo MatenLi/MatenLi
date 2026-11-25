@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI prompt · MatenLi docs</title>
+<meta name="description" content="A ready-made prompt that makes an AI assistant write a MatenLi plugin for you.">
+<link rel="icon" href="/assets/icon-512.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/wiki.css">
+<link rel="alternate" hreflang="en" href="/en/wiki/ai-prompt/">
+<link rel="alternate" hreflang="ru" href="/ru/wiki/ai-prompt/">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/"><img src="/assets/icon-512.png" alt="" width="32" height="32"> MatenLi</a>
+  <nav>
+    <a href="/en/wiki/">Documentation</a>
+    <a href="/download/">Download</a>
+    <a href="https://github.com/MatenLi/MatenLi">GitHub</a>
+    <a class="lang-switch" href="/ru/wiki/ai-prompt/" hreflang="ru" lang="ru">Русский</a>
+  </nav>
+</header>
+<div class="layout">
+  <aside class="side">
+    <p class="side-title">Documentation</p>
+    <nav class="toc-side"><a href="/en/wiki/getting-started/">Getting started</a><a href="/en/wiki/profiles/">Profiles and links</a><a href="/en/wiki/groups/">Groups and subscriptions</a><a href="/en/wiki/connecting/">Connecting and tests</a><a href="/en/wiki/routing/">Routing, DNS and inbound</a><a href="/en/wiki/settings/">Settings reference</a><a href="/en/wiki/modules/">Modules</a><a href="/en/wiki/plugins/">Plugins</a><a href="/en/wiki/make-a-plugin/">Make your own plugin</a><a href="/en/wiki/examples/">Examples</a><a href="/en/wiki/troubleshooting/">Troubleshooting</a><a class="active" href="/en/wiki/ai-prompt/">AI prompt</a><a href="/en/wiki/updating/">Updating and backup</a></nav>
+  </aside>
+  <main class="content">
+    <p class="crumbs"><a href="/en/wiki/">Documentation</a> / AI prompt</p>
+    <h1>AI prompt</h1>
+    <p class="summary">A ready-made prompt that makes an AI assistant write a MatenLi plugin for you.</p>
+    <details class="on-this-page" open><summary>On this page</summary><ul><li><a href="#how-to-use-it">How to use it</a></li><li><a href="#what-the-prompt-does">What the prompt does</a></li><li><a href="#tips">Tips</a></li></ul></details>
+    <p>Paste the full prompt into an AI assistant and describe the plugin you want. The complete prompt is
+also published as a plain file for AIs to fetch: <a href="/en/wiki/PROMPT.md">/wiki/PROMPT.md</a>.</p>
+<h2 id="how-to-use-it">How to use it<a class="headerlink" href="#how-to-use-it" title="Permanent link">#</a></h2>
+<ol>
+<li>Open the <a href="/en/wiki/PROMPT.md">PROMPT.md file</a> and copy everything in it.</li>
+<li>Start a new chat with an AI assistant and paste the prompt first.</li>
+<li>Under the prompt, write what you want. For example:</li>
+</ol>
+<blockquote>
+<p>Make a MatenLi plugin for the StormDNS tunnel. Users pick a local port and a resolver list.</p>
+</blockquote>
+<ol start="4">
+<li>Read the answer. Save the <code>module.json</code> it gives you, check it with a JSON validator, and zip it.</li>
+<li>Import the ZIP in MatenLi under <strong>Modules</strong>.</li>
+</ol>
+<h2 id="what-the-prompt-does">What the prompt does<a class="headerlink" href="#what-the-prompt-does" title="Permanent link">#</a></h2>
+<p>The prompt tells the AI:</p>
+<ul>
+<li>the exact module format (version 1), including every field and its type</li>
+<li>which cores exist and which fields they expect</li>
+<li>to ask one question when the protocol is unclear</li>
+<li>to return only a valid <code>module.json</code> and a short explanation</li>
+</ul>
+<h2 id="tips">Tips<a class="headerlink" href="#tips" title="Permanent link">#</a></h2>
+<ul>
+<li>Give the AI the link or documentation of the protocol you want to add.</li>
+<li>Ask it to explain each field in plain words, so you learn the format.</li>
+<li>Always check the result. An AI can make mistakes, and a plugin runs on your phone.</li>
+</ul>
+    <nav class="pager"><a class="prev" href="/en/wiki/troubleshooting/">&larr; Troubleshooting</a><a class="next" href="/en/wiki/updating/">Updating and backup &rarr;</a></nav>
+  </main>
+</div>
+<footer class="foot">MatenLi is open source. Contact: <a href="https://t.me/r_FFR_r">@r_FFR_r</a></footer>
+</body>
+</html>
