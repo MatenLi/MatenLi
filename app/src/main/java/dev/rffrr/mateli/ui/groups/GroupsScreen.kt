@@ -3,7 +3,6 @@
 package dev.rffrr.mateli.ui.groups
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.matchParentSize
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material.icons.filled.ArrowDropDown
