@@ -29,10 +29,10 @@ data class UrlResult(val ms: Long?, val error: String?)
  * Works connected or not.
  */
 object UrlProbe {
-    private const val CORE_START_TIMEOUT_MS = 15_000L
-    private const val REQUEST_TIMEOUT_MS = 8_000
-    private const val PARALLEL = 8
-    private const val STOP_GAP_MS = 500L
+    private const val CORE_START_TIMEOUT_MS = 10_000L
+    private const val REQUEST_TIMEOUT_MS = 5_000
+    private const val PARALLEL = 16
+    private const val STOP_GAP_MS = 300L
 
     /** Returns a result for every profile. Profiles that cannot run here get an error, not a number. */
     suspend fun testAll(

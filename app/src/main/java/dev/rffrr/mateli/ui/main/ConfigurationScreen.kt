@@ -5,11 +5,16 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Dns
@@ -24,6 +29,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -45,8 +51,9 @@ import dev.rffrr.mateli.ui.common.EmptyState
 import dev.rffrr.mateli.ui.theme.MatenLiShapes
 
 /**
- * Profile list for the selected group. Each card has Edit, URL test, Share and Delete.
- * [urlPings] holds the last URL test per profile id: a number, or the reason it failed.
+ * Profile list for the selected group. Each card has its name, type and server, the last URL test
+ * result as a badge, and the Edit, URL test, Share and Delete actions.
+ * [urlPings] holds the last URL test per profile id: a time, or the reason it failed.
  * [query] filters by name or server.
  */
 @Composable
@@ -137,8 +144,6 @@ private fun ProfileCard(
     val server = profile.outbound.optString("server")
     val port = profile.outbound.optInt("server_port")
     val unsupported = unsupportedReason(profile) != null
-    val urlLabel = stringResource(R.string.action_url_test)
-    val ms = urlResult?.ms
 
     Card(
         modifier = Modifier.fillMaxWidth().clickable(onClick = onSelect),
@@ -147,16 +152,19 @@ private fun ProfileCard(
             containerColor = if (selected) {
                 MaterialTheme.colorScheme.primaryContainer
             } else {
-                MaterialTheme.colorScheme.surfaceContainerHigh
+                MaterialTheme.colorScheme.surfaceContainerLow
             }
         )
     ) {
         Column(
-            modifier = Modifier.fillMaxWidth().padding(start = 8.dp, end = 4.dp, top = 12.dp, bottom = 4.dp)
+            modifier = Modifier.fillMaxWidth().padding(start = 4.dp, end = 4.dp, top = 8.dp, bottom = 4.dp)
         ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 RadioButton(selected = selected, onClick = onSelect)
-                Column(modifier = Modifier.weight(1f).padding(horizontal = 8.dp)) {
+                Column(modifier = Modifier.weight(1f).padding(horizontal = 4.dp)) {
                     Text(
                         text = profile.name,
                         style = MaterialTheme.typography.titleMedium,
@@ -165,7 +173,7 @@ private fun ProfileCard(
                         overflow = TextOverflow.Ellipsis
                     )
                     Text(
-                        text = "${profile.type.uppercase()}  $server:$port",
+                        text = "${profile.type.uppercase()} · $server:$port",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         maxLines = 1,
@@ -179,26 +187,8 @@ private fun ProfileCard(
                         )
                     }
                 }
-                when {
-                    urlTesting -> CircularProgressIndicator(
-                        modifier = Modifier.padding(end = 8.dp),
-                        strokeWidth = 2.dp
-                    )
-                    ms != null -> Text(
-                        text = stringResource(R.string.profile_url_ms, ms),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.tertiary,
-                        modifier = Modifier.padding(end = 8.dp)
-                    )
-                    urlResult != null -> Text(
-                        text = stringResource(R.string.profile_url_error, urlResult.error.orEmpty()),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.error,
-                        maxLines = 2,
-                        overflow = TextOverflow.Ellipsis,
-                        modifier = Modifier.padding(end = 8.dp).weight(0.6f, fill = false)
-                    )
-                }
+                ResultBadge(testing = urlTesting, result = urlResult)
+                Spacer(modifier = Modifier.width(8.dp))
             }
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -209,7 +199,7 @@ private fun ProfileCard(
                     Icon(Icons.Filled.Edit, contentDescription = stringResource(R.string.action_edit))
                 }
                 IconButton(onClick = onUrlTest) {
-                    Icon(Icons.Filled.Timer, contentDescription = urlLabel)
+                    Icon(Icons.Filled.Timer, contentDescription = stringResource(R.string.action_url_test))
                 }
                 IconButton(onClick = onShare) {
                     Icon(Icons.Filled.Share, contentDescription = stringResource(R.string.action_share))
@@ -219,5 +209,40 @@ private fun ProfileCard(
                 }
             }
         }
+    }
+}
+
+/** Spinner while testing, then a pill with the time in green or the reason in red. */
+@Composable
+private fun ResultBadge(testing: Boolean, result: UrlResult?) {
+    if (testing) {
+        CircularProgressIndicator(modifier = Modifier.size(24.dp))
+        return
+    }
+    if (result == null) return
+    val ms = result.ms
+    val container = if (ms != null) {
+        MaterialTheme.colorScheme.tertiaryContainer
+    } else {
+        MaterialTheme.colorScheme.errorContainer
+    }
+    val content = if (ms != null) {
+        MaterialTheme.colorScheme.onTertiaryContainer
+    } else {
+        MaterialTheme.colorScheme.onErrorContainer
+    }
+    val label = if (ms != null) {
+        stringResource(R.string.profile_url_ms, ms)
+    } else {
+        stringResource(R.string.profile_url_error, result.error.orEmpty())
+    }
+    Surface(shape = RoundedCornerShape(50), color = container, contentColor = content) {
+        Text(
+            text = label,
+            style = MaterialTheme.typography.labelLarge,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.widthIn(max = 160.dp).padding(horizontal = 12.dp, vertical = 6.dp)
+        )
     }
 }

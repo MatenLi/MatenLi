@@ -190,8 +190,7 @@ fun ConnectFab(state: CoreState, onClick: () -> Unit, modifier: Modifier = Modif
         if (state == CoreState.Connecting) {
             CircularProgressIndicator(
                 modifier = Modifier.size(72.dp),
-                color = container,
-                strokeWidth = 3.dp
+                color = container
             )
         }
         FloatingActionButton(
