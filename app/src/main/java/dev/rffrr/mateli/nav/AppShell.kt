@@ -223,7 +223,7 @@ fun AppShell() {
         }
         scope.launch {
             val result = withContext(Dispatchers.IO) {
-                runCatching { SubscriptionUpdater.refresh(profileStore, subStore, sub, prefs) }
+                runCatching { SubscriptionUpdater.refresh(profileStore, subStore, sub) }
             }
             result
                 .onSuccess {
@@ -350,7 +350,7 @@ fun AppShell() {
             .filter { it.autoUpdate && now - it.updatedAt > it.updateMinutes * 60_000L }
             .forEach { sub ->
                 withContext(Dispatchers.IO) {
-                    runCatching { SubscriptionUpdater.refresh(profileStore, subStore, sub, prefs) }
+                    runCatching { SubscriptionUpdater.refresh(profileStore, subStore, sub) }
                 }.onSuccess {
                     diff = it
                     refreshProfiles()

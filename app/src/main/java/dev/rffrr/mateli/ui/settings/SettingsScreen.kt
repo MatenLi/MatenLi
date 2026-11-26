@@ -272,10 +272,14 @@ fun SettingsScreen(modifier: Modifier = Modifier) {
                 R.string.mirror_enabled, R.string.mirror_summary
             )
             TextSetting(prefs, PrefKeys.MIRROR_BASE, Mirror.DEFAULT_BASE, R.string.mirror_base)
-            TextSetting(prefs, PrefKeys.MIRROR_UA, Mirror.DEFAULT_UA, R.string.mirror_ua)
-            TextSetting(prefs, PrefKeys.MIRROR_OS, Mirror.DEFAULT_OS, R.string.mirror_os)
-            TextSetting(prefs, PrefKeys.MIRROR_SUA, Mirror.DEFAULT_SUA, R.string.mirror_sua)
-            TextSetting(prefs, PrefKeys.MIRROR_FMT, Mirror.DEFAULT_FMT, R.string.mirror_fmt)
+            MenuSetting(
+                prefs, PrefKeys.MIRROR_CLIENT, Mirror.DEFAULT_CLIENT, R.string.mirror_client,
+                Mirror.CLIENTS.map { Option(it.first, it.second) }
+            )
+            MenuSetting(
+                prefs, PrefKeys.MIRROR_OS, Mirror.DEFAULT_OS, R.string.mirror_os,
+                Mirror.SYSTEMS.map { Option(it.first, it.second) }
+            )
         }
         SettingSection(R.string.country_lookup_section) {
             SwitchSetting(

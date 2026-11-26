@@ -2,6 +2,11 @@
 
 package dev.rffrr.mateli.ui.groups
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.matchParentSize
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -54,6 +59,8 @@ import dev.rffrr.mateli.profiles.Subscription
 import dev.rffrr.mateli.profiles.blankSubscription
 import dev.rffrr.mateli.profiles.SubscriptionStore
 import dev.rffrr.mateli.profiles.SubscriptionUpdater
+import dev.rffrr.mateli.profiles.Mirror
+import dev.rffrr.mateli.profiles.MirrorConfig
 import dev.rffrr.mateli.settings.Prefs
 import dev.rffrr.mateli.ui.common.EmptyState
 import dev.rffrr.mateli.ui.theme.MatenLiShapes
@@ -81,6 +88,7 @@ fun GroupsScreen(
     val subStore = remember { SubscriptionStore(context) }
     var subs by remember { mutableStateOf(subStore.list()) }
     var adding by remember { mutableStateOf(false) }
+    val prefs = Prefs.get(context)
     var draft by remember { mutableStateOf(blankSubscription()) }
     var editing by remember { mutableStateOf<Subscription?>(null) }
     var busy by remember { mutableStateOf<String?>(null) }
@@ -91,7 +99,7 @@ fun GroupsScreen(
         errors = errors - sub.id
         scope.launch {
             val result = withContext(Dispatchers.IO) {
-                runCatching { SubscriptionUpdater.refresh(profileStore, subStore, sub, Prefs.get(context)) }
+                runCatching { SubscriptionUpdater.refresh(profileStore, subStore, sub) }
             }
             busy = null
             result.onSuccess {
@@ -134,7 +142,7 @@ fun GroupsScreen(
             }
         }
         FloatingActionButton(
-            onClick = { draft = blankSubscription(); adding = true },
+            onClick = { draft = blankSubscription().copy(mirror = Mirror.defaults(prefs)); adding = true },
             modifier = Modifier
                 .align(Alignment.BottomEnd)
                 .padding(16.dp)
@@ -310,11 +318,18 @@ private fun GroupSettingsDialog(
     var filter by remember(sub.id) { mutableStateOf(sub.filter) }
     var dedupe by remember(sub.id) { mutableStateOf(sub.dedupe) }
     var agent by remember(sub.id) { mutableStateOf(sub.userAgent) }
+    var mirrorOn by remember(sub.id) { mutableStateOf(sub.mirror.enabled) }
+    var mirrorBase by remember(sub.id) { mutableStateOf(sub.mirror.base) }
+    var mirrorClient by remember(sub.id) { mutableStateOf(sub.mirror.client) }
+    var mirrorOs by remember(sub.id) { mutableStateOf(sub.mirror.os) }
+    var mirrorHwid by remember(sub.id) { mutableStateOf(sub.mirror.hwid) }
     var error by remember(sub.id) { mutableStateOf<String?>(null) }
     // Resolve strings in composable scope; stringResource cannot be called from the onClick lambda.
     val urlInvalid = stringResource(R.string.sub_url_invalid)
     val intervalInvalid = stringResource(R.string.group_interval_invalid)
     val filterInvalid = stringResource(R.string.sub_filter_invalid)
+    val mirrorBaseInvalid = stringResource(R.string.mirror_base_invalid)
+    val hwidInvalid = stringResource(R.string.mirror_hwid_invalid)
 
     AlertDialog(
         onDismissRequest = onDismiss,
@@ -376,6 +391,43 @@ private fun GroupSettingsDialog(
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth()
                 )
+                Text(stringResource(R.string.mirror_section), style = MaterialTheme.typography.titleSmall)
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(stringResource(R.string.mirror_enabled))
+                    Switch(checked = mirrorOn, onCheckedChange = { mirrorOn = it })
+                }
+                if (mirrorOn) {
+                    OutlinedTextField(
+                        value = mirrorBase,
+                        onValueChange = { mirrorBase = it },
+                        label = { Text(stringResource(R.string.mirror_base)) },
+                        singleLine = true,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                    ChoiceField(
+                        label = stringResource(R.string.mirror_client),
+                        value = mirrorClient,
+                        options = Mirror.CLIENTS,
+                        onSelect = { mirrorClient = it }
+                    )
+                    ChoiceField(
+                        label = stringResource(R.string.mirror_os),
+                        value = mirrorOs,
+                        options = Mirror.SYSTEMS,
+                        onSelect = { mirrorOs = it }
+                    )
+                    OutlinedTextField(
+                        value = mirrorHwid,
+                        onValueChange = { mirrorHwid = it.trim().lowercase() },
+                        label = { Text(stringResource(R.string.mirror_hwid)) },
+                        singleLine = true,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
                 error?.let {
                     Text(text = it, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error)
                 }
@@ -392,6 +444,10 @@ private fun GroupSettingsDialog(
                         error = intervalInvalid
                     filter.isNotBlank() && runCatching { Regex(filter) }.isFailure ->
                         error = filterInvalid
+                    mirrorOn && !(mirrorBase.trim().startsWith("https://") || mirrorBase.trim().startsWith("http://")) ->
+                        error = mirrorBaseInvalid
+                    mirrorOn && mirrorHwid.isNotBlank() && !Mirror.isValidHwid(mirrorHwid) ->
+                        error = hwidInvalid
                     else -> onSave(
                         sub.copy(
                             name = name.trim().ifBlank { sub.name }.ifBlank {
@@ -402,7 +458,18 @@ private fun GroupSettingsDialog(
                             updateMinutes = interval,
                             filter = filter.trim(),
                             dedupe = dedupe,
-                            userAgent = agent.trim().ifBlank { "MatenLi/0.1" }
+                            userAgent = agent.trim().ifBlank { "MatenLi/0.1" },
+                            mirror = MirrorConfig(
+                                enabled = mirrorOn,
+                                base = mirrorBase.trim().trimEnd('/'),
+                                client = mirrorClient,
+                                os = mirrorOs,
+                                hwid = when {
+                                    Mirror.isValidHwid(mirrorHwid) -> mirrorHwid
+                                    Mirror.isValidHwid(sub.mirror.hwid) -> sub.mirror.hwid
+                                    else -> Mirror.newHwid()
+                                }
+                            )
                         )
                     )
                 }
@@ -420,3 +487,33 @@ private fun GroupSettingsDialog(
 
 private fun formatTime(millis: Long): String =
     SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(Date(millis))
+
+/** A dropdown that only offers the given ids. Free text is not possible. */
+@Composable
+private fun ChoiceField(label: String, value: String, options: List<Pair<String, String>>, onSelect: (String) -> Unit) {
+    var open by remember { mutableStateOf(false) }
+    val shown = options.firstOrNull { it.first == value }?.second ?: value
+    Box(modifier = Modifier.fillMaxWidth()) {
+        OutlinedTextField(
+            value = shown,
+            onValueChange = {},
+            readOnly = true,
+            label = { Text(label) },
+            singleLine = true,
+            trailingIcon = { Icon(Icons.Filled.ArrowDropDown, contentDescription = null) },
+            modifier = Modifier.fillMaxWidth()
+        )
+        Box(modifier = Modifier.matchParentSize().clickable { open = true })
+        DropdownMenu(expanded = open, onDismissRequest = { open = false }) {
+            options.forEach { (id, text) ->
+                DropdownMenuItem(
+                    text = { Text(text) },
+                    onClick = {
+                        onSelect(id)
+                        open = false
+                    }
+                )
+            }
+        }
+    }
+}

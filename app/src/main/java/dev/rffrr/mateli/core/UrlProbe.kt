@@ -24,13 +24,15 @@ import java.net.URL
 data class UrlResult(val ms: Long?, val error: String?)
 
 /**
- * URL tests for many profiles at once. The profiles run in one headless core (see [ProbeService]),
- * each on its own local port, and every request goes through that port. Works connected or not.
+ * URL tests for many profiles at once. The profiles run in a headless core in its own process
+ * (see [ProbeService]), each on its own local port, and every request goes through that port.
+ * Works connected or not.
  */
 object UrlProbe {
     private const val CORE_START_TIMEOUT_MS = 15_000L
     private const val REQUEST_TIMEOUT_MS = 8_000
     private const val PARALLEL = 8
+    private const val STOP_GAP_MS = 500L
 
     /** Returns a result for every profile. Profiles that cannot run here get an error, not a number. */
     suspend fun testAll(
@@ -45,29 +47,44 @@ object UrlProbe {
             val reason = unsupportedReason(profile)
             if (reason != null) results[profile.id] = UrlResult(null, reason) else runnable += profile
         }
-        if (runnable.isEmpty()) return@withContext results
+        if (runnable.isNotEmpty()) results.putAll(testRun(context, prefs, runnable, url))
+        results
+    }
 
-        val ports = runnable.map { freePort() }
+    /**
+     * One probe core for these profiles. When that core will not start (usually one profile's config
+     * is bad), the profiles are tested one at a time, so only the bad profile reports an error.
+     */
+    private suspend fun testRun(
+        context: Context,
+        prefs: Prefs,
+        group: List<Profile>,
+        url: String
+    ): Map<String, UrlResult> {
+        val ports = group.map { freePort() }
         val status = File(context.cacheDir, ProbeService.STATUS_FILE)
         status.delete()
-        ProbeService.start(context, buildProbeConfig(prefs, runnable.zip(ports)))
+        ProbeService.start(context, buildProbeConfig(prefs, group.zip(ports)))
+        val coreError = awaitStart(status)
+        if (coreError != null) {
+            ProbeService.stop(context)
+            delay(STOP_GAP_MS)
+            if (group.size == 1) return mapOf(group[0].id to UrlResult(null, coreError))
+            val out = LinkedHashMap<String, UrlResult>()
+            for (profile in group) out.putAll(testRun(context, prefs, listOf(profile), url))
+            return out
+        }
         try {
-            val coreError = awaitStart(status)
-            if (coreError != null) {
-                runnable.forEach { results[it.id] = UrlResult(null, coreError) }
-            } else {
-                val gate = Semaphore(PARALLEL)
-                val done = coroutineScope {
-                    runnable.zip(ports).map { (profile, port) ->
-                        async { profile.id to gate.withPermit { fetchVia(port, url) } }
-                    }.awaitAll()
-                }
-                done.forEach { (id, result) -> results[id] = result }
-            }
+            val gate = Semaphore(PARALLEL)
+            return coroutineScope {
+                group.zip(ports).map { (profile, port) ->
+                    async { profile.id to gate.withPermit { fetchVia(port, url) } }
+                }.awaitAll()
+            }.toMap()
         } finally {
             ProbeService.stop(context)
+            delay(STOP_GAP_MS)
         }
-        results
     }
 
     /** Waits for the probe core to report. Returns null when it started, or the reason it did not. */

@@ -4,11 +4,11 @@
     <string name="profile_url_error">URL: %1$s</string>
     <string name="mirror_section">Subscription mirror</string>
     <string name="mirror_enabled">Use mirror</string>
-    <string name="mirror_summary">Subscriptions are downloaded through the mirror first. If it fails or has no servers, the original URL is used.</string>
+    <string name="mirror_summary">Downloads go through the mirror first. If it fails or has no servers, the original URL is used. These are the defaults for new subscriptions.</string>
     <string name="mirror_base">Mirror address</string>
-    <string name="mirror_ua">Mirror user agent (ua)</string>
-    <string name="mirror_os">Mirror OS (os)</string>
-    <string name="mirror_sua">Mirror sua (optional)</string>
-    <string name="mirror_hwid">Device id (h, created automatically)</string>
-    <string name="mirror_fmt">Mirror format (optional, e.g. b64)</string>
+    <string name="mirror_client">Client</string>
+    <string name="mirror_os">System</string>
+    <string name="mirror_hwid">Device id (16 hex, like 2edb083def3c855c)</string>
+    <string name="mirror_base_invalid">The mirror address must start with http:// or https://</string>
+    <string name="mirror_hwid_invalid">Device id must be exactly 16 hex characters, like 2edb083def3c855c</string>
 </resources>

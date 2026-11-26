@@ -119,9 +119,7 @@ object PrefKeys {
     const val PER_APP_PACKAGES = "perAppPackages"
     const val MIRROR_ENABLED = "mirrorEnabled"
     const val MIRROR_BASE = "mirrorBase"
-    const val MIRROR_UA = "mirrorUa"
+    const val MIRROR_CLIENT = "mirrorClient"
     const val MIRROR_OS = "mirrorOs"
-    const val MIRROR_SUA = "mirrorSua"
     const val MIRROR_HWID = "mirrorHwid"
-    const val MIRROR_FMT = "mirrorFmt"
 }

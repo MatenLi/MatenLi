@@ -4,11 +4,11 @@
     <string name="profile_url_error">URL: %1$s</string>
     <string name="mirror_section">Зеркало подписок</string>
     <string name="mirror_enabled">Использовать зеркало</string>
-    <string name="mirror_summary">Подписки сначала загружаются через зеркало. Если оно не работает или в нём нет серверов, используется исходная ссылка.</string>
+    <string name="mirror_summary">Подписки сначала загружаются через зеркало. Если оно не работает или в нём нет серверов, используется исходная ссылка. Это значения по умолчанию для новых подписок.</string>
     <string name="mirror_base">Адрес зеркала</string>
-    <string name="mirror_ua">User-agent зеркала (ua)</string>
-    <string name="mirror_os">ОС для зеркала (os)</string>
-    <string name="mirror_sua">sua зеркала (необязательно)</string>
-    <string name="mirror_hwid">Идентификатор устройства (h, создаётся сам)</string>
-    <string name="mirror_fmt">Формат зеркала (необязательно, например b64)</string>
+    <string name="mirror_client">Клиент</string>
+    <string name="mirror_os">Система</string>
+    <string name="mirror_hwid">Идентификатор устройства (16 hex, например 2edb083def3c855c)</string>
+    <string name="mirror_base_invalid">Адрес зеркала должен начинаться с http:// или https://</string>
+    <string name="mirror_hwid_invalid">Идентификатор устройства — ровно 16 hex-символов, например 2edb083def3c855c</string>
 </resources>

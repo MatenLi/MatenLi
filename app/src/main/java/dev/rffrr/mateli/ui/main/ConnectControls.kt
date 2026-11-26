@@ -87,7 +87,7 @@ fun ConfigurationBottomBar(
 
     Box(modifier = Modifier.fillMaxWidth()) {
         Surface(
-            modifier = Modifier.fillMaxWidth().padding(top = 44.dp),
+            modifier = Modifier.fillMaxWidth().padding(top = 56.dp),
             color = MaterialTheme.colorScheme.surfaceContainer,
             tonalElevation = 3.dp
         ) {
@@ -95,13 +95,13 @@ fun ConfigurationBottomBar(
                 modifier = Modifier
                     .fillMaxWidth()
                     .navigationBarsPadding()
-                    .padding(start = 16.dp, end = 16.dp, top = 10.dp, bottom = 10.dp),
+                    .padding(start = 20.dp, end = 20.dp, top = 22.dp, bottom = 18.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
                         text = exitText,
-                        style = MaterialTheme.typography.bodyMedium,
+                        style = MaterialTheme.typography.titleMedium,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -112,19 +112,19 @@ fun ConfigurationBottomBar(
                                 contentDescription = stringResource(
                                     if (unlocked) R.string.lock_insecure else R.string.lock_secure
                                 ),
-                                modifier = Modifier.size(14.dp),
+                                modifier = Modifier.size(18.dp),
                                 tint = if (unlocked) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.secondary
                             )
                             Spacer(modifier = Modifier.width(4.dp))
                         }
                         Text(
                             text = latencyText,
-                            style = MaterialTheme.typography.bodySmall,
+                            style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
                 }
-                Spacer(modifier = Modifier.width(96.dp))
+                Spacer(modifier = Modifier.width(104.dp))
                 Column(
                     modifier = Modifier.weight(1f),
                     horizontalAlignment = Alignment.End
@@ -145,9 +145,9 @@ fun ConfigurationBottomBar(
 @Composable
 private fun SpeedLine(icon: ImageVector, text: String) {
     Row(verticalAlignment = Alignment.CenterVertically) {
-        Icon(imageVector = icon, contentDescription = null, modifier = Modifier.size(16.dp))
-        Spacer(modifier = Modifier.width(4.dp))
-        Text(text = text, style = MaterialTheme.typography.bodyMedium)
+        Icon(imageVector = icon, contentDescription = null, modifier = Modifier.size(22.dp))
+        Spacer(modifier = Modifier.width(6.dp))
+        Text(text = text, style = MaterialTheme.typography.titleSmall)
     }
 }
 

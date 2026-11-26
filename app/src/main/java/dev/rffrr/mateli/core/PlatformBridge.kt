@@ -128,14 +128,28 @@ class PlatformBridge(private val service: VpnService) : PlatformInterface {
         val cm = connectivity ?: throw IllegalStateException("ConnectivityManager is not available")
         val callback = object : ConnectivityManager.NetworkCallback() {
             override fun onCapabilitiesChanged(network: Network, capabilities: NetworkCapabilities) {
-                reportDefault(cm, network, capabilities, listener)
+                // With the VPN up, the default network is the VPN itself. Report the real network under it.
+                if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_VPN)) {
+                    reportPhysical(cm, listener)
+                } else {
+                    reportDefault(cm, network, capabilities, listener)
+                }
             }
         }
         networkCallback = callback
         cm.registerDefaultNetworkCallback(callback)
-        cm.activeNetwork?.let { network ->
-            cm.getNetworkCapabilities(network)?.let { caps ->
+        reportPhysical(cm, listener)
+    }
+
+    /** The first internet network that is not a VPN. Outbound sockets must bind there, not to the tunnel. */
+    private fun reportPhysical(cm: ConnectivityManager, listener: InterfaceUpdateListener) {
+        for (network in cm.allNetworks) {
+            val caps = cm.getNetworkCapabilities(network) ?: continue
+            if (caps.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) &&
+                !caps.hasTransport(NetworkCapabilities.TRANSPORT_VPN)
+            ) {
                 reportDefault(cm, network, caps, listener)
+                return
             }
         }
     }
